@@ -41,12 +41,27 @@ a {
 .topnavs {
     display: flex;
     justify-content: space-around;
+    flex-direction: column;
     align-items: center;
     background-color: rgb(33 37 41);
     color: #fff;
     padding: 20px 0px 20px 0px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-    
+}
+
+.topnavs div {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.user-navs-logged {
+    display:  none !important;
+}
+
+.mb-sidebars {
+    display: none !important;
 }
 
 .logo img {
@@ -335,10 +350,10 @@ a {
 /* <=======/FOOTER=======> */
 
 /* <X> RESPONSIVE <X> */
-@media (max-width: 360px) {
+@media (max-width: 370px) {
     /* General Size */
     body {
-        width: 360px;
+        width: 370px;
     }
     /* Header */
     .bottomnavs {
@@ -365,13 +380,17 @@ a {
         color: rgb(255, 193, 7);
     }
 
+    .mb-sidebars {
+        display: flex !important;
+    }
+
     .logo img {
         width: 4rem;
         height: auto;
     }
 
     .user-navs-logged {
-        display: flex;
+        display: flex !important;
         gap: 20px;
     }
 
