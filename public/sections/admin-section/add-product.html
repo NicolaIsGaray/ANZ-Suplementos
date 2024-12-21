@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="../../icon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../../css-sheets/add-product.css" />
+    <title>Agregar Producto</title>
+  </head>
+  <body>
+    <header>
+      <div class="head-container">
+        <div class="pc-navs">
+          <div class="topnavs">
+            <div class="logo">
+              <a href="../../index.html">
+                <img src="../../media/logo-tibushop.png" alt="ANZ Logo" />
+              </a>
+            </div>
+
+            <div class="search-container">
+              <input
+                type="text"
+                placeholder="Buscar"
+                id="searcher"
+                onfocus="this.placeholder = ''"
+                onblur="this.placeholder = '¿Aún no te decides? No pasa nada'"
+              />
+              <button type="submit" id="searcher-submiter">
+                Buscar <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+            </div>
+            <div class="user-navs">
+              <a href="../user-section/login.html" class="login"
+                >Iniciar Sesión</a
+              >
+              <a href="../user-section/register.html" class="register"
+                >Registrarse</a
+              >
+            </div>
+          </div>
+          <div class="bottomnavs">
+            <div class="navs-container">
+              <nav>
+                <ul>
+                  <li>
+                    <a href="../../index.html">INICIO</a>
+                  </li>
+                  <li>
+                    <a href="../product-section/product-general.html?section=suplementos"
+                      >SUPLEMENTOS</a
+                    >
+                  </li>
+                  <li>
+                    <a href="../product-section/product-general.html?section=ofertas"
+                      >OFERTAS</a
+                    >
+                  </li>
+                  <li>
+                    <a href="../product-section/product-general.html?section=vasos"
+                      >VASOS Y SHAKERS</a
+                    >
+                  </li>
+                  <li>
+                    <a href="../about.html">QUIENES SOMOS</a>
+                  </li>
+                  <li>
+                    <a href="../contact.html">CONTACTO</a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="adm">
+      <button type="button" id="mg-sect">
+        <i class="fa-solid fa-crown"></i>
+      </button>
+    </div>
+
+    <div class="container-product">
+      <div class="agregarTitle">
+        <h1>Agregar Producto</h1>
+      </div> <br>
+      <div class="info-box">
+        <form action="" method="post">
+          <div class="textInputWrapper">
+            <input
+              placeholder="Nombre del Producto ( * )"
+              type="text"
+              class="textInput"
+              name="NombreProducto"
+              id="productName"
+              required
+              autocomplete="off"
+              maxlength="75"
+            />
+          </div>
+          <div class="textInputWrapper">
+            <textarea
+              name="DescripcionProducto"
+              id="productDesc"
+              cols="30"
+              rows="10"
+              class="textareaInput"
+              placeholder="Describe tu producto ( * )"
+              required
+              autocomplete="off"
+            ></textarea>
+          </div>
+          <div class="textInputWrapper">
+            <input
+              placeholder="¿Cuantas Unidades Deseas Vender? ( * )"
+              type="text"
+              class="textInput"
+              name="Stock"
+              id="stock"
+              required
+              autocomplete="off"
+            />
+          </div>
+          <div class="textInputWrapper">
+            <input
+              placeholder="¿Que precio tendrá? ( * )"
+              type="text"
+              class="textInput"
+              name="precioProducto"
+              id="price"
+              required
+              autocomplete="off"
+            />
+          </div>
+          <div class="textInputWrapper">
+            <input
+              placeholder="Imagen de Portada [URL]"
+              type="text"
+              class="textInput"
+              name="ImagenPortada"
+              id="image"
+              required
+              autocomplete="off"
+            />
+          </div>
+          <div class="categoryContainer">
+            <span>Selecciona la categoría del producto ( * )</span>
+            <select id="category">
+            </select>
+          </div>
+          <div class="addProductContainer">
+            <input type="submit" value="Añadir Producto" id="addProduct" />
+          </div>
+        </form>
+      </div>
+
+      <div>
+        <button type="button" id="backButton">Regresar</button>
+      </div>
+    </div>
+
+    <footer>
+      <div class="end-container">
+        <div class="social-media">
+          <a target="_blank" id="facebook"><i class="fa-brands fa-facebook"></i></a>
+          <a target="_blank" id="instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a target="_blank" id="twitter"><i class="fa-brands fa-square-x-twitter"></i></a>
+          <a target="_blank" id="youtube"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+        <p>ANZ SUPLEMENTOS &copy; 2024. Todos los derechos reservados.</p>
+      </div>
+    </footer>
+    <script
+      src="https://kit.fontawesome.com/21f1cfa061.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../../js-scripts/add-product.js"></script>
+  </body>
+</html>

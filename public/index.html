@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./css-sheets/index.css">
+    <title>ANZ SUPLEMENTOS</title>
+</head>
+<body>
+    <header>
+        <div class="head-container">
+            <div class="pc-navs">
+                <div class="topnavs">
+                    <div class="logo">
+                        <a href="./index.html">
+                        <img src="./media/logo-tibushop.png" alt="ANZ Logo">
+                        </a>
+                    </div>
+                    
+                    <div class="search-container">
+                        <input type="text" placeholder="Buscar" id="searcher" onfocus="this.placeholder = ''" onblur="this.placeholder = '¿Aún no te decides? No pasa nada'">
+                        <button type="submit" id="searcher-submiter">Buscar <i class="fa-solid fa-magnifying-glass"></i></button>
+                    </div>
+                    <div class="user-navs">
+                        <a href="./sections/user-section/login.html" class="login">Iniciar Sesión</a>
+                        <a href="./sections/user-section/register.html" class="register">Registrarse</a>
+                    </div>
+                </div>
+                <div class="bottomnavs">
+                    <div class="navs-container">
+                        <nav>
+                            <ul>
+                                <li>
+                                    <a href="./index.html">INICIO</a>
+                                </li>
+                                <li>
+                                    <a href="./sections/product-section/product-general.html?section=suplementos">SUPLEMENTOS</a>
+                                </li>
+                                <li>
+                                    <a href="./sections/product-section/product-general.html?section=ofertas">OFERTAS</a>
+                                </li>
+                                <li>
+                                    <a href="./sections/product-section/product-general.html?section=vasos">VASOS Y SHAKERS</a>
+                                </li>
+                                <li>
+                                    <a href="./sections/about.html">QUIENES SOMOS</a>
+                                </li>
+                                <li>
+                                    <a href="./sections/contact.html">CONTACTO</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="adm">
+        <button type="button" id="mg-sect"><i class="fa-solid fa-crown"></i></button>
+    </div>
+
+    <div class="slideshow-container">
+        <!-- Full-width images with number and caption text -->
+        <div class="slidesDiv fade">
+            <img src="./media/slide1.jpeg" style="height: 40vw;width:100%">
+        </div>
+    
+        <div class="slidesDiv fade">
+            <img src="./media/slide2.jpg" style="height: 40vw;width:100%">
+        </div>
+    
+        <div class="slidesDiv fade">
+            <img src="./media/slide3.png" style="height: 40vw;width:100%">
+        </div>
+    </div>
+    <br>
+    
+    <div class="main-container">
+        <div class="main-content">
+            <div class="category-name">
+                <h3>Suplementos</h3>
+            </div>
+            <ul id="suplementos">
+
+            </ul>
+        </div>
+        <div class="main-content">
+            <div class="category-name">
+                <h3>Vasos y Shakers</h3>
+            </div>
+            <ul id="vasos">
+
+            </ul>
+        </div>
+        <div class="main-content">
+            <div class="category-name">
+                <h3>Ofertas</h3>
+            </div>
+            <ul id="ofertas">
+
+            </ul>
+        </div>
+    </div>
+
+    <div class="details-container">
+        <div class="detail">
+            <i class="fa-solid fa-truck"></i>
+            <span>
+                <strong>ENVIOS A TODO EL PAIS</strong>
+            </span>
+            <span>Info</span>
+        </div>
+        <div class="detail">
+            <i class="fa-brands fa-whatsapp"></i>
+            <span>
+                <strong>ATENCIÓN POR WHATSAPP</strong>
+            </span>
+            <span>Info</span>
+        </div>
+        <div class="detail">
+            <i class="fa-solid fa-shop"></i>
+            <span>
+                <strong>LOCAL FÍSICO</strong>
+            </span>
+            <span>Info</span>
+        </div>
+        <div class="detail">
+            <i class="fa-solid fa-circle-check"></i>
+            <span>
+                <strong>GARANTÍA</strong>
+            </span>
+            <span>Info</span>
+        </div>
+    </div>
+
+    <footer>
+        <div class="end-container">
+            <div class="social-media">
+                <a target="_blank" id="facebook"><i class="fa-brands fa-facebook"></i></a>
+                <a target="_blank" id="instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a target="_blank" id="twitter"><i class="fa-brands fa-square-x-twitter"></i></a>
+                <a target="_blank" id="youtube"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+            <p>ANZ SUPLEMENTOS &copy; 2024. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+<script src="https://kit.fontawesome.com/21f1cfa061.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="./js-scripts/index.js"></script>
+</body>
+</html>
