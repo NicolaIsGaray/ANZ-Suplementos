@@ -11,7 +11,7 @@ a {
     text-decoration: none;
 }
 
-/* <=======ADMIN=======> */
+/* <=======ADM=======> */
 .adm {
     position: fixed;
     z-index: 10;
@@ -29,7 +29,7 @@ a {
     cursor: pointer;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.7);
 }
-/* <=======/ADMIN=======> */
+/* <=======/ADM=======> */
 
 /* <=======HEADER=======> */
 .head-container {
@@ -350,11 +350,21 @@ a {
 /* <=======/FOOTER=======> */
 
 /* <X> RESPONSIVE <X> */
-@media (max-width: 370px) {
+@media (max-width: 480px) {
     /* General Size */
     body {
-        width: 370px;
+        width: 480px;
     }
+    /* Adm Button */
+    .adm {
+        bottom: 12vw;
+        left: 12vw;
+    }
+
+    .adm button{
+        transform: scale(2);
+    }
+
     /* Header */
     .bottomnavs {
         display: none;
@@ -400,7 +410,7 @@ a {
 
     /* Slideshow */
     .slideshow-container {
-        padding-top: 4.9rem;
+        padding-top: 14vw;
         height: 24rem;
     }
 
@@ -462,4 +472,8 @@ a {
         padding: 0px 0px 6px 0px;
     }
 }
+
+@media (min-width: 481px) and (max-width: 768px) {
+    
+  }
 /* <X> /RESPONSIVE <X> */
