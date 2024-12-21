@@ -25,7 +25,7 @@ setInterval(() => plusSlides(1), 5000); // Cambiar slide automáticamente cada 2
 //<|ROLES|>
 //Verificacion de Rol
 const getAdm = document.querySelector(".adm");
-const getUserOpt = document.querySelector(".user-navs")
+const getUserOpt = document.querySelector(".user-navs");
 
 window.onload = () => {
     getAdm.style.display = "none";
@@ -59,6 +59,8 @@ async function obtenerRolUsuario() {
         }
 
     } catch (error) {
+        console.log(error.response.data);
+        
     }
 }
 
