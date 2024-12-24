@@ -41,7 +41,7 @@ a {
 .topnavs {
     display: flex;
     justify-content: space-around;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     background-color: rgb(33 37 41);
     color: #fff;
@@ -52,7 +52,7 @@ a {
 .topnavs div {
     display: flex;
     width: 100%;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
 }
 

@@ -106,3 +106,32 @@ form input[type="submit"]:hover {
 
 /* <===/CONTAINER===> */
 
+/* <X> RESPONSIVE <X> */
+
+@media (max-width: 480px) {
+    .logo {
+        display: block;
+        position: fixed;
+        top: 12vw;
+        left: 36vw;
+    }
+
+    .logo img {
+        width: 26vw;
+    }
+
+   .container {
+        flex-direction: column;
+        align-items: center;
+        height: 100%;
+        position: relative;
+        top: 24vw;
+    }
+   .left-container {
+        width: 80%;
+    }
+   .right-container {
+        display: none;
+    }
+}
+/* </X> RESPONSIVE <X> */
