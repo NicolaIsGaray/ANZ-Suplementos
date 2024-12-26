@@ -44,7 +44,7 @@ openBtn.addEventListener("click", (e) => {
 //<|ROLES|>
 //Verificacion de Rol
 const getAdm = document.querySelector(".adm");
-const getUserOpt = document.querySelector(".user-navs");
+const getUserOpt = document.querySelector(".guest-log");
 const getGuessOpt = document.querySelector(".guess-content");
 
 window.onload = () => {
@@ -77,13 +77,45 @@ async function obtenerRolUsuario() {
         } else {
             getAdm.innerHTML = ' '; // Ocultar botones de admin si es cliente
             getUserOpt.innerHTML = ' '
+            getUserOpt.style.width = "0px !important"
             getGuessOpt.innerHTML = ' ';
         }
 
+        const userInfo = await axios.get("/usuario/me", {
+            headers: {
+                Authorization: `Bearer ${token}` // Enviar el token en los headers
+            }
+        });
+        const userRes = userInfo.data;
+        const userName = document.querySelector(".user-button");
+        userName.textContent = `${userInfo.data.username}`;
+
+        userRes.forEach(usuario => {
+            console.log(usuario);
+            
+        });
+
     } catch (error) {
-        console.log(error.response.data);
+        console.log(error);
     }
 }
+
+//LogOut
+// const logOut = async () => {
+//     try {
+//       const response = await axios.post("/usuario/logOut")
+//     } catch (error) {
+//       console.log(error.message);
+//     }
+// }
+
+// const logOutButton = document.getElementById("logout");
+// logOutButton.addEventListener("click", (e) => {
+//     e.preventDefault();
+//     logOut();
+//     localStorage.removeItem("token");
+//     window.location.href = "./index.html";
+// })
 
 //Botón de Admin
 const admBtn = document.getElementById('mg-sect');
@@ -107,11 +139,6 @@ async function obtenerCategorias() {
     } catch (error) {
         console.error('Error al obtener categorías:', error);
     }
-}
-
-async function trySeccion() {
-    const seccion = await obtenerCategorias();
-    window.location.href = `./categorias/seccion.html?seccion=${seccion.nombreCategoria}`
 }
 
 const redirect = (id, url) => {
@@ -192,13 +219,17 @@ getProductos();
 const getSociales = async () => {
     try {
         const response = await axios.get('/pagina/contactos');
-        const contacto = response.data; // Almacena la URL de Instagram obtenida
+        const contacto = response.data;
         
         contacto.forEach(contactos => {
+            const whatsapp = document.getElementById("wa-cont");
+
             const facebookIcon = document.getElementById('facebook');
             const instagramIcon = document.getElementById('instagram');
             const twitterIcon = document.getElementById('twitter');
             const youtubeIcon = document.getElementById('youtube');
+
+            whatsapp.href = `https://wa.me/${contactos.telefono}`;
 
             facebookIcon.href = contactos.facebook;
             instagramIcon.href = contactos.instagram;

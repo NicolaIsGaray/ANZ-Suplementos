@@ -5,7 +5,6 @@ const getUserOpt = document.querySelector(".user-navs")
 
 window.onload = () => {
     getAdm.style.display = "none";
-    getUserOpt.style.display = "none"
 }
 
 async function obtenerRolUsuario() {
@@ -19,22 +18,27 @@ async function obtenerRolUsuario() {
             }
         });
 
-        console.log('Respuesta del servidor:', response.data); // Imprimir toda la respuesta para depuración
+        console.log(response.data); // Imprimir toda la respuesta para depuración
 
         const isAdmin = response.data.isAdmin; // Suponiendo que el backend te está enviando isAdmin como true/false
 
+        window.onload = () => {
+            getUserOpt.style.display = "none";  
+        } 
+        
         if (isAdmin) {
-            console.log("El usuario es un administrador.");
-            // Aquí puedes mostrar los botones de admin
             getAdm.style.display = "flex"; // Mostrar los botones para admin
             getUserOpt.innerHTML = ' '
+            getGuessOpt.innerHTML = ' ';
         } else {
-            console.log("El usuario es un cliente.");
-            // Aquí puedes mostrar los botones de cliente
-            getAdm.style.display = "none"; // Ocultar botones de admin si es cliente
+            getAdm.innerHTML = ' '; // Ocultar botones de admin si es cliente
             getUserOpt.innerHTML = ' '
+            getUserOpt.style.display = 'none';
+            getGuessOpt.innerHTML = ' ';
         }
+
     } catch (error) {
+        console.log(error);
     }
 }
 
@@ -88,10 +92,8 @@ const getProductosPorCategoria = async () => {
 
     try {
         // Llamada al backend para obtener productos filtrados
-        const response = await axios.get(`/producto/porCategoria?section=${categoria}`);
-        const productos = await response.json();
-
-        console.log("Productos obtenidos:", productos); // Debug
+        const response = await axios.get(`/producto/productos`);
+        const productos = response.data;
 
         // Limpiar el contenedor antes de renderizar
         const divProducts = document.querySelector(".products-card");
@@ -101,6 +103,7 @@ const getProductosPorCategoria = async () => {
         productos.forEach(producto => {
             renderProduct(producto);
         });
+
     } catch (error) {
         console.error("Error al obtener productos por categoría:", error);
     }
@@ -116,7 +119,7 @@ const renderProduct = (producto) => {
 
     const productImg = document.createElement("img");
     productImg.classList.add("item-img");
-    productImg.setAttribute("src", producto.imgPortada || "../media/icons/default.png");
+    productImg.setAttribute("src", producto.imgPortada || "../../media/default.png");
 
     const productName = document.createElement("span");
     productName.classList.add("product-name");
@@ -128,16 +131,20 @@ const renderProduct = (producto) => {
 
     // Evento para redirigir al detalle del producto
     buyButton.addEventListener("click", () => {
-        redirect(producto._id, `../producto/producto.html`);
+        redirect(producto._id, `./product.html`);
     });
 
-    // Agregar elementos al contenedor principal del producto
-    divItem.appendChild(productImg);
-    divItem.appendChild(productName);
-    divItem.appendChild(buyButton);
+    const categoriaCheck = getCategoriaFromURL();
 
-    // Agregar el producto al contenedor de productos
-    divProducts.appendChild(divItem);
+    if (categoriaCheck === producto.categoria) {
+        // Agregar elementos al contenedor principal del producto
+        divItem.appendChild(productImg);
+        divItem.appendChild(productName);
+        divItem.appendChild(buyButton);
+
+        // Agregar el producto al contenedor de productos
+        divProducts.appendChild(divItem);
+    }
 };
 
 // Iniciar la obtención de productos cuando se carga la página
@@ -147,13 +154,17 @@ document.addEventListener("DOMContentLoaded", getProductosPorCategoria);
 const getSociales = async () => {
     try {
         const response = await axios.get('/pagina/contactos');
-        const contacto = response.data; // Almacena la URL de Instagram obtenida
+        const contacto = response.data;
         
         contacto.forEach(contactos => {
+            const whatsapp = document.getElementById("wa-cont");
+
             const facebookIcon = document.getElementById('facebook');
             const instagramIcon = document.getElementById('instagram');
             const twitterIcon = document.getElementById('twitter');
             const youtubeIcon = document.getElementById('youtube');
+
+            whatsapp.href = `https://wa.me/${contactos.telefono}`;
 
             facebookIcon.href = contactos.facebook;
             instagramIcon.href = contactos.instagram;

@@ -57,23 +57,6 @@ productRoute.get('/productos', async (req, res) => {
     }
 });
 
-productRoute.get('/producto/porCategoria', async (req, res) => {
-    try {
-        const { categoria } = req.query;
-
-        if (!categoria) {
-            return res.status(400).json({ error: "Debe proporcionar una categoría" });
-        }
-
-        const productos = await Producto.find({ categoria }); // Filtrar por la categoría
-        res.status(200).json(productos);
-    } catch (error) {
-        console.error("Error al obtener productos por categoría:", error);
-        res.status(500).send("Error en el servidor");
-    }
-});
-
-
 productRoute.get('/selected/:idProductSel', async (req, res) => {
     try {
         const producto = await Producto.findById(req.params.idProductSel);

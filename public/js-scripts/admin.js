@@ -66,7 +66,6 @@ async function verificarAccesoAdmin() {
         console.log(response.data.message); // Mensaje de éxito
     } catch (error) {
         console.error("Acceso denegado:", error.response?.data?.message || error.message);
-        alert("Acceso denegado. No tienes permisos para ver esta página.");
         window.location.href = "/"; // Redirigir a otra página
     }
 }

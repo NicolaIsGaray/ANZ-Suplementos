@@ -165,6 +165,11 @@ a {
     text-align: center;
 }
 
+.user-button {
+    padding: 10px;
+    transition: all .3s ease;
+}
+
 .login:hover {
     background-color: rgb(255, 255, 255);
     color: rgb(33 37 41);

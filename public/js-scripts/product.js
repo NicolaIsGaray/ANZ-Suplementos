@@ -165,10 +165,14 @@ const getSociales = async () => {
         const contacto = response.data; // Almacena la URL de Instagram obtenida
         
         contacto.forEach(contactos => {
+            const whatsapp = document.getElementById("wa-cont");
+
             const facebookIcon = document.getElementById('facebook');
             const instagramIcon = document.getElementById('instagram');
             const twitterIcon = document.getElementById('twitter');
             const youtubeIcon = document.getElementById('youtube');
+
+            whatsapp.href = `https://wa.me/${contactos.telefono}`;
 
             facebookIcon.href = contactos.facebook;
             instagramIcon.href = contactos.instagram;

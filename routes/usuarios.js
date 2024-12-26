@@ -11,6 +11,8 @@ const dotEnv = require("dotenv");
 
 dotEnv.config();
 
+const JWT_SECRET = process.env.JWT_TOKEN;
+
 const saltRounds = 10;
 
 const hashPassword = async (contraseña) => {
@@ -80,14 +82,13 @@ userRoute.post('/logOut', async (req, res) => {
     } catch (error) {
         res.sendStatus(500);
     }
-})
+});
 
 userRoute.get('/data/:idUser', async (req, res) => {
     try {
         let answer = await UserData.findById(req.params.idUser)
-        res.status(200).send({user: {nombre: answer.nombre,
-             apellido: answer.apellido,
-              email: answer.email, rol: answer.rol}})
+        res.status(200).send({user: {username: answer.username,
+              email: answer.email, rol: answer.rol}});
     } catch (error) {
         res.status(500).send(console.log("Error."))
     }
@@ -155,19 +156,9 @@ userRoute.get("/admin-only", authMiddleware, adminMiddleware, (req, res) => {
 
 userRoute.get('/me', async (req, res) => {
     try {
-        const token = req.headers.authorization && req.headers.authorization.split(" ")[1];
-
-        if (!token) {
-            return res.status(401).json({ message: "No se proporcionó token" });
-        }
-
-        // Buscar al usuario en la base de datos con el ID decodificado
-        const usuario = await UserData.findById(decoded.id);
-
-        if (!usuario) {
-            return res.status(404).json({ message: "Usuario no encontrado" });
-        }
-
+        const token = req.headers.authorization;
+        const payload = JWT.decode(token, JWT_SECRET);
+        res.send(payload)
     } catch (error) {
         console.error("Error:", error);
         res.status(500).json({ message: "Error en el servidor" });
