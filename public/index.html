@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link rel="shortcut icon" href="icon.ico" type="image/x-icon">
     <link rel="stylesheet" href="./css-sheets/index.css">
     <title>ANZ SUPLEMENTOS</title>
@@ -14,7 +14,7 @@
                 <div class="topnavs">
                     <div>
                         <div class="mb-sidebars">
-                            <a><i class="fa-solid fa-bars"></i></a>
+                            <a class="open-sidebar"><i class="fa-solid fa-bars"></i></a>
                         </div>
                         <div class="logo">
                             <a href="./index.html">
@@ -22,8 +22,7 @@
                             </a>
                         </div>
                         <div class="user-navs-logged">
-                            <a href="./sections/user-section/login.html"><i class="fa-solid fa-user"></i></a>
-                            <a href="#"><i class="fa-solid fa-sign-out-alt"></i></a>
+                            <a class="userBtn"><i class="fa-solid fa-user"></i></a>
                         </div>
                         
                         <div class="search-container">
@@ -66,8 +65,34 @@
         </div>
     </header>
 
+    <div class="mb-user-sidebar">
+        <div class="guess-content">
+            <ul>
+                <li><a href="./sections/user-section/login.html">Iniciar Sesión</a></li>
+                <li><a href="./sections/user-section/register.html">Registrarse</a></li>
+            </ul>
+        </div>
+        <h4>Cuenta</h4>
+    </div>
+    <div class="mb-sidebar">
+        <div class="side-content">
+            <ul>
+                <li><a href="./index.html">Inicio</a></li>
+                <li><a href="./sections/product-section/product-general.html?section=suplementos">Suplementos</a></li>
+                <li><a href="./sections/product-section/product-general.html?section=ofertas">Ofertas</a></li>
+                <li><a href="./sections/product-section/product-general.html?section=vasos">Vasos y Shakers</a></li>
+                <li><a href="./sections/about.html">Quienes Somos</a></li>
+                <li><a href="./sections/contact.html">Contacto</a></li>
+            </ul>
+        </div>
+    </div>
+
     <div class="adm">
         <button type="button" id="mg-sect"><i class="fa-solid fa-crown"></i></button>
+    </div>
+
+    <div class="wa">
+        <a type="button" id="wa-sect"><i class="fa-brands fa-whatsapp"></i></a>
     </div>
 
     <div class="slideshow-container">

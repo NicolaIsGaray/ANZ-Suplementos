@@ -137,6 +137,27 @@ const getProduct = async () => {
 
 getProduct()
 
+// <|Toggle User Sidebar|>
+const userSidebar = document.querySelector(".mb-user-sidebar");
+const toggleUserSidebarBtn = document.querySelector(".userBtn");
+
+toggleUserSidebarBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    userSidebar.classList.toggle("mb-user-sidebar-open");
+});
+// </|Toggle User Sidebar|>
+
+
+// <|Toggle Sidebar|>
+const sidebar = document.querySelector(".mb-sidebar");
+const openBtn = document.querySelector(".open-sidebar");
+
+openBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    sidebar.classList.toggle("sidebar-open");
+});
+// </|Toggle Sidebar|>
+
 //<|CONTACTO|>
 const getSociales = async () => {
     try {

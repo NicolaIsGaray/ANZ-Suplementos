@@ -20,12 +20,32 @@ showSlides();
 setInterval(() => plusSlides(1), 5000); // Cambiar slide automáticamente cada 2 segundos
 // </|SLIDESHOWS|>
 
+// <|Toggle User Sidebar|>
+const userSidebar = document.querySelector(".mb-user-sidebar");
+const toggleUserSidebarBtn = document.querySelector(".userBtn");
 
+toggleUserSidebarBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    userSidebar.classList.toggle("mb-user-sidebar-open");
+});
+// </|Toggle User Sidebar|>
+
+
+// <|Toggle Sidebar|>
+const sidebar = document.querySelector(".mb-sidebar");
+const openBtn = document.querySelector(".open-sidebar");
+
+openBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    sidebar.classList.toggle("sidebar-open");
+});
+// </|Toggle Sidebar|>
 
 //<|ROLES|>
 //Verificacion de Rol
 const getAdm = document.querySelector(".adm");
 const getUserOpt = document.querySelector(".user-navs");
+const getGuessOpt = document.querySelector(".guess-content");
 
 window.onload = () => {
     getAdm.style.display = "none";
@@ -53,14 +73,15 @@ async function obtenerRolUsuario() {
         if (isAdmin) {
             getAdm.style.display = "flex"; // Mostrar los botones para admin
             getUserOpt.innerHTML = ' '
+            getGuessOpt.innerHTML = ' ';
         } else {
             getAdm.innerHTML = ' '; // Ocultar botones de admin si es cliente
             getUserOpt.innerHTML = ' '
+            getGuessOpt.innerHTML = ' ';
         }
 
     } catch (error) {
         console.log(error.response.data);
-        
     }
 }
 
