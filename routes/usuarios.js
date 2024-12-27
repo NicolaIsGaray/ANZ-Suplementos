@@ -156,9 +156,16 @@ userRoute.get("/admin-only", authMiddleware, adminMiddleware, (req, res) => {
 
 userRoute.get('/me', async (req, res) => {
     try {
-        const token = req.headers.authorization;
+        const token = req.headers.authorization.split(' ')[1];
         const payload = JWT.decode(token, JWT_SECRET);
-        res.send(payload)
+        const userPayload = payload.id;
+
+        const userResponse = await UserData.findById(userPayload);
+
+        if (!userResponse) {
+            res.status(404).json({error: "Usuario no encontrado."});
+        }
+        res.status(200).send(userResponse);
     } catch (error) {
         console.error("Error:", error);
         res.status(500).json({ message: "Error en el servidor" });

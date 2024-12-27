@@ -1,10 +1,14 @@
 //<|ROLES|>
 //Verificacion de Rol
 const getAdm = document.querySelector(".adm");
-const getUserOpt = document.querySelector(".user-navs")
+const getUserOpt = document.querySelector(".guess-log");
+const getGuessOpt = document.querySelector(".guess-content");
+
+const userOptions = document.querySelector(".user-options");
 
 window.onload = () => {
     getAdm.style.display = "none";
+    userOptions.style.display = "none";
 }
 
 async function obtenerRolUsuario() {
@@ -27,22 +31,71 @@ async function obtenerRolUsuario() {
         } 
         
         if (isAdmin) {
-            getAdm.style.display = "flex"; // Mostrar los botones para admin
-            getUserOpt.innerHTML = ' '
+            getAdm.style.display = "flex";
+            getUserOpt.style.display = "none"
+            getGuessOpt.style.display = "none";
+            userOptions.style.display = "flex";
+
         } else {
-            getAdm.innerHTML = ' '; // Ocultar botones de admin si es cliente
-            getUserOpt.innerHTML = ' '
+            getAdm.innerHTML = ' ';
+            getUserOpt.style.display = "none"
+            getGuessOpt.style.display = "none";
+            userOptions.style.display = "flex";
         }
 
+        async function userResponse() {
+            const response = await axios.get("/usuario/me", {
+                headers: {
+                    Authorization: `Bearer ${token}` // Enviar el token en los headers
+                }
+            })
+            return response.data;
+        }
+
+        const usuarioDisplay = await userResponse();
+        const usernameDisplay = document.querySelector(".user-button");
+        const sideUsername = document.getElementById("username");
+
+        usernameDisplay.innerHTML = `${usuarioDisplay.username} <i class="fa-solid fa-circle-user"></i>`;
+        sideUsername.innerHTML = `${usuarioDisplay.username}`;
+
     } catch (error) {
+        console.log(error);
     }
 }
+
+const usernameDisplay = document.querySelector(".user-button");
+const logOutButton = document.getElementById("logout");
+const profileButton = document.getElementById("profile");
+
+usernameDisplay.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    logOutButton.classList.toggle("logout-anim");
+    profileButton.classList.toggle("profile-anim");
+});
+
+//LogOut
+const logOut = async () => {
+    try {
+      const response = await axios.post("/usuario/logOut")
+    } catch (error) {
+      console.log(error.message);
+    }
+}
+
+logOutButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    logOut();
+    localStorage.removeItem("token");
+    window.location.href = "./index.html";
+})
 
 //Botón de Admin
 const admBtn = document.getElementById('mg-sect');
 admBtn.addEventListener('click', (e) => {
     e.preventDefault();
-    window.location.href = './admin-section/manage.html';
+    window.location.href = './sections/admin-section/manage.html';
 });
 
 // Llamada para verificar el rol y ejecutar la acción

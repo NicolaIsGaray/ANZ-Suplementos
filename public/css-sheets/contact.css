@@ -160,6 +160,61 @@ a {
     text-align: center;
 }
 
+#logout {
+    display: block;
+    color: rgb(255, 193, 7);
+    transform: translateX(-275px);
+    transition: all .3s ease;
+    cursor: pointer;
+    z-index: -1;
+}
+
+#profile {
+    display: block;
+    color: rgb(255, 193, 7);
+    cursor: pointer;
+    transform: translateX(-150px);
+    transition: all .3s ease;
+    z-index: -1;
+}
+
+.logout-anim {
+    transform: translateX(0px)!important;
+    transition: all .3s ease !important;
+    z-index: 0 !important;
+}
+
+.profile-anim {
+    transform: translateX(0px) !important;
+    transition: all .3s ease !important;
+    z-index: 0 !important;
+}
+
+.user-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    transition: all .3s ease;
+    cursor: pointer;
+    background-color: rgb(255, 193, 7);
+    border: 1px solid rgb(33 37 41);
+    border-radius: 5px;
+    color: rgb(33, 37, 41) !important;
+    font-weight: 600;
+    z-index: 2;
+    user-select: none;
+}
+
+.user-button i {
+    font-size: 24px;
+}
+
+.user-options {
+    display: flex;
+    gap: 40px;
+}
+
 .login:hover {
     background-color: rgb(255, 255, 255);
     color: rgb(33 37 41);
@@ -385,6 +440,8 @@ a {
     .wha-alt a {
         position: absolute;
         bottom: 18vw;
+        user-select: none;
+        cursor: pointer;
         color: #ffffffdc;
         background-color: #06c910;
         border: 2px solid #fff;
