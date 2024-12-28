@@ -321,6 +321,36 @@ a {
     border-radius: 6px;
     background-color: rgb(33 37 41);
 }
+
+.user-logged-content {
+    display: flex;
+    background-color: rgb(255, 193, 7);
+    flex-direction: column;
+    align-items: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    width: 100%;
+}
+
+.user-logged-content ul {
+    display: flex;
+    list-style: none;
+    padding: 0px;
+    gap: 40px;
+    margin: 0px;
+}
+
+.user-logged-content a {
+    color: #ffffff;
+    padding: 10px;
+    text-decoration: none;
+    border: 1px solid black;
+    border-radius: 6px;
+    background-color: rgb(33 37 41);
+    width: 100px;
+    display: block;
+    text-align: center;
+}
 /* <---/User Sidebar---> */
 
 /* <---Mobile Sidebar---> */
@@ -465,7 +495,7 @@ a {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 100%; /* Hace que el contenedor ocupe todo el alto de la tarjeta */
+    height: 100%;
     padding-top: 8px;
 }
 
@@ -613,6 +643,18 @@ a {
 
     .search-container {
         display: none !important;
+    }
+
+    #logout {
+        display: block;
+        color: rgb(255, 193, 7);
+        transform: translateX(0px);
+    }
+    
+    #profile {
+        display: block;
+        color: rgb(255, 193, 7);
+        transform: translateX(0px);
     }
 
     /* Slideshow */

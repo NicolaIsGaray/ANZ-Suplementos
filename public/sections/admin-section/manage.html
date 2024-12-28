@@ -2,7 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+    />
     <link rel="shortcut icon" href="../../icon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="../../css-sheets/manage.css" />
     <title>Administración</title>
@@ -12,31 +15,46 @@
       <div class="head-container">
         <div class="pc-navs">
           <div class="topnavs">
-            <div class="logo">
-              <a href="../../index.html">
-                <img src="../../media/logo-tibushop.png" alt="ANZ Logo" />
-              </a>
-            </div>
+            <div>
+              <div class="mb-sidebars">
+                <a class="open-sidebar"><i class="fa-solid fa-bars"></i></a>
+              </div>
+              <div class="logo">
+                <a href="../../index.html">
+                  <img src="../../media/logo-tibushop.png" alt="ANZ Logo" />
+                </a>
+              </div>
+              <div class="user-navs-logged">
+                <a class="userBtn"><i class="fa-solid fa-user"></i></a>
+              </div>
 
-            <div class="search-container">
-              <input
-                type="text"
-                placeholder="Buscar"
-                id="searcher"
-                onfocus="this.placeholder = ''"
-                onblur="this.placeholder = '¿Aún no te decides? No pasa nada'"
-              />
-              <button type="submit" id="searcher-submiter">
-                Buscar <i class="fa-solid fa-magnifying-glass"></i>
-              </button>
+              <div class="search-container">
+                <input
+                  type="text"
+                  placeholder="Buscar"
+                  id="searcher"
+                  onfocus="this.placeholder = ''"
+                  onblur="this.placeholder = '¿Aún no te decides? No pasa nada'"
+                />
+                <button type="submit" id="searcher-submiter">
+                  Buscar <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+              </div>
             </div>
             <div class="user-navs">
-              <a href="../user-section/login.html" class="login"
-                >Iniciar Sesión</a
-              >
-              <a href="../user-section/register.html" class="register"
-                >Registrarse</a
-              >
+              <div class="guess-log">
+                <a href="../user-section/login.html" class="login"
+                  >Iniciar Sesión</a
+                >
+                <a href="../user-section/register.html" class="register"
+                  >Registrarse</a
+                >
+              </div>
+              <div class="user-options">
+                <a class="user-button"></a>
+                <a class="profile">Mi perfil</a>
+                <a class="logout">Cerrar Sesión</a>
+              </div>
             </div>
           </div>
           <div class="bottomnavs">
@@ -47,17 +65,20 @@
                     <a href="../../index.html">INICIO</a>
                   </li>
                   <li>
-                    <a href="../product-section/product-general.html?section=suplementos"
+                    <a
+                      href="../product-section/product-general.html?section=suplementos"
                       >SUPLEMENTOS</a
                     >
                   </li>
                   <li>
-                    <a href="../product-section/product-general.html?section=ofertas"
+                    <a
+                      href="../product-section/product-general.html?section=ofertas"
                       >OFERTAS</a
                     >
                   </li>
                   <li>
-                    <a href="../product-section/product-general.html?section=vasos"
+                    <a
+                      href="..product-section/product-general.html?section=vasos"
                       >VASOS Y SHAKERS</a
                     >
                   </li>
@@ -74,6 +95,53 @@
         </div>
       </div>
     </header>
+
+    <div class="mb-user-sidebar">
+      <div class="guess-content">
+        <ul>
+          <li>
+            <a href="../user-section/login.html">Iniciar Sesión</a>
+          </li>
+          <li>
+            <a href="../user-section/register.html">Registrarse</a>
+          </li>
+        </ul>
+      </div>
+      <div class="user-logged-content">
+        <ul>
+          <li><a class="profile">Mi perfil</a></li>
+          <li><a class="logout" onclick="logOutEvent()">Cerrar Sesión</a></li>
+        </ul>
+      </div>
+      <h4 id="mb-username">Cuenta</h4>
+    </div>
+    <div class="mb-sidebar">
+      <div class="side-content">
+        <ul>
+          <li><a href="../../index.html">Inicio</a></li>
+          <li>
+            <a
+              href="../product-section/product-general.html?section=suplementos"
+              >Suplementos</a
+            >
+          </li>
+          <li>
+            <a
+              href="../product-section/product-general.html?section=ofertas"
+              >Ofertas</a
+            >
+          </li>
+          <li>
+            <a
+              href="../product-section/product-general.html?section=vasos"
+              >Vasos y Shakers</a
+            >
+          </li>
+          <li><a href="../about.html">Quienes Somos</a></li>
+          <li><a href="../contact.html">Contacto</a></li>
+        </ul>
+      </div>
+    </div>
 
     <div class="adm">
       <button type="button" id="mg-sect">
@@ -96,9 +164,13 @@
           </div>
           <div class="product-options">
             <div id="prod-div">
-            <h3>Gestión de Productos</h3>
+              <h3>Gestión de Productos</h3>
               <div class="addProduct-container">
-                <button type="button" class="btn btn-warning" id="addProductPage">
+                <button
+                  type="button"
+                  class="btn btn-warning"
+                  id="addProductPage"
+                >
                   Agregar Producto
                 </button>
               </div>
@@ -156,12 +228,13 @@
                 <label for="number-contact">
                   Ingresa tu nuevo número de Contacto (Celular o Telefono).
                 </label>
-                <input 
-                type="tel"
-                id="number-contact"
-                name="number-contact"
-                placeholder="+54 015 999 9999">
-              
+                <input
+                  type="tel"
+                  id="number-contact"
+                  name="number-contact"
+                  placeholder="+54 015 999 9999"
+                />
+
                 <input
                   type="button"
                   value="Editar"
@@ -170,12 +243,13 @@
                 <label for="ig-contact">
                   Ingresa tu nueva página de Instagram.
                 </label>
-                <input 
-                type="text"
-                id="ig-contact"
-                name="ig-contact"
-                placeholder="URL de la Página de Instagram">
-              
+                <input
+                  type="text"
+                  id="ig-contact"
+                  name="ig-contact"
+                  placeholder="URL de la Página de Instagram"
+                />
+
                 <input
                   type="button"
                   value="Editar"
@@ -184,26 +258,24 @@
                 <label for="x-contact">
                   Ingresa tu nueva página de Twitter/X.
                 </label>
-                <input 
-                type="text"
-                id="x-contact"
-                name="x-contact"
-                placeholder="URL de la Página de Twitter/X">
-              
                 <input
-                  type="button"
-                  value="Editar"
-                  onclick="editarTwitter()"
+                  type="text"
+                  id="x-contact"
+                  name="x-contact"
+                  placeholder="URL de la Página de Twitter/X"
                 />
+
+                <input type="button" value="Editar" onclick="editarTwitter()" />
                 <label for="fb-contact">
                   Ingresa tu nueva página de Facebook.
                 </label>
-                <input 
-                type="text"
-                id="fb-contact"
-                name="fb-contact"
-                placeholder="URL de la Página de Facebook">
-              
+                <input
+                  type="text"
+                  id="fb-contact"
+                  name="fb-contact"
+                  placeholder="URL de la Página de Facebook"
+                />
+
                 <input
                   type="button"
                   value="Editar"
@@ -212,17 +284,14 @@
                 <label for="yt-contact">
                   Ingresa tu nuevo canal de Youtube.
                 </label>
-                <input 
-                type="text"
-                id="yt-contact"
-                name="yt-contact"
-                placeholder="URL del Canal">
-              
                 <input
-                  type="button"
-                  value="Editar"
-                  onclick="editarYoutube()"
+                  type="text"
+                  id="yt-contact"
+                  name="yt-contact"
+                  placeholder="URL del Canal"
                 />
+
+                <input type="button" value="Editar" onclick="editarYoutube()" />
               </form>
             </div>
           </div>
@@ -233,10 +302,18 @@
     <footer>
       <div class="end-container">
         <div class="social-media">
-          <a target="_blank" id="facebook"><i class="fa-brands fa-facebook"></i></a>
-          <a target="_blank" id="instagram"><i class="fa-brands fa-instagram"></i></a>
-          <a target="_blank" id="twitter"><i class="fa-brands fa-square-x-twitter"></i></a>
-          <a target="_blank" id="youtube"><i class="fa-brands fa-youtube"></i></a>
+          <a target="_blank" id="facebook"
+            ><i class="fa-brands fa-facebook"></i
+          ></a>
+          <a target="_blank" id="instagram"
+            ><i class="fa-brands fa-instagram"></i
+          ></a>
+          <a target="_blank" id="twitter"
+            ><i class="fa-brands fa-square-x-twitter"></i
+          ></a>
+          <a target="_blank" id="youtube"
+            ><i class="fa-brands fa-youtube"></i
+          ></a>
         </div>
         <p>ANZ SUPLEMENTOS &copy; 2024. Todos los derechos reservados.</p>
       </div>

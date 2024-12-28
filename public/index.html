@@ -37,8 +37,8 @@
                         </div>
                         <div class="user-options">
                             <a class="user-button"></a>
-                            <a id="profile">Mi perfil</a>
-                            <a id="logout">Cerrar Sesión</a>
+                            <a class="profile">Mi perfil</a>
+                            <a class="logout">Cerrar Sesión</a>
                         </div>
                     </div>
                 </div>
@@ -79,7 +79,13 @@
                 <li><a href="./sections/user-section/register.html">Registrarse</a></li>
             </ul>
         </div>
-        <h4>Cuenta</h4>
+        <div class="user-logged-content">
+            <ul>
+                <li><a class="profile">Mi perfil</a></li>
+                <li><a class="logout" onclick="logOutEvent()">Cerrar Sesión</a></li>
+            </ul> 
+        </div>
+        <h4 id="mb-username">Cuenta</h4>
     </div>
     <div class="mb-sidebar">
         <div class="side-content">
