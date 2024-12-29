@@ -1,6 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Faustina:ital,wght@0,300..800;1,300..800&family=Markazi+Text:wght@400..700&family=Mitr:wght@200;300;400;500;600;700&family=Oswald:wght@200..700&family=Russo+One&display=swap');
 
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden; /* Previene desbordamientos horizontales */
+    transform: scale(1); /* Asegura que no se aplique zoom */
+}
+
 body {
     margin: 0;
     background-color: rgb(255 193 7);
