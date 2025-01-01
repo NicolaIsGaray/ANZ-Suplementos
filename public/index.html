@@ -10,7 +10,7 @@
 <body>
     <header>
         <div class="head-container">
-            <div class="pc-navs">
+            <div class="navs">
                 <div class="topnavs">
                     <div>
                         <div class="mb-sidebars">
@@ -26,9 +26,13 @@
                         </div>
                         
                         <div class="search-container">
-                            <input type="text" placeholder="Buscar" id="searcher" onfocus="this.placeholder = ''" onblur="this.placeholder = '¿Aún no te decides? No pasa nada'">
-                            <button type="submit" id="searcher-submiter">Buscar <i class="fa-solid fa-magnifying-glass"></i></button>
+                            <input type="text" placeholder="¿Qué necesitás?" id="searcher">
+                            <button type="submit" id="searcher-submiter"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </div>
+                    </div>
+                    <div class="mb-search">
+                        <input type="text" placeholder="¿Qué necesitás?" id="mb-searcher">
+                        <button type="submit" id="mb-searcher-submiter"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </div>
                     <div class="user-navs">
                         <div class="guess-log">
@@ -38,7 +42,7 @@
                         <div class="user-options">
                             <a class="user-button"></a>
                             <a class="profile">Mi perfil</a>
-                            <a class="logout">Cerrar Sesión</a>
+                            <a class="logout" onclick="logOutEvent()">Cerrar Sesión</a>
                         </div>
                     </div>
                 </div>

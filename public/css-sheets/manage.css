@@ -3,7 +3,6 @@
 
 body {
     margin: 0;
-    background-color: rgb(255 193 7);
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     display: flex;
     flex-direction: column;
@@ -13,7 +12,7 @@ a {
     text-decoration: none;
 }
 
-/* <=======ADMIN=======> */
+/* <=======ADM=======> */
 .adm {
     position: fixed;
     z-index: 10;
@@ -31,25 +30,63 @@ a {
     cursor: pointer;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.7);
 }
-/* <=======/ADMIN=======> */
+/* <=======/ADM=======> */
+
+/* <=======WA=======> */
+.wa {
+    position: fixed;
+    z-index: 8;
+    bottom: 4vw;
+    right: 6vw;
+}
+
+.wa a {
+    text-align: center;
+    transform: scale(2.5);
+    padding: 8px;
+    display: block;
+    width: 16px;
+    height: 16px;
+    border: none;
+    background-color: #06c910;
+    color: #fff;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.7);
+}
+/* <=======/WA=======> */
 
 /* <=======HEADER=======> */
 .head-container {
     position: fixed;
     width: 100%;
-    z-index: 5;
-    top: 0px;
+    z-index: 12;
 }
 
 .topnavs {
     display: flex;
     justify-content: space-around;
+    flex-direction: row;
     align-items: center;
-    background-color: rgb(33 37 41);
+    background-color: rgb(255, 193, 7);
     color: #fff;
     padding: 20px 0px 20px 0px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-    
+}
+
+.topnavs div {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-navs-logged {
+    display:  none !important;
+}
+
+.mb-sidebars {
+    display: none !important;
 }
 
 .logo img {
@@ -63,24 +100,49 @@ a {
 }
 
 #searcher {
-    width: 16vw;
-    padding: 10px;
+    width: 100%;
+    padding: 20px;
     z-index: 2;
     position: relative;
+    border-radius: 30px;
+    border: none;
+}
+
+#mb-searcher {
+    width: 80%;
+    padding: 20px;
+    z-index: 2;
+    position: relative;
+    border-radius: 30px;
+    border: none;
+}
+
+#mb-searcher-submiter {
+    display: flex;
+    position: absolute;
+    right: 50px;
+    padding: 4px;
+    z-index: 2;
+    background: transparent;
+    border: none;
+    color: rgb(33, 37, 41);
+    cursor: pointer;
 }
 
 #searcher-submiter {
     display: flex;
     position: absolute;
-    padding: 4px;
-    gap: 10px;
+    padding: 10px;
+    transform: scale(1.5);
+    right: 38%;
     transition: all .4s ease-in-out;
-    z-index: 1;
-    transform: translateX(0px);
+    z-index: 2;
     background: transparent;
     border: none;
-    color: #fff;
+    color: #000000;
     cursor: pointer;
+    background: white;
+    border-radius: 30px;
 }
 
 #searcher:focus {
@@ -91,47 +153,108 @@ a {
     display: none;
 }
 
-#searcher:focus + #searcher-submiter {
-    transition: all .4s ease;
-    transform: translateX(20vw);
+.mb-search {
+    display: none !important;
 }
 
 .user-navs {
-    display: flex;
     gap: 30px;
+    width: 60% !important;
 }
 
 .user-navs a {
-    color: #fff;
+    color: rgb(255, 255, 255);
+}
+
+.user-navs-logged {
+    display: none;
+}
+
+.guess-log {
+    gap: 16px;
 }
 
 .login {
-    background-color: transparent;
+    background-color: rgb(33 37 41);
     padding: 10px;
-    border: 1px solid rgb(255, 255, 255);
+    border: 1px solid rgb(33 37 41);
     border-radius: 5px;
     transition: all .3s ease;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.7);
 }
 
 .register {
-    background-color: rgb(255 193 7);
-    color: rgb(33 37 41) !important;
+    background-color: rgb(33 37 41);
     padding: 10px;
     border-radius: 5px;
     width: 5vw;
     transition: all .3s ease;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.7);
     text-align: center;
 }
 
+.logout {
+    display: block;
+    color: rgb(255, 193, 7);
+    transform: translateX(-275px);
+    transition: all .3s ease;
+    cursor: pointer;
+    z-index: -1;
+}
+
+.profile {
+    display: block;
+    color: rgb(255, 193, 7);
+    cursor: pointer;
+    transform: translateX(-150px);
+    transition: all .3s ease;
+    z-index: -1;
+}
+
+.logout-anim {
+    transform: translateX(0px)!important;
+    transition: all .3s ease !important;
+    z-index: 0 !important;
+}
+
+.profile-anim {
+    transform: translateX(0px) !important;
+    transition: all .3s ease !important;
+    z-index: 0 !important;
+}
+
+.user-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    transition: all .3s ease;
+    cursor: pointer;
+    background-color: rgb(255, 193, 7);
+    border: 1px solid rgb(33 37 41);
+    border-radius: 5px;
+    color: rgb(33, 37, 41) !important;
+    font-weight: 600;
+    z-index: 2;
+    user-select: none;
+}
+
+.user-button i {
+    font-size: 24px;
+}
+
+.user-options {
+    display: flex;
+    gap: 40px;
+}
+
 .login:hover {
-    background-color: rgb(255, 255, 255);
-    color: rgb(33 37 41);
+    color: rgb(255, 193, 7);
     transition: all .3s ease;
 }
 
 .register:hover {
-    background-color: rgb(248, 205, 75);
-    color: rgb(33 37 41);
+    color: rgb(255, 193, 7);
     transition: all .3s ease;
 }
 
@@ -139,7 +262,7 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(255 193 7);
+    background-color: rgb(33 37 41);
     padding: 10px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     font-family: 'Lilita One';
@@ -147,7 +270,7 @@ a {
     font-weight: 200;
 }
 .bottomnavs a {
-    color: rgb(33 37 41);
+    color: rgb(255 193 7);
 }
 
 .navs-container ul{
@@ -469,10 +592,11 @@ a {
     display: flex;
     align-items: center;
     flex-direction: column;
-    background-color: rgb(33 37 41);
-    color: #fff;
-    padding-top: 12px;
-    padding-bottom: 12px;
+    background-color: rgb(255, 193, 7);
+    color: rgb(33, 37, 41);
+    font-weight: 600;
+    padding-top: 80px;
+    padding-bottom: 16px;
 }
 
 .social-media a{
@@ -519,6 +643,7 @@ a {
 
     .topnavs {
         justify-content: center;
+        gap: 16px;
         flex-direction: column;
     }
 
@@ -534,7 +659,7 @@ a {
     }
 
     .topnavs a {
-        color: rgb(255, 193, 7);
+        color: rgb(33, 37, 41);
     }
 
     .mb-sidebars {
@@ -559,13 +684,21 @@ a {
         display: none !important;
     }
 
-    #logout {
+    .mb-search {
+        display: flex !important;
+    }
+
+    #searcher {
+        width: 70%;
+    }
+
+    .logout {
         display: block;
         color: rgb(255, 193, 7);
         transform: translateX(0px);
     }
     
-    #profile {
+    .profile {
         display: block;
         color: rgb(255, 193, 7);
         transform: translateX(0px);

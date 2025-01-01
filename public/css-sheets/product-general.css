@@ -3,7 +3,6 @@
 
 body {
     margin: 0;
-    background-color: rgb(255 193 7);
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     display: flex;
     flex-direction: column;
@@ -13,7 +12,7 @@ a {
     text-decoration: none;
 }
 
-/* <=======ADMIN=======> */
+/* <=======ADM=======> */
 .adm {
     position: fixed;
     z-index: 10;
@@ -31,7 +30,7 @@ a {
     cursor: pointer;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.7);
 }
-/* <=======/ADMIN=======> */
+/* <=======/ADM=======> */
 
 /* <=======WA=======> */
 .wa {
@@ -67,8 +66,9 @@ a {
 .topnavs {
     display: flex;
     justify-content: space-around;
+    flex-direction: row;
     align-items: center;
-    background-color: rgb(33 37 41);
+    background-color: rgb(255, 193, 7);
     color: #fff;
     padding: 20px 0px 20px 0px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
@@ -100,24 +100,49 @@ a {
 }
 
 #searcher {
-    width: 16vw;
-    padding: 10px;
+    width: 100%;
+    padding: 20px;
     z-index: 2;
     position: relative;
+    border-radius: 30px;
+    border: none;
+}
+
+#mb-searcher {
+    width: 80%;
+    padding: 20px;
+    z-index: 2;
+    position: relative;
+    border-radius: 30px;
+    border: none;
+}
+
+#mb-searcher-submiter {
+    display: flex;
+    position: absolute;
+    right: 50px;
+    padding: 4px;
+    z-index: 2;
+    background: transparent;
+    border: none;
+    color: rgb(33, 37, 41);
+    cursor: pointer;
 }
 
 #searcher-submiter {
     display: flex;
     position: absolute;
-    padding: 4px;
-    gap: 10px;
+    padding: 10px;
+    transform: scale(1.5);
+    right: 38%;
     transition: all .4s ease-in-out;
-    z-index: 1;
-    transform: translateX(0px);
+    z-index: 2;
     background: transparent;
     border: none;
-    color: #fff;
+    color: #000000;
     cursor: pointer;
+    background: white;
+    border-radius: 30px;
 }
 
 #searcher:focus {
@@ -128,43 +153,47 @@ a {
     display: none;
 }
 
-#searcher:focus + #searcher-submiter {
-    transition: all .4s ease;
-    transform: translateX(20vw);
+.mb-search {
+    display: none !important;
 }
 
 .user-navs {
-    display: flex;
     gap: 30px;
+    width: 60% !important;
 }
 
 .user-navs a {
-    color: #fff;
+    color: rgb(255, 255, 255);
+}
+
+.user-navs-logged {
+    display: none;
 }
 
 .guess-log {
-    gap: 40px;
+    gap: 16px;
 }
 
 .login {
-    background-color: transparent;
+    background-color: rgb(33 37 41);
     padding: 10px;
-    border: 1px solid rgb(255, 255, 255);
+    border: 1px solid rgb(33 37 41);
     border-radius: 5px;
     transition: all .3s ease;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.7);
 }
 
 .register {
-    background-color: rgb(255 193 7);
-    color: rgb(33 37 41) !important;
+    background-color: rgb(33 37 41);
     padding: 10px;
     border-radius: 5px;
     width: 5vw;
     transition: all .3s ease;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.7);
     text-align: center;
 }
 
-#logout {
+.logout {
     display: block;
     color: rgb(255, 193, 7);
     transform: translateX(-275px);
@@ -173,7 +202,7 @@ a {
     z-index: -1;
 }
 
-#profile {
+.profile {
     display: block;
     color: rgb(255, 193, 7);
     cursor: pointer;
@@ -220,14 +249,12 @@ a {
 }
 
 .login:hover {
-    background-color: rgb(255, 255, 255);
-    color: rgb(33 37 41);
+    color: rgb(255, 193, 7);
     transition: all .3s ease;
 }
 
 .register:hover {
-    background-color: rgb(248, 205, 75);
-    color: rgb(33 37 41);
+    color: rgb(255, 193, 7);
     transition: all .3s ease;
 }
 
@@ -235,7 +262,7 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(255 193 7);
+    background-color: rgb(33 37 41);
     padding: 10px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     font-family: 'Lilita One';
@@ -243,7 +270,7 @@ a {
     font-weight: 200;
 }
 .bottomnavs a {
-    color: rgb(33 37 41);
+    color: rgb(255 193 7);
 }
 
 .navs-container ul{
@@ -430,7 +457,8 @@ a {
 .item-main {
     margin: 1vw;
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
+    align-items: center;
     border: 1px solid #ccc;
     border-radius: 8px;
     overflow: hidden;
@@ -481,10 +509,11 @@ a {
     display: flex;
     align-items: center;
     flex-direction: column;
-    background-color: rgb(33 37 41);
-    color: #fff;
-    padding-top: 12px;
-    padding-bottom: 12px;
+    background-color: rgb(255, 193, 7);
+    color: rgb(33, 37, 41);
+    font-weight: 600;
+    padding-top: 80px;
+    padding-bottom: 16px;
 }
 
 .social-media a{
@@ -494,11 +523,6 @@ a {
 
 /* <X> RESPONSIVE <X> */
 @media (max-width: 480px) {
-    /* General Size */
-    body {
-        width: 480px;
-    }
-
     /* User Options */
     .mb-user-sidebar {
         display: flex;
@@ -524,13 +548,21 @@ a {
         transform: scale(2);
     }
 
-    #logout {
+    .mb-search {
+        display: flex !important;
+    }
+
+    #searcher {
+        width: 70%;
+    }
+
+    .logout {
         display: block;
         color: rgb(255, 193, 7);
         transform: translateX(0px);
     }
     
-    #profile {
+    .profile {
         display: block;
         color: rgb(255, 193, 7);
         transform: translateX(0px);
@@ -544,6 +576,7 @@ a {
     .topnavs {
         justify-content: center;
         flex-direction: column;
+        gap: 16px;
     }
 
     .topnavs div {
@@ -558,7 +591,7 @@ a {
     }
 
     .topnavs a {
-        color: rgb(255, 193, 7);
+        color: rgb(33, 37, 41);
     }
 
     .mb-sidebars {
@@ -581,6 +614,10 @@ a {
 
     .search-container {
         display: none !important;
+    }
+
+    .products {
+        margin-top: 18vw;
     }
 }
 /* <X> /RESPONSIVE <X> */

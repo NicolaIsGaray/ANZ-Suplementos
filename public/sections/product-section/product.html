@@ -10,81 +10,71 @@
   <body>
     <header>
       <div class="head-container">
-        <div class="pc-navs">
-          <div class="topnavs">
-            <div>
-              <div class="mb-sidebars">
-                <a class="open-sidebar"><i class="fa-solid fa-bars"></i></a>
+          <div class="navs">
+              <div class="topnavs">
+                  <div>
+                      <div class="mb-sidebars">
+                          <a class="open-sidebar"><i class="fa-solid fa-bars"></i></a>
+                      </div>
+                      <div class="logo">
+                          <a href="../../index.html">
+                          <img src="../../media/logo-tibushop.png" alt="ANZ Logo">
+                          </a>
+                      </div>
+                      <div class="user-navs-logged">
+                          <a class="userBtn"><i class="fa-solid fa-user"></i></a>
+                      </div>
+                      
+                      <div class="search-container">
+                          <input type="text" placeholder="¿Qué necesitás?" id="searcher">
+                          <button type="submit" id="searcher-submiter"><i class="fa-solid fa-magnifying-glass"></i></button>
+                      </div>
+                  </div>
+                  <div class="mb-search">
+                      <input type="text" placeholder="¿Qué necesitás?" id="mb-searcher">
+                      <button type="submit" id="mb-searcher-submiter"><i class="fa-solid fa-magnifying-glass"></i></button>
+                  </div>
+                  <div class="user-navs">
+                      <div class="guess-log">
+                          <a href="../user-section/login.html" class="login">Iniciar Sesión</a>
+                          <a href="../user-section/register.html" class="register">Registrarse</a>
+                      </div>
+                      <div class="user-options">
+                          <a class="user-button"></a>
+                          <a class="profile">Mi perfil</a>
+                          <a class="logout" onclick="logOutEvent()">Cerrar Sesión</a>
+                      </div>
+                  </div>
               </div>
-              <div class="logo">
-                <a href="../../index.html">
-                  <img src="../../media/logo-tibushop.png" alt="ANZ Logo" />
-                </a>
+              <div class="bottomnavs">
+                  <div class="navs-container">
+                      <nav>
+                          <ul>
+                              <li>
+                                  <a href="../../index.html">INICIO</a>
+                              </li>
+                              <li>
+                                  <a href="./product-general.html?section=suplementos">SUPLEMENTOS</a>
+                              </li>
+                              <li>
+                                  <a href="./product-general.html?section=ofertas">OFERTAS</a>
+                              </li>
+                              <li>
+                                  <a href="./product-general.html?section=vasos">VASOS Y SHAKERS</a>
+                              </li>
+                              <li>
+                                  <a href="../about.html">QUIENES SOMOS</a>
+                              </li>
+                              <li>
+                                  <a href="../contact.html">CONTACTO</a>
+                              </li>
+                          </ul>
+                      </nav>
+                  </div>
               </div>
-              <div class="user-navs-logged">
-                <a class="userBtn"><i class="fa-solid fa-user"></i></a>
-              </div>
-
-              <div class="search-container">
-                <input
-                  type="text"
-                  placeholder="Buscar"
-                  id="searcher"
-                  onfocus="this.placeholder = ''"
-                  onblur="this.placeholder = '¿Aún no te decides? No pasa nada'"
-                />
-                <button type="submit" id="searcher-submiter">
-                  Buscar <i class="fa-solid fa-magnifying-glass"></i>
-                </button>
-              </div>
-            </div>
-            <div class="user-navs">
-              <div class="guess-log">
-                <a href="../user-section/login.html" class="login">Iniciar Sesión</a>
-                <a href="../user-section/register.html" class="register">Registrarse</a>
-            </div>
-            <div class="user-options">
-                <a class="user-button"></a>
-                <a id="profile">Mi perfil</a>
-                <a id="logout">Cerrar Sesión</a>
-            </div>
-            </div>
           </div>
-          <div class="bottomnavs">
-            <div class="navs-container">
-              <nav>
-                <ul>
-                  <li>
-                    <a href="../../index.html">INICIO</a>
-                  </li>
-                  <li>
-                    <a href="./product-general.html?section=suplementos"
-                      >SUPLEMENTOS</a
-                    >
-                  </li>
-                  <li>
-                    <a href="./product-general.html?section=suplementos"
-                      >OFERTAS</a
-                    >
-                  </li>
-                  <li>
-                    <a href="./product-general.html?section=suplementos"
-                      >VASOS Y SHAKERS</a
-                    >
-                  </li>
-                  <li>
-                    <a href="../about.html">QUIENES SOMOS</a>
-                  </li>
-                  <li>
-                    <a href="../contact.html">CONTACTO</a>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-          </div>
-        </div>
       </div>
-    </header>
+  </header>
 
     <div class="mb-user-sidebar">
       <div class="guess-content">

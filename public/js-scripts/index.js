@@ -113,8 +113,8 @@ async function obtenerRolUsuario() {
 }
 
 const usernameDisplay = document.querySelector(".user-button");
-const logOutButton = document.getElementById("logout");
-const profileButton = document.getElementById("profile");
+const logOutButton = document.querySelector(".logout");
+const profileButton = document.querySelector(".profile");
 
 usernameDisplay.addEventListener("click", (e) => {
     e.preventDefault();
@@ -167,7 +167,6 @@ const redirect = (id, url) => {
 }
 
 const renderProduct = (Productos) => {
-    const ulProducts = document.querySelector(".products-main")
     const categoryUl1 = document.querySelector("#ofertas");
     const categoryUl2 = document.querySelector("#vasos");
     const categoryUl3 = document.querySelector("#suplementos");
@@ -196,15 +195,15 @@ const renderProduct = (Productos) => {
     let imgVerify = Productos.imgPortada ? Productos.imgPortada : "./media/default.png";
     productImg.setAttribute("src", imgVerify);
 
-    if (Productos.categoria === 'Aminoacidos') {
+    if (Productos.categoria === 'ofertas') {
         categoryUl1.append(liItem);
     }
 
-    if (Productos.categoria === 'Vasos y Shakers') {
+    if (Productos.categoria === 'vasos') {
         categoryUl2.append(liItem);
     }
 
-    if (Productos.categoria === 'Suplemento') {
+    if (Productos.categoria === 'suplementos') {
         categoryUl3.append(liItem);
     }
 
