@@ -471,7 +471,7 @@ a {
 .admin-options-content ul {
     display: flex;
     list-style: none;
-    gap: 2vw;
+    gap: 30px;
     padding: 0px;
 }
 
@@ -777,7 +777,7 @@ a {
 }
 
 .category-box div > form input[type="text"] {
-    width: 200px;
+    width: 100%;
     height: 40px;
     font-size: 18px;
     text-align: center;
@@ -788,14 +788,14 @@ a {
 }
 
 .category-box div > form select {
-    width: 200px;
+    width: 100%;
     height: 40px;
     font-size: 18px;
     text-align: center;
 }
 
 .category-box div > form input[type="submit"] {
-    width: 200px;
+    width: 100%;
     height: 40px;
     font-size: 18px;
     background-color: rgb(255, 193, 7);
@@ -1030,12 +1030,22 @@ a {
     .categories-container {
         padding: 0;
         width: 100%;
-        height: 36vh;
+        height: auto;
     }
 
     .categories-container h2 {
         font-size: 2rem;
-        margin-right: 60vw;
+        margin-right: 45vw;
+    }
+
+    .categories-subcontainer {
+        padding-bottom: 4vh;
+    }
+
+    .category-box {
+        justify-content: space-between;
+        flex-direction: column;
+        height: 100%;
     }
 
     .contact-container {
@@ -1084,6 +1094,7 @@ a {
     .visual {
         gap: 10px;
         width: 100%;
+        margin: 0;
     }
 
     .item-img-div {

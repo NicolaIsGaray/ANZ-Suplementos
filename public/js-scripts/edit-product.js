@@ -330,7 +330,7 @@ function renderProduct(Productos) {
 
     const currentImg = document.getElementById("current-img");
     const currentImgUrl = document.getElementById("image");
-    let imgVerify = Productos.imgPortada ? Productos.imgPortada : ("../media/icons/default.png");
+    let imgVerify = Productos.imgPortada ? Productos.imgPortada : ("../../media/default.png");
     currentImg.setAttribute("src", imgVerify);
     currentImgUrl.value = imgVerify;
 
