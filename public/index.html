@@ -54,13 +54,13 @@
                                     <a href="./index.html">INICIO</a>
                                 </li>
                                 <li>
-                                    <a href="./sections/product-section/product-general.html?section=suplementos">SUPLEMENTOS</a>
+                                    <a href="./sections/product-section/product-general.html?section=Suplementos">SUPLEMENTOS</a>
                                 </li>
                                 <li>
-                                    <a href="./sections/product-section/product-general.html?section=ofertas">OFERTAS</a>
+                                    <a href="./sections/product-section/product-general.html?section=Ofertas">OFERTAS</a>
                                 </li>
                                 <li>
-                                    <a href="./sections/product-section/product-general.html?section=vasos">VASOS Y SHAKERS</a>
+                                    <a href="./sections/product-section/product-general.html?section=Vasos">VASOS Y SHAKERS</a>
                                 </li>
                                 <li>
                                     <a href="./sections/about.html">QUIENES SOMOS</a>
@@ -95,9 +95,9 @@
         <div class="side-content">
             <ul>
                 <li><a href="./index.html">Inicio</a></li>
-                <li><a href="./sections/product-section/product-general.html?section=suplementos">Suplementos</a></li>
-                <li><a href="./sections/product-section/product-general.html?section=ofertas">Ofertas</a></li>
-                <li><a href="./sections/product-section/product-general.html?section=vasos">Vasos y Shakers</a></li>
+                <li><a href="./sections/product-section/product-general.html?section=Suplementos" id="cat-1">Suplementos</a></li>
+                <li><a href="./sections/product-section/product-general.html?section=Ofertas" id="cat-2">Ofertas</a></li>
+                <li><a href="./sections/product-section/product-general.html?section=Vasos" id="cat-3">Vasos y Shakers</a></li>
                 <li><a href="./sections/about.html">Quienes Somos</a></li>
                 <li><a href="./sections/contact.html">Contacto</a></li>
             </ul>
@@ -128,30 +128,36 @@
     <br>
     
     <div class="main-container">
-        <div class="main-content">
+        <section>
             <div class="category-name">
                 <h3>Suplementos</h3>
             </div>
-            <ul id="suplementos">
-
-            </ul>
-        </div>
-        <div class="main-content">
+            <div class="main-content">
+                <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" navigation="true" space-between="30" slides-per-view="auto" loop="true" id="Suplementos">
+                </swiper-container>
+            </div>
+        </section>
+        
+        <section>
             <div class="category-name">
                 <h3>Vasos y Shakers</h3>
             </div>
-            <ul id="vasos">
-
-            </ul>
-        </div>
-        <div class="main-content">
-            <div class="category-name">
-                <h3>Ofertas</h3>
+            <div class="main-content">
+                <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" navigation="true" space-between="30" slides-per-view="auto" loop="true" id="Vasos">
+                </swiper-container>
             </div>
-            <ul id="ofertas">
-
-            </ul>
-        </div>
+        </section>
+        
+        <section>
+            <div class="category-name">
+                <h3>Equipamiento</h3>
+            </div>
+            <div class="main-content">
+                <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" navigation="true" space-between="30" slides-per-view="auto" loop="true" id="Ofertas">
+                </swiper-container>
+            </div>
+        </section>
+        
     </div>
 
     <div class="details-container">
@@ -198,6 +204,7 @@
     </footer>
 
 <script src="https://kit.fontawesome.com/21f1cfa061.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="./js-scripts/index.js"></script>
 </body>

@@ -5,10 +5,12 @@ const getUserOpt = document.querySelector(".guess-log");
 const getGuessOpt = document.querySelector(".guess-content");
 
 const userOptions = document.querySelector(".user-options");
+const mbUserLogged = document.querySelector(".user-logged-content");
 
 window.onload = () => {
     getAdm.style.display = "none";
     userOptions.style.display = "none";
+    mbUserLogged.style.display = "none";
 }
 
 async function obtenerRolUsuario() {
@@ -27,7 +29,7 @@ async function obtenerRolUsuario() {
         const isAdmin = response.data.isAdmin; // Suponiendo que el backend te está enviando isAdmin como true/false
 
         window.onload = () => {
-            getUserOpt.style.display = "none";  
+            getUserOpt.style.display = "none";
         } 
         
         if (isAdmin) {
@@ -35,12 +37,14 @@ async function obtenerRolUsuario() {
             getUserOpt.style.display = "none"
             getGuessOpt.style.display = "none";
             userOptions.style.display = "flex";
+            mbUserLogged.style.display = "flex";
 
         } else {
             getAdm.innerHTML = ' ';
             getUserOpt.style.display = "none"
             getGuessOpt.style.display = "none";
             userOptions.style.display = "flex";
+            mbUserLogged.style.display = "flex";
         }
 
         async function userResponse() {
@@ -54,10 +58,11 @@ async function obtenerRolUsuario() {
 
         const usuarioDisplay = await userResponse();
         const usernameDisplay = document.querySelector(".user-button");
-        const sideUsername = document.getElementById("username");
+        const mbUserName = document.getElementById("mb-username");
 
         usernameDisplay.innerHTML = `${usuarioDisplay.username} <i class="fa-solid fa-circle-user"></i>`;
-        sideUsername.innerHTML = `${usuarioDisplay.username}`;
+
+        mbUserName.innerHTML = `${usuarioDisplay.username}`;
 
     } catch (error) {
         console.log(error);
@@ -65,8 +70,8 @@ async function obtenerRolUsuario() {
 }
 
 const usernameDisplay = document.querySelector(".user-button");
-const logOutButton = document.getElementById("logout");
-const profileButton = document.getElementById("profile");
+const logOutButton = document.querySelector(".logout");
+const profileButton = document.querySelector(".profile");
 
 usernameDisplay.addEventListener("click", (e) => {
     e.preventDefault();
@@ -84,23 +89,43 @@ const logOut = async () => {
     }
 }
 
-logOutButton.addEventListener("click", (e) => {
-    e.preventDefault();
+function logOutEvent() {
     logOut();
     localStorage.removeItem("token");
     window.location.href = "./index.html";
-})
+}
 
 //Botón de Admin
 const admBtn = document.getElementById('mg-sect');
 admBtn.addEventListener('click', (e) => {
     e.preventDefault();
-    window.location.href = './sections/admin-section/manage.html';
+    window.location.href = '../admin-section/manage.html';
 });
 
 // Llamada para verificar el rol y ejecutar la acción
 obtenerRolUsuario();
 //</|ROLES|>
+
+// <|Toggle User Sidebar|>
+const userSidebar = document.querySelector(".mb-user-sidebar");
+const toggleUserSidebarBtn = document.querySelector(".userBtn");
+
+toggleUserSidebarBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    userSidebar.classList.toggle("mb-user-sidebar-open");
+});
+// </|Toggle User Sidebar|>
+
+
+// <|Toggle Sidebar|>
+const sidebar = document.querySelector(".mb-sidebar");
+const openBtn = document.querySelector(".open-sidebar");
+
+openBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    sidebar.classList.toggle("sidebar-open");
+});
+// </|Toggle Sidebar|>
 
 //VER MÁS INFO
 function verMas() {
@@ -189,27 +214,6 @@ const getProduct = async () => {
 }
 
 getProduct()
-
-// <|Toggle User Sidebar|>
-const userSidebar = document.querySelector(".mb-user-sidebar");
-const toggleUserSidebarBtn = document.querySelector(".userBtn");
-
-toggleUserSidebarBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    userSidebar.classList.toggle("mb-user-sidebar-open");
-});
-// </|Toggle User Sidebar|>
-
-
-// <|Toggle Sidebar|>
-const sidebar = document.querySelector(".mb-sidebar");
-const openBtn = document.querySelector(".open-sidebar");
-
-openBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    sidebar.classList.toggle("sidebar-open");
-});
-// </|Toggle Sidebar|>
 
 //<|CONTACTO|>
 const getSociales = async () => {

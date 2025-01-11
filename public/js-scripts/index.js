@@ -1,3 +1,10 @@
+// <|OCULTAR SWIPER BULLETS|>
+const swiperContainer = document.querySelectorAll('swiper-container');
+swiperContainer.forEach(shown => {
+    shown.pagination = false;
+});
+// </|OCULTAR SWIPER BULLETS|>
+
 // <|SLIDESHOWS|>
 let slideIndex = 0;
 let slides = document.getElementsByClassName("slidesDiv");
@@ -149,7 +156,6 @@ admBtn.addEventListener('click', (e) => {
 obtenerRolUsuario();
 //</|ROLES|>
 
-
 //<|PRODUCTOS|>
 //Obtener Categorias
 async function obtenerCategorias() {
@@ -167,27 +173,33 @@ const redirect = (id, url) => {
 }
 
 const renderProduct = (Productos) => {
-    const categoryUl1 = document.querySelector("#ofertas");
-    const categoryUl2 = document.querySelector("#vasos");
-    const categoryUl3 = document.querySelector("#suplementos");
+    const category1 = document.querySelector("#Ofertas");
+    const category2 = document.querySelector("#Vasos");
+    const category3 = document.querySelector("#Suplementos");
 
     const liItem = document.createElement("li");
+    const swiperSlider = document.createElement("swiper-slide");
     const productName = document.createElement("span");
     const productPrice = document.createElement("span");
     const productImg = document.createElement("img");
     const buyButton = document.createElement("button");
 
+    const divImg = document.createElement("div");
     const divItemContent = document.createElement("div");
 
     divItemContent.classList.add("item-content");
+    divImg.classList.add("item-img-div");
     productImg.classList.add("item-img");
     buyButton.classList.add("buy-button");
     liItem.classList.add("item-main");
 
-    buyButton.innerHTML = `Comprar <i class="fa-solid fa-basket-shopping" style="color: #FFD43B;"></i>`;
+    productName.id = "name-product";
+    productPrice.id = "price";
+
+    buyButton.innerHTML = `COMPRAR <i class="fa-solid fa-basket-shopping" style="color: #FFD43B;"></i>`;
 
     let priceVerify = Productos.precio ? Productos.precio : "Null"
-    productPrice.textContent = `Precio: $${priceVerify}`;
+    productPrice.textContent = `$${priceVerify}`;
 
     let nameVerify = Productos.nombre ? Productos.nombre : "Null"
     productName.textContent = nameVerify;
@@ -195,23 +207,25 @@ const renderProduct = (Productos) => {
     let imgVerify = Productos.imgPortada ? Productos.imgPortada : "./media/default.png";
     productImg.setAttribute("src", imgVerify);
 
-    if (Productos.categoria === 'ofertas') {
-        categoryUl1.append(liItem);
+    if (Productos.categoria === 'Ofertas') {
+        category1.append(swiperSlider);
     }
 
-    if (Productos.categoria === 'vasos') {
-        categoryUl2.append(liItem);
+    if (Productos.categoria === 'Vasos') {
+        category2.append(swiperSlider);
     }
 
-    if (Productos.categoria === 'suplementos') {
-        categoryUl3.append(liItem);
+    if (Productos.categoria === 'Suplementos') {
+        category3.append(swiperSlider);
     }
 
-    liItem.appendChild(productImg);
+    divImg.appendChild(productImg);
+    swiperSlider.appendChild(liItem);
+    liItem.appendChild(divImg);
     divItemContent.appendChild(productName);
     divItemContent.appendChild(productPrice);
-    liItem.appendChild(buyButton);
-    liItem.appendChild(divItemContent)
+    divItemContent.appendChild(buyButton);
+    liItem.appendChild(divItemContent);
 
     buyButton.addEventListener("click", () => {
         redirect(Productos._id,`./sections/product-section/product.html`)

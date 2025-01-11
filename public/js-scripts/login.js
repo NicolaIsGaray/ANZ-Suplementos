@@ -30,7 +30,6 @@ function getInputValues() {
               if (token) {
               localStorage.setItem("token", token);  // Guardar el token en localStorage
               console.log("Token guardado en localStorage");
-              alert("Inicio de sesión exitoso");
           } else {
               alert("Error: No se recibió un token");
           }

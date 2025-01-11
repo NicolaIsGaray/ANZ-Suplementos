@@ -54,13 +54,13 @@
                                   <a href="../../index.html">INICIO</a>
                               </li>
                               <li>
-                                  <a href="../product-section/product-general.html?section=suplementos">SUPLEMENTOS</a>
+                                  <a href="../product-section/product-general.html?section=Suplementos">SUPLEMENTOS</a>
                               </li>
                               <li>
-                                  <a href="../product-section/product-general.html?section=ofertas">OFERTAS</a>
+                                  <a href="../product-section/product-general.html?section=Ofertas">OFERTAS</a>
                               </li>
                               <li>
-                                  <a href="../product-section/product-general.html?section=vasos">VASOS Y SHAKERS</a>
+                                  <a href="../product-section/product-general.html?section=Vasos">VASOS Y SHAKERS</a>
                               </li>
                               <li>
                                   <a href="../about.html">QUIENES SOMOS</a>
@@ -101,19 +101,19 @@
           <li><a href="../../index.html">Inicio</a></li>
           <li>
             <a
-              href="../product-section/product-general.html?section=suplementos"
+              href="../product-section/product-general.html?section=Suplementos"
               >Suplementos</a
             >
           </li>
           <li>
             <a
-              href="../product-section/product-general.html?section=ofertas"
+              href="../product-section/product-general.html?section=Ofertas"
               >Ofertas</a
             >
           </li>
           <li>
             <a
-              href="../product-section/product-general.html?section=vasos"
+              href="../product-section/product-general.html?section=Vasos"
               >Vasos y Shakers</a
             >
           </li>
@@ -123,185 +123,160 @@
       </div>
     </div>
 
-    <div class="adm">
-      <button type="button" id="mg-sect">
-        <i class="fa-solid fa-crown"></i>
-      </button>
+    <div class="go-start">
+      <a href="#up-start" class="go-start-btn">
+        <i class="fa-solid fa-arrow-up"></i>
+      </a>
     </div>
 
-    <div class="adm-container">
-      <div class="sidebarOptions">
-        <h3>ANZ Suplementos - Administración</h3>
-        <div class="flex-divider">
-          <div class="optionsList">
-            <ul>
-              <li class="optionS" id="product-option">Productos</li>
-              <li class="optionS" id="section-option">
-                Secciones (EN PROCESO)
-              </li>
-              <li class="optionS" id="contact-option">Contacto</li>
-            </ul>
+    <section class="administrator-options" id="up-start">
+      <div class="admin-options-container">
+        <h1>¿Que deseas hacer <u>hoy</u>?</h1>
+        <div class="admin-options-content">
+          <ul>
+            <li>
+              <a href="#product-manage">Gestión de Productos</a>
+            </li>
+            <li>
+              <a href="#category-manage">Gestión de Categorías</a>
+            </li>
+            <li>
+              <a href="#contact-manage">Gestión de Contacto</a>
+            </li>
+          </ul>
+  
+      </div>
+    </section>
+
+    <section class="products" id="product-manage">
+      <div class="products-container">
+        <div class="section-options">
+          <h2>Productos</h2>
+          <div class="other-options">
+            <button id="filter">
+              <i class="fa-solid fa-filter"></i> Filtrar
+            </button>
+            <button id="add-product">
+              <i class="fa-solid fa-plus"></i> Añadir Producto
+            </button>
           </div>
-          <div class="product-options">
-            <div id="prod-div">
-              <h3>Gestión de Productos</h3>
-              <div class="addProduct-container">
-                <button
-                  type="button"
-                  class="btn btn-warning"
-                  id="addProductPage"
-                >
-                  Agregar Producto
-                </button>
-              </div>
-              <div class="editProduct-container">
-                <button
-                  type="button"
-                  class="btn btn-warning"
-                  id="editProductPage"
-                >
-                  Editar Producto [EN PROCESO]
-                </button>
-              </div>
-              <div class="removeProduct-container">
-                <button
-                  type="button"
-                  class="btn btn-warning"
-                  id="removeProductPage"
-                >
-                  Eliminar Producto [EN PROCESO]
-                </button>
-              </div>
-            </div>
-            <div id="cate-div">
-              <div class="addCategory">
-                <h4>Agregar nueva Categoría</h4>
-                <form action="" method="post">
-                  <input type="text" name="newCategoria" id="newCtgr" />
-                  <input type="submit" value="+" id="addCategoryBtn" />
-                </form>
-              </div>
-            </div>
-          </div>
-          <div class="section-options">
-            <h3>Gestión de Secciones</h3>
-            <div class="addSection-container">
-              <button type="button" class="btn btn-warning" id="addSection">
-                Añadir sección
-              </button>
-            </div>
-            <div class="editSection-container">
-              <button type="button" class="btn btn-warning" id="editSection">
-                Editar Sección
-              </button>
-            </div>
-            <div class="removeSection-container">
-              <button type="button" class="btn btn-warning" id="removeSection">
-                Eliminar Sección
-              </button>
-            </div>
-          </div>
-          <div class="contact-options">
-            <h3>Editar Contacto</h3>
-            <div class="editContact-container">
-              <form action="" method="post" id="contact-form">
-                <label for="number-contact">
-                  Ingresa tu nuevo número de Contacto (Celular o Telefono).
-                </label>
-                <input
-                  type="tel"
-                  id="number-contact"
-                  name="number-contact"
-                  placeholder="+54 015 999 9999"
-                />
+        </div>
+        <div class="filter-container">
+        </div>
+        <div class="products-subcontainer">
+        </div>
+      </div>
+    </section>
 
-                <input
-                  type="button"
-                  value="Editar"
-                  onclick="editarTelefono()"
-                />
-                <label for="ig-contact">
-                  Ingresa tu nueva página de Instagram.
-                </label>
-                <input
-                  type="text"
-                  id="ig-contact"
-                  name="ig-contact"
-                  placeholder="URL de la Página de Instagram"
-                />
-
-                <input
-                  type="button"
-                  value="Editar"
-                  onclick="editarInstagram()"
-                />
-                <label for="x-contact">
-                  Ingresa tu nueva página de Twitter/X.
-                </label>
-                <input
-                  type="text"
-                  id="x-contact"
-                  name="x-contact"
-                  placeholder="URL de la Página de Twitter/X"
-                />
-
-                <input type="button" value="Editar" onclick="editarTwitter()" />
-                <label for="fb-contact">
-                  Ingresa tu nueva página de Facebook.
-                </label>
-                <input
-                  type="text"
-                  id="fb-contact"
-                  name="fb-contact"
-                  placeholder="URL de la Página de Facebook"
-                />
-
-                <input
-                  type="button"
-                  value="Editar"
-                  onclick="editarFacebook()"
-                />
-                <label for="yt-contact">
-                  Ingresa tu nuevo canal de Youtube.
-                </label>
-                <input
-                  type="text"
-                  id="yt-contact"
-                  name="yt-contact"
-                  placeholder="URL del Canal"
-                />
-
-                <input type="button" value="Editar" onclick="editarYoutube()" />
+    <section class="categories" id="category-manage">
+      <div class="categories-container">
+        <h2>Categorías</h2>
+        <div class="categories-subcontainer">
+          <div class="category-box">
+            <div class="add-category">
+              <h3>Añadir Categoría</h3>
+              <form action="" method="post">
+                <input type="text" name="newCategoria" id="newCtgr" placeholder="Nombre"/>
+                <input type="submit" value="Crear" id="addCategoryBtn"/>
+              </form>
+            </div>
+            <div class="delete-category">
+              <h3>Eliminar Categoría</h3>
+              <form action="" method="post">
+                <select name="delCategoria" id="delCtgr">
+                  <option value="" selected disabled>- Elegir Categoría -</option>
+                </select>
+                <input type="submit" value="Eliminar Categoría" id="delCategoryBtn" />
               </form>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <footer>
-      <div class="end-container">
-        <div class="social-media">
-          <a target="_blank" id="facebook"
-            ><i class="fa-brands fa-facebook"></i
-          ></a>
-          <a target="_blank" id="instagram"
-            ><i class="fa-brands fa-instagram"></i
-          ></a>
-          <a target="_blank" id="twitter"
-            ><i class="fa-brands fa-square-x-twitter"></i
-          ></a>
-          <a target="_blank" id="youtube"
-            ><i class="fa-brands fa-youtube"></i
-          ></a>
+    <section class="contact" id="contact-manage">
+      <div class="contact-container">
+        <h2>Contacto</h2>
+        <div class="contact-subcontainer">
+          <form action="" method="post" id="contact-form">
+            <div class="one">
+              <label for="number-contact">
+              Ingresa tu nuevo número de Contacto (Celular o Telefóno).
+            </label>
+            <input
+              type="tel"
+              id="number-contact"
+              name="number-contact"
+              placeholder="+54 015 999 9999"
+            />
+            <input
+              type="button"
+              value="Editar"
+              onclick="editarTelefono()"
+            />
+            <label for="ig-contact">
+              Ingresa tu nueva página de Instagram.
+            </label>
+            <input
+              type="text"
+              id="ig-contact"
+              name="ig-contact"
+              placeholder="URL de la Página de Instagram"
+            />
+            <input
+              type="button"
+              value="Editar"
+              onclick="editarInstagram()"
+            />
+            <label for="x-contact">
+              Ingresa tu nueva página de Twitter/X.
+            </label>
+            <input
+              type="text"
+              id="x-contact"
+              name="x-contact"
+              placeholder="URL de la Página de Twitter/X"
+            />
+            <input type="button" value="Editar" onclick="editarTwitter()" />
+            </div>
+
+            <div class="two">
+              <label for="fb-contact">
+                Ingresa tu nueva página de Facebook.
+              </label>
+              <input
+                type="text"
+                id="fb-contact"
+                name="fb-contact"
+                placeholder="URL de la Página de Facebook"
+              />
+  
+              <input
+                type="button"
+                value="Editar"
+                onclick="editarFacebook()"
+              />
+              <label for="yt-contact">
+                Ingresa tu nuevo canal de Youtube.
+              </label>
+              <input
+                type="text"
+                id="yt-contact"
+                name="yt-contact"
+                placeholder="URL del Canal"
+              />
+  
+              <input type="button" value="Editar" onclick="editarYoutube()" />
+            </div>
+          </form>
         </div>
-        <p>ANZ SUPLEMENTOS &copy; 2024. Todos los derechos reservados.</p>
       </div>
-    </footer>
+    </section>
     <script
       src="https://kit.fontawesome.com/21f1cfa061.js"
       crossorigin="anonymous"
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="../../js-scripts/admin.js"></script>
   </body>

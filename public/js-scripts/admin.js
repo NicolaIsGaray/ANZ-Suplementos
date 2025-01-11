@@ -8,7 +8,6 @@ toggleUserSidebarBtn.addEventListener("click", (e) => {
 });
 // </|Toggle User Sidebar|>
 
-
 // <|Toggle Sidebar|>
 const sidebar = document.querySelector(".mb-sidebar");
 const openBtn = document.querySelector(".open-sidebar");
@@ -29,7 +28,6 @@ const userOptions = document.querySelector(".user-options");
 const mbUserLogged = document.querySelector(".user-logged-content");
 
 window.onload = () => {
-    getAdm.style.display = "none";
     userOptions.style.display = "none";
     mbUserLogged.style.display = "none";
 }
@@ -54,14 +52,12 @@ async function obtenerRolUsuario() {
         } 
         
         if (isAdmin) {
-            getAdm.style.display = "flex";
             getUserOpt.style.display = "none"
             getGuessOpt.style.display = "none";
             userOptions.style.display = "flex";
             mbUserLogged.style.display = "flex";
 
         } else {
-            getAdm.innerHTML = ' ';
             getUserOpt.style.display = "none"
             getGuessOpt.style.display = "none";
             userOptions.style.display = "flex";
@@ -91,8 +87,8 @@ async function obtenerRolUsuario() {
 }
 
 const usernameDisplay = document.querySelector(".user-button");
-const logOutButton = document.getElementById("logout");
-const profileButton = document.getElementById("profile");
+const logOutButton = document.querySelector(".logout");
+const profileButton = document.querySelector(".profile");
 
 usernameDisplay.addEventListener("click", (e) => {
     e.preventDefault();
@@ -113,26 +109,19 @@ const logOut = async () => {
 function logOutEvent() {
     logOut();
     localStorage.removeItem("token");
-    window.location.href = "./index.html";
+    window.location.href = "../../index.html";
 }
-
-//Botón de Admin
-const admBtn = document.getElementById('mg-sect');
-admBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    window.location.href = './sections/admin-section/manage.html';
-});
 
 // Llamada para verificar el rol y ejecutar la acción
 obtenerRolUsuario();
 //</|ROLES|>
 
+//<|VERIFICACIÓN|>
 async function verificarAccesoAdmin() {
     const token = localStorage.getItem("token");
 
     if (!token) {
-        alert("No tienes acceso. Por favor, inicia sesión.");
-        window.location.href = "../user/login.html"; // Redirigir a la página de login
+        window.location.href = "../user-section/login.html"; // Redirigir a la página de login
         return;
     }
 
@@ -149,48 +138,277 @@ async function verificarAccesoAdmin() {
 }
 
 verificarAccesoAdmin();
+//</|VERIFICACIÓN|>
 
-const divProductOpt = document.querySelector(".product-options");
-const divSectionOpt = document.querySelector(".section-options");
-const divContactOpt = document.querySelector(".contact-options");
+//<|GESTIÓN DE PRODUCTOS|>
+//FILTRAR PRODUCTOS
+const filterButton = document.getElementById("filter");
+const filterContainer = document.querySelector(".filter-container");
 
-const liProductOpt = document.querySelector("#product-option");
-const liSectionOpt = document.querySelector("#section-option");
-const liContactOpt = document.querySelector("#contact-option");
+filterButton.addEventListener("click", (e) => {
+    e.preventDefault();
 
-document.addEventListener("click", (event) => {
-    if (event.target.classList.contains("optionS")) {
-        if (event.target.id === 'product-option') {
-            divSectionOpt.style.display = "none";
-            divContactOpt.style.display = "none";
-            divProductOpt.style.display = "flex";
-
-            liSectionOpt.classList.remove("selected-option");
-            liContactOpt.classList.remove("selected-option");
-            liProductOpt.classList.toggle("selected-option");
-        }
-        if (event.target.id === 'section-option') {
-            divProductOpt.style.display = "none";
-            divContactOpt.style.display = "none";
-            divSectionOpt.style.display = "flex";
-
-            liProductOpt.classList.remove("selected-option");
-            liContactOpt.classList.remove("selected-option");
-            liSectionOpt.classList.toggle("selected-option");
-        }
-        if (event.target.id === 'contact-option') {
-            divSectionOpt.style.display = "none";
-            divProductOpt.style.display = "none";
-            divContactOpt.style.display = "flex";
-
-            liSectionOpt.classList.remove("selected-option");
-            liProductOpt.classList.remove("selected-option");
-            liContactOpt.classList.toggle("selected-option");
-        }
-    }
+    filterContainer.classList.toggle("filter-container-visible");
 });
 
-const addProductPage = document.getElementById('addProductPage');
+// FILTRAR PRODUCTOS CON CHECKBOXES
+
+const cargarFiltradoCategorias = async () => {
+    try {
+        const respuesta = await axios.get('/producto/categorias'); // Ruta para obtener categorías
+        const categorias = respuesta.data;
+
+        const contenedorCategorias = document.querySelector('.filter-container');
+        contenedorCategorias.innerHTML = ''; // Limpiar contenido previo
+
+        categorias.forEach(categoria => {
+            const label = document.createElement('label');
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.value = categoria.nombreCategoria;
+            checkbox.classList.add('categoria-checkbox');
+
+            label.textContent = categoria.nombreCategoria;
+            label.prepend(checkbox);
+
+            contenedorCategorias.appendChild(label);
+        });
+
+        // Escuchar cambios en los checkboxes
+        const checkboxes = document.querySelectorAll('.categoria-checkbox');
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', filtrarProductos);
+        });
+    } catch (error) {
+        console.error('Error al cargar categorías:', error);
+    }
+};
+
+const filtrarProductos = async () => {
+    try {
+        // Obtener checkboxes de categorías seleccionadas
+        const checkboxes = document.querySelectorAll('.categoria-checkbox');
+        const categoriasSeleccionadas = Array.from(checkboxes)
+            .filter(checkbox => checkbox.checked) // Filtrar solo los marcados
+            .map(checkbox => checkbox.value);
+
+        // Construir la URL dependiendo de si hay categorías seleccionadas
+        const url = categoriasSeleccionadas.length > 0
+            ? `/producto/selectedCat?categorias=${categoriasSeleccionadas.join(',')}`
+            : '/producto/productos'; // Si no hay categorías seleccionadas, traer todos los productos
+
+        // Hacer la solicitud al backend
+        const respuesta = await axios.get(url);
+        const productos = respuesta.data;
+
+        // Limpiar contenedor y renderizar productos
+        const divProducts = document.querySelector(".products-subcontainer");
+        divProducts.innerHTML = ''; // Limpiar productos previos
+        productos.forEach(producto => {
+            renderProduct(producto);
+        });
+    } catch (error) {
+        console.error('Error al filtrar productos:', error);
+    }
+};
+
+// Función para cargar todos los productos al inicio
+const cargarProductosIniciales = async () => {
+    try {
+        const respuesta = await axios.get('/producto/productos'); // URL para obtener todos los productos
+        const productos = respuesta.data;
+
+        // Renderizar todos los productos
+        const divProducts = document.querySelector(".products-subcontainer");
+        divProducts.innerHTML = ''; // Limpiar productos previos
+        productos.forEach(producto => {
+            renderProduct(producto);
+        });
+    } catch (error) {
+        console.error('Error al cargar productos iniciales:', error);
+    }
+};
+
+// Agregar eventos a las checkboxes
+const inicializarEventosCheckboxes = () => {
+    const checkboxes = document.querySelectorAll('.categoria-checkbox');
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', filtrarProductos);
+    });
+};
+
+// Inicialización al cargar la página
+window.onload = async () => {
+    await cargarProductosIniciales(); // Cargar todos los productos al inicio
+    inicializarEventosCheckboxes(); // Agregar eventos a las checkboxes
+};
+
+
+// Renderizar productos al cargar la página
+document.addEventListener("DOMContentLoaded", () => {
+    cargarFiltradoCategorias();
+    getProductos(); // Traer todos los productos inicialmente
+});
+
+
+//SEPARAR Y MOSTRAR ID EN BARRA DE NAVEGACIÓN
+const query = window.location.search.split("=");
+const idProducto = query[1]
+
+const redirect = (id, url) => {
+    window.location.href = `${url}?product=${id}`;
+}
+
+// Función para obtener productos por categoría
+const getProductos = async () => {
+    try {
+        // Llamada al backend para obtener productos filtrados
+        const response = await axios.get(`/producto/productos`);
+        const productos = response.data;
+
+    } catch (error) {
+        console.error("Error al obtener productos:", error);
+    }
+};
+
+const deleteProduct = async (id) => {
+    try {
+        const response = await axios.delete(`/producto/eliminar-producto/${id}`);
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+
+// Función para renderizar un producto
+const renderProduct = (producto) => {
+    const divProducts = document.querySelector(".products-subcontainer");
+
+    // DIVS
+    const divItem = document.createElement("div");
+    divItem.classList.add("product-box");
+    
+    const divVisual = document.createElement("div");
+    divVisual.classList.add("visual");
+
+    const divIdentifiers = document.createElement("div");
+    divIdentifiers.classList.add("identifiers");
+
+    const divIdContent = document.createElement("div");
+    divIdContent.classList.add("id-content");
+
+    const divProductOptions = document.createElement("div");
+    divProductOptions.classList.add("product-options");
+
+    const divTitleDeco = document.createElement("div");
+    divTitleDeco.classList.add("title-deco");
+
+    const divStockPrice = document.createElement("div");
+    divStockPrice.classList.add("stock-price");
+
+    const divStock = document.createElement("div");
+    divStock.classList.add("stock");
+
+    const divPrice = document.createElement("div");
+    divPrice.classList.add("price");
+
+    //VISUAL DIV
+    const productImg = document.createElement("img");
+    const divImg = document.createElement("div");
+    productImg.classList.add("item-img");
+    divImg.classList.add("item-img-div");
+    productImg.setAttribute("src", producto.imgPortada || "../../media/default.png");
+    divImg.appendChild(productImg);
+    divVisual.appendChild(divImg);
+    divVisual.appendChild(divIdentifiers);
+
+    //IDENTIFIERS DIV
+    const productName = document.createElement("h3");
+    productName.classList.add("product-name");
+    productName.textContent = producto.nombre || "Producto sin nombre";
+
+    divTitleDeco.innerHTML = "&nbsp;"
+
+    divIdentifiers.appendChild(divIdContent);
+    divIdentifiers.appendChild(productName);
+    divIdentifiers.appendChild(divTitleDeco);
+
+    //ID CONTENT DIV
+    const idContentId = document.createElement("p");
+    idContentId.textContent = `ID: (${producto._id})`;
+
+    const buttonEditProduct = document.createElement("button");
+    buttonEditProduct.id = "edit-product";
+    buttonEditProduct.innerHTML = `<i class="fa-regular fa-pen-to-square"></i>`;
+    buttonEditProduct.addEventListener("click", () => {
+        redirect(producto._id, "./edit-product.html");
+    });
+
+    const buttonDeleteProduct = document.createElement("button");
+    buttonDeleteProduct.id = "delete-product";
+    buttonDeleteProduct.innerHTML = `<i class="fa-regular fa-trash-can"></i>`;
+    buttonDeleteProduct.addEventListener("click", () => {
+        Swal.fire({
+            title: "¿Estás seguro de borrar el siguiente producto?",
+            text: `${producto.nombre}`,
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Confirmar",
+            cancelButtonText: "Cancelar"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                deleteProduct(producto._id).then(() => {
+                    Swal.fire("¡Eliminado!", "Producto eliminado con éxito.", "success");
+                    // Actualizar el DOM
+                    divItem.remove(); // Elimina el producto del DOM
+                }).catch(error => {
+                    Swal.fire("Error", "No se pudo eliminar el producto.", "error");
+                });
+            }
+        });
+    });
+    
+
+    divProductOptions.appendChild(buttonEditProduct);
+    divProductOptions.appendChild(buttonDeleteProduct);
+
+    divIdContent.appendChild(idContentId);
+    divIdContent.appendChild(divProductOptions);
+
+    //STOCK PRICE DIV
+    const stockTitle = document.createElement("p");
+    const stockAmount = document.createElement("span");
+    stockTitle.textContent = "Stock";
+    stockAmount.textContent = producto.stock || 0;
+
+    divStock.appendChild(stockTitle);
+    divStock.appendChild(stockAmount);
+
+    const priceTitle = document.createElement("p");
+    const priceAmount = document.createElement("span");
+    priceTitle.textContent = "Precio";
+    priceAmount.textContent = `$${producto.precio || 0}`;
+
+    divPrice.appendChild(priceTitle);
+    divPrice.appendChild(priceAmount);
+
+    divStockPrice.appendChild(divStock);
+    divStockPrice.appendChild(divPrice);
+
+    //PRODUCT BOX DIV
+    divItem.appendChild(divVisual);
+    divItem.appendChild(divStockPrice);
+
+    divProducts.appendChild(divItem);
+};
+
+// Iniciar la obtención de productos cuando se carga la página
+document.addEventListener("DOMContentLoaded", getProductos);
+
+
+//AGREGAR PRODUCTO
+const addProductPage = document.getElementById('add-product');
 
 const goToAdd = async () => {
     window.location.href = './add-product.html';
@@ -199,6 +417,109 @@ const goToAdd = async () => {
 addProductPage.addEventListener('click', (e) => {
     goToAdd(e);
 });
+
+//</|GESTIÓN DE PRODUCTOS|>
+
+// <|CATEGORÍAS|>
+//AGREGAR CATEGORÍA
+function getCategoryInput() {
+    const addInput = document.getElementById("newCtgr");
+
+    const addValue = addInput.value;
+
+    if (addValue.length <= 1) {
+        console.log("Error, no puede ser menor a 1.");
+    }
+
+    return {
+        nombreCategoria: addValue
+    }
+}
+
+const categoryRegister = async (e) => {
+    e.preventDefault();
+    const {nombreCategoria} = getCategoryInput();
+
+    if (!nombreCategoria) {
+        Swal.fire({
+            icon: "error",
+            title: "¡Hey!",
+            text: "El nombre no puede estar vacio."
+          });
+    } else {
+        const CategoryToSend = {
+            nombreCategoria
+        };
+    
+        try {
+            await axios.post("/producto/categoria", CategoryToSend)
+        } catch (error) {
+            console.log(error.response.data);
+        }
+    }
+}
+
+const categoryAdd = document.querySelector("#addCategoryBtn");
+categoryAdd.addEventListener("click", (e) => {
+    categoryRegister(e);
+    location.reload();
+});
+
+//ELIMINAR CATEGORÍA
+async function obtenerCategorias() {
+    try {
+        const response = await axios.get('/producto/categorias'); // URL de la API que devuelve las categorías
+        const categorias = response.data; // Almacena las categorías obtenidas
+        return categorias; // Devuelve las categorías obtenidas
+    } catch (error) {
+        console.error('Error al obtener categorías:', error);
+    }
+}
+
+async function cargarCategorias() {
+    const categorias = await obtenerCategorias();
+    
+    const selectContainer = document.getElementById("delCtgr");
+    const excludeCategory = ["Suplementos", "Vasos", "Ofertas"]
+
+    categorias.forEach(categoria => {
+        // Verifica si la categoría es la que quieres evitar renderizar
+        if (excludeCategory.includes(categoria.nombreCategoria)) {
+            return; // Salta esta categoría
+        }
+    
+        // Renderiza la categoría normalmente
+        const catOption = document.createElement("option");
+        catOption.value = categoria.nombreCategoria;
+        catOption.text = categoria.nombreCategoria;
+        selectContainer.appendChild(catOption);
+    });
+    
+    
+}
+
+cargarCategorias();
+
+async function eliminarCategoria() {
+    const selectedCategory = document.getElementById("delCtgr").value;
+
+    try {
+        await axios.delete(`/producto/eliminar-categoria/${selectedCategory}`);
+        alert("Categoría eliminada con éxito.");
+        location.reload();
+    } catch (error) {
+        console.error("Error al eliminar la categoría:", error.response.data);
+    }
+
+}
+
+const deleteCategoriaBtn = document.getElementById("delCategoryBtn");
+
+deleteCategoriaBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    eliminarCategoria();
+});
+// </|CATEGORÍAS|>
 
 // <|REDES SOCIALES Y CONTACTO TELEFÓNICO|>
 const formularioContacto = document.getElementById("contact-form");
@@ -269,72 +590,3 @@ const editarYoutube = async () => {
     }
 }
 // </|REDES SOCIALES Y CONTACTO TELEFÓNICO|>
-
-function getCategoryInput() {
-    const addInput = document.getElementById("newCtgr");
-
-    const addValue = addInput.value;
-
-    if (addValue.length <= 1) {
-        console.log("Error, no puede ser menor a 1.");
-    }
-
-    return {
-        nombreCategoria: addValue
-    }
-}
-
-const categoryRegister = async (e) => {
-    e.preventDefault();
-    const {nombreCategoria} = getCategoryInput();
-
-    if (!nombreCategoria) {
-        Swal.fire({
-            icon: "error",
-            title: "¡Hey!",
-            text: "El nombre no puede estar vacio."
-          });
-        return;
-    }
-
-    const CategoryToSend = {
-        nombreCategoria
-    };
-
-    try {
-        await axios.post("/producto/categoria", CategoryToSend)
-        window.history.back();
-    } catch (error) {
-        console.log(error.response.data);
-    }
-}
-
-const categoryAdd = document.querySelector("#addCategoryBtn");
-categoryAdd.addEventListener("click", (e) => {
-    categoryRegister(e);
-});
-
-//<|CONTACTO|>
-const getSociales = async () => {
-    try {
-        const response = await axios.get('/pagina/contactos');
-        const contacto = response.data; // Almacena la URL de Instagram obtenida
-        
-        contacto.forEach(contactos => {
-            const facebookIcon = document.getElementById('facebook');
-            const instagramIcon = document.getElementById('instagram');
-            const twitterIcon = document.getElementById('twitter');
-            const youtubeIcon = document.getElementById('youtube');
-
-            facebookIcon.href = contactos.facebook;
-            instagramIcon.href = contactos.instagram;
-            twitterIcon.href = contactos.twitter;
-            youtubeIcon.href = contactos.youtube;
-        });
-    } catch (error) {
-        console.error('Error al obtener URL de Youtube:', error.response.data);
-    }
-}
-
-getSociales();
-//</|CONTACTO|>

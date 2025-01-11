@@ -26,36 +26,44 @@ productRoute.post('/agregarProducto', async (req, res) => {
 
 productRoute.put('/editar-producto/:id', async (req, res) => {
     try {
-        const producto = await Producto.findByIdAndUpdate(req.params.id, req.body,{
-            new: true
-        });
-        res.status(200).send(producto);
-    } catch (error) {
-        res.status(500).send(error);
-    }
-})
+        const productoId = req.params.id;
+        const dataToUpdate = req.body;
 
-productRoute.get('/productos', async (req, res) => {
-    const { categoria } = req.query;
-
-    try {
-        let filtro = {};
-        if (categoria) {
-            filtro = { categoria }; // Filtra solo por la categoría
+        // Busca el producto existente
+        const productoExistente = await Producto.findById(productoId);
+        if (!productoExistente) {
+            return res.status(404).send({ message: "Producto no encontrado" });
         }
 
-        const productos = await Producto.find(filtro);
+        // Actualiza solo los campos enviados
+        const productoActualizado = await Producto.findByIdAndUpdate(
+            productoId,
+            { $set: dataToUpdate },
+            { new: true } // Retorna el producto actualizado
+        );
 
-        if (!productos || productos.length === 0) {
-            return res.status(404).json({ message: "No se encontraron productos para esta categoría" });
-        }
-
-        res.status(200).json(productos);
+        res.status(200).send(productoActualizado);
     } catch (error) {
-        console.error("Error al obtener productos:", error);
-        res.status(500).send("Error en el servidor");
+        console.error("Error al actualizar el producto:", error);
+        res.status(500).send({ message: "Error al actualizar el producto", error });
     }
 });
+
+
+
+productRoute.get('/productos', async (req, res) => {
+    try {
+        const categorias = req.query.categorias ? req.query.categorias.split(',') : []; // Array de categorías desde query params
+        const filtros = categorias.length > 0 ? { categoria: { $in: categorias } } : {}; // Si hay categorías, filtrar
+
+        const productos = await Producto.find(filtros); // Buscar productos que coincidan con las categorías
+        res.status(200).json(productos);
+    } catch (error) {
+        console.error('Error al filtrar productos:', error);
+        res.status(500).json({ error: 'Error al filtrar productos.' });
+    }
+});
+
 
 productRoute.get('/selected/:idProductSel', async (req, res) => {
     try {
@@ -69,24 +77,23 @@ productRoute.get('/selected/:idProductSel', async (req, res) => {
     }
 });
 
-productRoute.get('/selectedCat/:categoriaSel', async (req, res) => {
+productRoute.get('/selectedCat', async (req, res) => {
+    const categorias = req.query.categorias?.split(',') || []; // Obtener categorías seleccionadas
     try {
-        console.log("REQ PARAMS:", req.params);
-        console.log("Categoria en el backend:", { categoria: req.params.categoriaSel }); // Verificar si llega el parámetro
-        let select = await Producto.findOne({ categoria: req.params.categoriaSel });
-        if (!select) {
-            return res.status(404).json({ error: 'Producto y/o Categoria no encontrados.' });
+        let productos;
+        if (categorias.length > 0) {
+            productos = await Producto.find({ categoria: { $in: categorias } }); // Filtrar por categorías
+        } else {
+            productos = await Producto.find(); // Traer todos los productos
         }
-        console.log("Producto en el backend:", select);
-
-        res.status(200).send(select);
+        res.status(200).json(productos);
     } catch (error) {
-        console.error("Error al buscar producto:", error);
-        res.status(500).send("Error en el servidor");
+        res.status(500).json({ message: 'Error al filtrar productos', error });
     }
 });
 
-productRoute.delete('/eliminar/:idProducto', async (req, res) => {
+
+productRoute.delete('/eliminar-producto/:idProducto', async (req, res) => {
     try {
         await Producto.findByIdAndDelete(req.params.idProducto);
         res.status(204).send("Producto Eliminado.")
@@ -129,5 +136,23 @@ productRoute.get('/categorias', async (req, res) => {
         res.status(500).json({ error: 'Error en el servidor' });
     }
 });
+
+productRoute.delete('/eliminar-categoria/:nombreCategoria', async (req, res) => {
+    try {
+        const { nombreCategoria } = req.params; // Obtén el nombre de la categoría desde los parámetros de la URL
+
+        const categoriaEliminada = await Categorias.findOneAndDelete({ nombreCategoria }); // Busca y elimina la categoría por su nombre
+
+        if (!categoriaEliminada) {
+            return res.status(404).json({ error: 'Categoría no encontrada.' });
+        }
+
+        res.status(200).json({ message: 'Categoría eliminada con éxito.', nombreCategoria: categoriaEliminada });
+    } catch (error) {
+        console.error('Error al eliminar la categoría:', error);
+        res.status(500).json({ error: 'Error al eliminar la categoría.' });
+    }
+});
+
 
 module.exports = productRoute;

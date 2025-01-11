@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Lilita+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bowlby+One+SC&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Faustina:ital,wght@0,300..800;1,300..800&family=Markazi+Text:wght@400..700&family=Mitr:wght@200;300;400;500;600;700&family=Oswald:wght@200..700&family=Russo+One&display=swap');
 
 body {
@@ -10,6 +11,29 @@ body {
 
 a {
     text-decoration: none;
+}
+
+section {
+    width: 60%;
+}
+
+swiper-container {
+    width: 100%;
+    height: 100%;
+}
+
+swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px !important;
+}
+
+.mySwiper .swiper-pagination {
+    display: none !important;
 }
 
 /* <=======ADM=======> */
@@ -108,6 +132,10 @@ a {
     border: none;
 }
 
+#searcher:focus-visible {
+    outline: none;
+}
+
 #mb-searcher {
     width: 80%;
     padding: 20px;
@@ -115,6 +143,10 @@ a {
     position: relative;
     border-radius: 30px;
     border: none;
+}
+
+#mb-searcher:focus-visible {
+    outline: none;
 }
 
 #mb-searcher-submiter {
@@ -314,7 +346,7 @@ a {
 }
 
 .mb-user-sidebar-open {
-    transform: translateY(108px);
+    transform: translateY(22vh);
     transition: all .2s ease-in-out;
 }
 
@@ -378,12 +410,13 @@ a {
 /* <---Mobile Sidebar---> */
 .mb-sidebar{
     position: fixed;
+    top: 12vh;
     width: 100%;
     height: 100%;
-    padding-top: 24vw;
+    padding-top: 6vh;
     background-color: rgb(33 37 41);
     display: block;
-    z-index: 10;
+    z-index: 12;
     transition: all .3s linear(0 0%, 0 1.8%, 0.01 3.6%, 0.03 6.35%, 0.07 9.1%, 0.13 11.4%, 0.19 13.4%, 0.27 15%, 0.34 16.1%, 0.54 18.35%, 0.66 20.6%, 0.72 22.4%, 0.77 24.6%, 0.81 27.3%, 0.85 30.4%, 0.88 35.1%, 0.92 40.6%, 0.94 47.2%, 0.96 55%, 0.98 64%, 0.99 74.4%, 1 86.4%, 1 100%);
     transform: translateX(-300vw);
 }
@@ -449,47 +482,41 @@ a {
 /* <---Main Content---> */
 .main-container {
     display: flex;
-    justify-content: center;
     flex-direction: column;
-    margin-top: 36vw;
+    align-items: center;
+    margin-top: 38vh;
 }
 
 .main-content {
     display: flex;
-    width: 100%;
+    flex-direction: row;
 }
 
+/* Estilo para la lista de items dentro del slider */
 .main-content ul {
     display: flex;
-    gap: 60px;
-    margin-top: 1.25vw;
-    padding-left: 8vw;
-}
-
-.category-name {
-    width: 15%;
-}
-
-.category-name h3{
-    width: 100%;
-    background-color: rgb(255, 193, 7);
-    text-align: center;
-    padding: 6vw 3vw 6vw 3vw;
-    border-right: 1px solid #333;
-    position: relative;
-    z-index: 3;
+    gap: 16px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    transition: transform 0.5s ease; /* Transición para el deslizamiento */
 }
 
 /* <-Item Display-> */
 .item-main {
     background-color: white;
-    width: 160px;
-    height: 160px;
+    width: 200px;
+    height: 420px;
     border-radius: 10px;
-    border: none;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.6);
-    text-align: center;
+    border: 1px solid #0000001f;
+    text-align: start;
+    font-family: "Montserrat", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 12px;
     padding: 1vw;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -497,19 +524,45 @@ a {
     z-index: 2;
 }
 
+.item-img-div {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px 0px 30px 0px;
+}
+
 .item-img {
-    width: 25%;
-    height: 50%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+#name-product {
+    color: rgb(114, 114, 114);
+    font-weight: 500;
+    height: 48px !important;
+    width: 176px;
+}
+
+#price {
+    font-size: 16px;
 }
 
 .buy-button {
-    position: absolute;
-    top: 10vw;
-    padding: 8px;
-    width: 60%;
-    border: 1px solid black;
+    height: 42px;
+    color: rgb(255 255 255);
+    font-family: "Montserrat", serif;
+    font-optical-sizing: auto;
+    font-weight: 900;
+    font-style: normal;
+    font-size: xx-small;
+    width: 100px;
+    background-color: rgb(33 37 41);
+    border: none;
     border-radius: 10px;
-    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.7);
     cursor: pointer;
 }
 
@@ -549,10 +602,10 @@ a {
 /* <-> Details <-> */
 .details-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 24px;
     padding: 6vw 3vw 6vw 3vw;
 }
 
@@ -561,12 +614,12 @@ a {
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    background-color: rgb(33 37 41);
-    color: #fff;
+    color: rgb(33, 37, 41);
     padding: 10px;
     max-width: 230px;
     width: 100%;
-    border: 2px solid #fff;
+    border-radius: 16px;
+    box-shadow: 0px 0px 2px 2px rgb(0 0 0 / 20%);
 }
 /* <-> /Details <-> */
 
@@ -591,8 +644,11 @@ a {
 
 /* <X> RESPONSIVE <X> */
 @media (max-width: 480px) {
-    /* General Size */
-    body {
+    ::-webkit-scrollbar {
+        display: none !important;
+    }
+
+    section {
         width: 480px;
     }
 
@@ -712,12 +768,14 @@ a {
     .category-name h3{
         background: transparent;
         border: none;
-        bottom: 4rem;
         width: 10rem;
+        margin-left: 8vw;
     }
 
     .main-content {
         margin-bottom: 2rem;
+        overflow-x: scroll;
+        width: 480px;
     }
 
     .main-content ul {
@@ -734,11 +792,10 @@ a {
 
     .item-main {
         flex: 0 0 auto;
-        width: 150px;
-        height: 200px;
+        width: 200px;
+        height: 350px;
         scroll-snap-align: center;
         box-shadow: none;
-        border: 1px solid black;
     }
 
     .buy-button {

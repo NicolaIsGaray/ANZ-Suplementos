@@ -70,8 +70,8 @@ async function obtenerRolUsuario() {
 }
 
 const usernameDisplay = document.querySelector(".user-button");
-const logOutButton = document.getElementById("logout");
-const profileButton = document.getElementById("profile");
+const logOutButton = document.querySelector(".logout");
+const profileButton = document.querySelector(".profile");
 
 usernameDisplay.addEventListener("click", (e) => {
     e.preventDefault();
@@ -99,7 +99,7 @@ function logOutEvent() {
 const admBtn = document.getElementById('mg-sect');
 admBtn.addEventListener('click', (e) => {
     e.preventDefault();
-    window.location.href = './sections/admin-section/manage.html';
+    window.location.href = '../admin-section/manage.html';
 });
 
 // Llamada para verificar el rol y ejecutar la acción
@@ -177,31 +177,52 @@ const renderProduct = (producto) => {
     const divItem = document.createElement("div");
     divItem.classList.add("item-main", "seccion");
 
+    const divItemContent = document.createElement("div");
+    divItemContent.classList.add("item-content");
+
     const productImg = document.createElement("img");
+    const divImg = document.createElement("div");
+    divImg.classList.add("item-img-div");
     productImg.classList.add("item-img");
-    productImg.setAttribute("src", producto.imgPortada || "../../media/default.png");
+    let imgVerify = producto.imgPortada ? producto.imgPortada : "../../media/default.png";
+    productImg.setAttribute("src", imgVerify);
+    divImg.appendChild(productImg);
 
     const productName = document.createElement("span");
-    productName.classList.add("product-name");
-    productName.textContent = producto.nombre || "Producto sin nombre";
+    productName.id = "name-product";
+    let nameVerify = producto.nombre ? producto.nombre : "Null"
+    productName.textContent = nameVerify;
+
+    const productPrice = document.createElement("span");
+    productPrice.id = "price";
+    let priceVerify = producto.precio ? producto.precio : "Null"
+    productPrice.textContent = `$${priceVerify}`;
 
     const buyButton = document.createElement("button");
     buyButton.classList.add("buy-button");
-    buyButton.innerHTML = `<i class="fa-solid fa-basket-shopping"></i> Comprar`;
+    buyButton.innerHTML = `COMPRAR <i class="fa-solid fa-basket-shopping" style="color: #FFD43B;"></i>`;
 
     // Evento para redirigir al detalle del producto
     buyButton.addEventListener("click", () => {
         redirect(producto._id, `./product.html`);
     });
-
+    
     const categoriaCheck = getCategoriaFromURL();
 
-    if (categoriaCheck === producto.categoria) {
-        // Agregar elementos al contenedor principal del producto
-        divItem.appendChild(productImg);
-        divItem.appendChild(productName);
-        divItem.appendChild(buyButton);
+    const sectionName = document.getElementById("section-name");
 
+    if (categoriaCheck === producto.categoria) {
+        if (producto.categoria === "Vasos") {
+            sectionName.textContent = "Vasos y Shakers"
+        } else {
+            sectionName.textContent = producto.categoria;
+        }
+        // Agregar elementos al contenedor principal del producto
+        divItem.appendChild(divImg);
+        divItemContent.appendChild(productName);
+        divItemContent.appendChild(productPrice);
+        divItemContent.appendChild(buyButton);
+        divItem.appendChild(divItemContent);
         // Agregar el producto al contenedor de productos
         divProducts.appendChild(divItem);
     }

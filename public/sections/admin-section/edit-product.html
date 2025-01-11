@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width"/>
+    <link rel="shortcut icon" href="../../icon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../../css-sheets/edit-product.css" />
+    <title>Editar Producto</title>
+  </head>
+  <body>
+    <header>
+      <div class="head-container">
+          <div class="navs">
+              <div class="topnavs">
+                  <div>
+                      <div class="mb-sidebars">
+                          <a class="open-sidebar"><i class="fa-solid fa-bars"></i></a>
+                      </div>
+                      <div class="logo">
+                          <a href="../../index.html">
+                          <img src="../../media/logo-tibushop.png" alt="ANZ Logo">
+                          </a>
+                      </div>
+                      <div class="user-navs-logged">
+                          <a class="userBtn"><i class="fa-solid fa-user"></i></a>
+                      </div>
+                      
+                      <div class="search-container">
+                          <input type="text" placeholder="¿Qué necesitás?" id="searcher">
+                          <button type="submit" id="searcher-submiter"><i class="fa-solid fa-magnifying-glass"></i></button>
+                      </div>
+                  </div>
+                  <div class="mb-search">
+                      <input type="text" placeholder="¿Qué necesitás?" id="mb-searcher">
+                      <button type="submit" id="mb-searcher-submiter"><i class="fa-solid fa-magnifying-glass"></i></button>
+                  </div>
+                  <div class="user-navs">
+                      <div class="guess-log">
+                          <a href="../user-section/login.html" class="login">Iniciar Sesión</a>
+                          <a href="../user-section/register.html" class="register">Registrarse</a>
+                      </div>
+                      <div class="user-options">
+                          <a class="user-button"></a>
+                          <a class="profile">Mi perfil</a>
+                          <a class="logout" onclick="logOutEvent()">Cerrar Sesión</a>
+                      </div>
+                  </div>
+              </div>
+              <div class="bottomnavs">
+                  <div class="navs-container">
+                      <nav>
+                          <ul>
+                              <li>
+                                  <a href="../../index.html">INICIO</a>
+                              </li>
+                              <li>
+                                  <a href="../product-section/product-general.html?section=Suplementos">SUPLEMENTOS</a>
+                              </li>
+                              <li>
+                                  <a href="../product-section/product-general.html?section=Ofertas">OFERTAS</a>
+                              </li>
+                              <li>
+                                  <a href="../product-section/product-general.html?section=Vasos">VASOS Y SHAKERS</a>
+                              </li>
+                              <li>
+                                  <a href="../about.html">QUIENES SOMOS</a>
+                              </li>
+                              <li>
+                                  <a href="../contact.html">CONTACTO</a>
+                              </li>
+                          </ul>
+                      </nav>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </header>
+
+    <div class="mb-user-sidebar">
+      <div class="guess-content">
+        <ul>
+          <li>
+            <a href="../user-section/login.html">Iniciar Sesión</a>
+          </li>
+          <li>
+            <a href="../user-section/register.html">Registrarse</a>
+          </li>
+        </ul>
+      </div>
+      <div class="user-logged-content">
+        <ul>
+          <li><a class="profile">Mi perfil</a></li>
+          <li><a class="logout" onclick="logOutEvent()">Cerrar Sesión</a></li>
+        </ul>
+      </div>
+      <h4 id="mb-username">Cuenta</h4>
+    </div>
+    <div class="mb-sidebar">
+      <div class="side-content">
+        <ul>
+          <li><a href="../../index.html">Inicio</a></li>
+          <li>
+            <a
+              href="../product-section/product-general.html?section=Suplementos"
+              >Suplementos</a
+            >
+          </li>
+          <li>
+            <a
+              href="../product-section/product-general.html?section=Ofertas"
+              >Ofertas</a
+            >
+          </li>
+          <li>
+            <a
+              href="../product-section/product-general.html?section=Vasos"
+              >Vasos y Shakers</a
+            >
+          </li>
+          <li><a href="../about.html">Quienes Somos</a></li>
+          <li><a href="../contact.html">Contacto</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="adm">
+      <button type="button" id="mg-sect">
+        <i class="fa-solid fa-crown"></i>
+      </button>
+    </div>
+
+    <section class="container-product">
+      <div class="content-product">
+        <div class="add-title">
+          <h1>Agregar Producto</h1>
+        </div>
+        <div class="info-box">
+          <form action="" method="post">
+            <div class="textInputWrapper">
+              <input
+                type="text"
+                class="textInput"
+                name="NombreProducto"
+                id="productName"
+                required
+                autocomplete="off"
+                maxlength="75"
+                placeholder=" "
+              />
+              <label for="productName" class="text-wrap">
+                Nombre del producto ( * )
+              </label>
+            </div>
+            <div class="textInputWrapper">
+              <textarea
+                name="DescripcionProducto"
+                id="productDesc"
+                cols="30"
+                rows="10"
+                class="textareaInput"
+                required
+                autocomplete="off"
+                placeholder=" "
+              ></textarea>
+              <label for="productDesc" class="text-wrap" id="text-wrap-desc">
+                Descripción ( * )
+              </label>
+            </div>
+            <div class="textInputWrapper">
+              <input
+                type="text"
+                class="textInput"
+                name="Stock"
+                id="stock"
+                required
+                autocomplete="off"
+                placeholder=" "
+              />
+              <label for="stock" class="text-wrap">
+                Unidades ( * )
+              </label>
+            </div>
+            <div class="textInputWrapper">
+              <input
+                type="text"
+                class="textInput"
+                name="precioProducto"
+                id="price"
+                required
+                autocomplete="off"
+                placeholder=" "
+              />
+              <label for="price" class="text-wrap">
+                Precio ( * )
+              </label>
+            </div>
+            <div class="textInputWrapper">
+              <input
+                type="text"
+                class="textInput"
+                name="ImagenPortada"
+                id="image"
+                required
+                autocomplete="off"
+                placeholder=" "
+              />
+              <label for="image" class="text-wrap">
+                Imagen de Portada [URL]
+              </label>
+              <img src="" alt="producto" id="current-img">
+            </div>
+            <div class="categoryContainer">
+              <span>Selecciona la categoría del producto ( * )</span>
+              <select id="category">
+                <option value="" selected disabled>- Categoría -</option>
+              </select>
+            </div>
+            <div class="addProductContainer">
+              <input type="submit" value="Editar Producto" id="editProduct" />
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="back-container">
+        <button type="button" id="backButton">Regresar</button>
+      </div>
+    </section>
+  </body>
+  <script
+      src="https://kit.fontawesome.com/21f1cfa061.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../../js-scripts/edit-product.js"></script>
+</html>

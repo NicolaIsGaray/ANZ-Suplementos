@@ -1,10 +1,36 @@
+// <|Toggle User Sidebar|>
+const userSidebar = document.querySelector(".mb-user-sidebar");
+const toggleUserSidebarBtn = document.querySelector(".userBtn");
+
+toggleUserSidebarBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    userSidebar.classList.toggle("mb-user-sidebar-open");
+});
+// </|Toggle User Sidebar|>
+
+
+// <|Toggle Sidebar|>
+const sidebar = document.querySelector(".mb-sidebar");
+const openBtn = document.querySelector(".open-sidebar");
+
+openBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    sidebar.classList.toggle("sidebar-open");
+});
+// </|Toggle Sidebar|>
+
 //<|ROLES|>
 //Verificacion de Rol
 const getAdm = document.querySelector(".adm");
-const getUserOpt = document.querySelector(".user-navs")
+const getUserOpt = document.querySelector(".guess-log");
+const getGuessOpt = document.querySelector(".guess-content");
+
+const userOptions = document.querySelector(".user-options");
+const mbUserLogged = document.querySelector(".user-logged-content");
 
 window.onload = () => {
-    getAdm.style.display = "none";
+    userOptions.style.display = "none";
+    mbUserLogged.style.display = "none";
 }
 
 async function obtenerRolUsuario() {
@@ -23,19 +49,68 @@ async function obtenerRolUsuario() {
         const isAdmin = response.data.isAdmin; // Suponiendo que el backend te está enviando isAdmin como true/false
 
         window.onload = () => {
-            getUserOpt.style.display = "none";  
+            getUserOpt.style.display = "none";
         } 
         
         if (isAdmin) {
-            getAdm.style.display = "flex"; // Mostrar los botones para admin
-            getUserOpt.innerHTML = ' '
+            getUserOpt.style.display = "none"
+            getGuessOpt.style.display = "none";
+            userOptions.style.display = "flex";
+            mbUserLogged.style.display = "flex";
+
         } else {
-            getAdm.innerHTML = ' '; // Ocultar botones de admin si es cliente
-            getUserOpt.innerHTML = ' '
+            getUserOpt.style.display = "none"
+            getGuessOpt.style.display = "none";
+            userOptions.style.display = "flex";
+            mbUserLogged.style.display = "flex";
         }
 
+        async function userResponse() {
+            const response = await axios.get("/usuario/me", {
+                headers: {
+                    Authorization: `Bearer ${token}` // Enviar el token en los headers
+                }
+            })
+            return response.data;
+        }
+
+        const usuarioDisplay = await userResponse();
+        const usernameDisplay = document.querySelector(".user-button");
+        const mbUserName = document.getElementById("mb-username");
+
+        usernameDisplay.innerHTML = `${usuarioDisplay.username} <i class="fa-solid fa-circle-user"></i>`;
+
+        mbUserName.innerHTML = `${usuarioDisplay.username}`;
+
     } catch (error) {
+        console.log(error);
     }
+}
+
+const usernameDisplay = document.querySelector(".user-button");
+const logOutButton = document.querySelector(".logout");
+const profileButton = document.querySelector(".profile");
+
+usernameDisplay.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    logOutButton.classList.toggle("logout-anim");
+    profileButton.classList.toggle("profile-anim");
+});
+
+//LogOut
+const logOut = async () => {
+    try {
+      const response = await axios.post("/usuario/logOut")
+    } catch (error) {
+      console.log(error.message);
+    }
+}
+
+function logOutEvent() {
+    logOut();
+    localStorage.removeItem("token");
+    window.location.href = "../../index.html";
 }
 
 //Botón de Admin
@@ -49,12 +124,12 @@ admBtn.addEventListener('click', (e) => {
 obtenerRolUsuario();
 //</|ROLES|>
 
+//<|VERIFICACIÓN|>
 async function verificarAccesoAdmin() {
     const token = localStorage.getItem("token");
 
     if (!token) {
-        alert("No tienes acceso. Por favor, inicia sesión.");
-        window.location.href = "../user/login.html"; // Redirigir a la página de login
+        window.location.href = "../user-section/login.html"; // Redirigir a la página de login
         return;
     }
 
@@ -66,12 +141,12 @@ async function verificarAccesoAdmin() {
         console.log(response.data.message); // Mensaje de éxito
     } catch (error) {
         console.error("Acceso denegado:", error.response?.data?.message || error.message);
-        alert("Acceso denegado. No tienes permisos para ver esta página.");
         window.location.href = "/"; // Redirigir a otra página
     }
 }
 
 verificarAccesoAdmin();
+//</|VERIFICACIÓN|>
 
 //Formatear el texto del precio
 const inputFieldPrice = document.getElementById('price');
@@ -197,7 +272,7 @@ const productRegister = async (e) => {
 
     try {
         await axios.post("/producto/agregarProducto", ObjectsToSend)
-        window.history.back();
+        location.reload();
     } catch (error) {
         console.log(error.response.data);
         
@@ -207,16 +282,6 @@ const productRegister = async (e) => {
 const productAdd = document.querySelector("#addProduct");
 productAdd.addEventListener("click", (e) => {
     productRegister(e);
-})
-
-const backButton = document.getElementById('backButton');
-
-backButton.addEventListener("mouseover", () => {
-    backButton.value = '¿Regresar?';
-})
-
-backButton.addEventListener("mouseout", () => {
-    backButton.value = 'Regresar';
 })
 
 const goBack = async (e) => {
@@ -236,28 +301,3 @@ backButton.addEventListener('click', (e) =>{
         location.reload();
     };
 })
-
-//<|CONTACTO|>
-const getSociales = async () => {
-    try {
-        const response = await axios.get('/pagina/contactos');
-        const contacto = response.data; // Almacena la URL de Instagram obtenida
-        
-        contacto.forEach(contactos => {
-            const facebookIcon = document.getElementById('facebook');
-            const instagramIcon = document.getElementById('instagram');
-            const twitterIcon = document.getElementById('twitter');
-            const youtubeIcon = document.getElementById('youtube');
-
-            facebookIcon.href = contactos.facebook;
-            instagramIcon.href = contactos.instagram;
-            twitterIcon.href = contactos.twitter;
-            youtubeIcon.href = contactos.youtube;
-        });
-    } catch (error) {
-        console.error('Error al obtener URL de Youtube:', error.response.data);
-    }
-}
-
-getSociales();
-//</|CONTACTO|>
