@@ -649,7 +649,7 @@ swiper-slide {
     }
 
     section {
-        width: 480px;
+        width: 100%;
     }
 
     /* User Options */
@@ -774,20 +774,12 @@ swiper-slide {
 
     .main-content {
         margin-bottom: 2rem;
-        overflow-x: scroll;
-        width: 480px;
+        width: 100%;
     }
 
     .main-content ul {
-        overflow-x: auto;
         gap: 12px;
         padding: 14px 14px 50px 14px;
-        scroll-behavior: smooth;
-        scroll-snap-type: x mandatory;
-    }
-
-    .main-content ul::-webkit-scrollbar {
-        display: none;
     }
 
     .item-main {
