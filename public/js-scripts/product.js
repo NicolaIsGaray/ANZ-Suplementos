@@ -173,7 +173,7 @@ function renderProduct(Productos) {
     productDescName.textContent = nameVerify;
 
     let descVerify = Productos.descripcion ? Productos.descripcion : error;
-    productDesc.textContent = descVerify;
+    productDesc.innerHTML = descVerify;
 
     let imgVerify = Productos.imgPortada ? Productos.imgPortada : ("../media/icons/default.png");
     productImg.setAttribute("src", imgVerify);

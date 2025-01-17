@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width"/>
     <link rel="shortcut icon" href="../../icon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="../../css-sheets/edit-product.css" />
+    <link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet">
     <title>Editar Producto</title>
   </head>
   <body>
@@ -152,9 +153,10 @@
               </label>
             </div>
             <div class="textInputWrapper">
+              <div id="editor-container"></div>
               <textarea
                 name="DescripcionProducto"
-                id="productDesc"
+                id="editor-textarea"
                 cols="30"
                 rows="10"
                 class="textareaInput"
@@ -162,9 +164,6 @@
                 autocomplete="off"
                 placeholder=" "
               ></textarea>
-              <label for="productDesc" class="text-wrap" id="text-wrap-desc">
-                Descripción ( * )
-              </label>
             </div>
             <div class="textInputWrapper">
               <input
@@ -230,7 +229,28 @@
       src="https://kit.fontawesome.com/21f1cfa061.js"
       crossorigin="anonymous"
     ></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>}
+    <script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
+  <script>
+    var quill = new Quill("#editor-container", {
+      theme: "snow", // Tema prediseñado.
+      placeholder: "Añade la descripción de tu producto. ( * )",
+      // Modulos para la edición.
+      modules: {
+        toolbar: [
+          [{ 'header': [1, 2, 3, false] }],
+          ["bold", "italic", "underline"], // Formatos básicos.
+          [{ list: "ordered" }, { list: "bullet" }] // Listas.
+        ],
+      },
+    });
+
+    // Sincronizar el contenido de Quill con un <textarea> antes de enviar
+      var textarea = document.getElementById('editor-textarea');
+    quill.on('text-change', function () {
+      textarea.value = quill.root.innerHTML; // Copia el contenido del editor al <textarea>
+    });
+  </script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="../../js-scripts/edit-product.js"></script>
 </html>

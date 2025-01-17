@@ -219,7 +219,7 @@ function getInputValues() {
     const productCategoryInput = document.querySelector("#category");
 
     const productNameValue = productNameInput.value;
-    const productDescValue = productDescInput.value;
+    const productDescValue = quill.root.innerHTML;
     const productStockValue = productStockInput.value.replace(/\./g, '');
     const productPriceValue = productPriceInput.value.replace(/\./g, '');
     const productImgValue = productImgInput.value;

@@ -478,6 +478,23 @@ section {
     height: auto;
 }
 
+.ql-container.ql-snow {
+    border: 1px solid rgb(33, 37, 41) !important;
+    border-top: none !important;
+}
+
+.ql-toolbar.ql-snow {
+    border: 1px solid rgb(33, 37, 41) !important;
+}
+
+#editor-textarea {
+    display: none;
+}
+
+#editor-container {
+    height: 18vh !important;
+}
+
 .text-wrap {
     position: absolute;
     transform: translateY(-27px) translateX(10px);

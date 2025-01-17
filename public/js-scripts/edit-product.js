@@ -324,9 +324,9 @@ function renderProduct(Productos) {
     let nameVerify = Productos.nombre ? Productos.nombre : error;
     productName.value = nameVerify;
 
-    const productDesc  = document.getElementById("productDesc");
+    const productDesc  = document.getElementById("editor-textarea");
     let descVerify = Productos.descripcion ? Productos.descripcion : error;
-    productDesc.innerHTML = descVerify;
+    productDesc.innerHTML = quill.clipboard.dangerouslyPasteHTML(descVerify);
 
     const currentImg = document.getElementById("current-img");
     const currentImgUrl = document.getElementById("image");
