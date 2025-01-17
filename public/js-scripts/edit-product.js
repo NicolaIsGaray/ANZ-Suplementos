@@ -86,17 +86,6 @@ async function obtenerRolUsuario() {
     }
 }
 
-const usernameDisplay = document.querySelector(".user-button");
-const logOutButton = document.querySelector(".logout");
-const profileButton = document.querySelector(".profile");
-
-usernameDisplay.addEventListener("click", (e) => {
-    e.preventDefault();
-
-    logOutButton.classList.toggle("logout-anim");
-    profileButton.classList.toggle("profile-anim");
-});
-
 //LogOut
 const logOut = async () => {
     try {
@@ -209,14 +198,13 @@ cargarCategorias();
 
 function getInputValues() {
     const productNameInput = document.querySelector("#productName");
-    const productDescInput = document.querySelector("#productDesc");
     const productStockInput = document.querySelector("#stock");
     const productPriceInput = document.querySelector("#price");
     const productImgInput = document.querySelector("#image");
     const productCategoryInput = document.querySelector("#category");
 
     const productNameValue = productNameInput.value;
-    const productDescValue = productDescInput.value;
+    const productDescValue = quill.root.innerHTML;
     const productStockValue = productStockInput.value.replace(/\./g, '');
     const productPriceValue = productPriceInput.value.replace(/\./g, '');
     const productImgValue = productImgInput.value;

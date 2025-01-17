@@ -69,17 +69,6 @@ async function obtenerRolUsuario() {
     }
 }
 
-const usernameDisplay = document.querySelector(".user-button");
-const logOutButton = document.getElementById("logout");
-const profileButton = document.getElementById("profile");
-
-usernameDisplay.addEventListener("click", (e) => {
-    e.preventDefault();
-
-    logOutButton.classList.toggle("logout-anim");
-    profileButton.classList.toggle("profile-anim");
-});
-
 //LogOut
 const logOut = async () => {
     try {

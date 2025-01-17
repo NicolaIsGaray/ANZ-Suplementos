@@ -204,31 +204,20 @@ a {
 .logout {
     display: block;
     color: rgb(255, 193, 7);
-    transform: translateX(-275px);
-    transition: all .3s ease;
+    transition: all .3s ease-in-out;
     cursor: pointer;
-    z-index: -1;
+}
+
+.logout:hover {
+    color: rgb(255, 0, 0) !important;
+    text-shadow: none;
 }
 
 .profile {
     display: block;
     color: rgb(255, 193, 7);
     cursor: pointer;
-    transform: translateX(-150px);
     transition: all .3s ease;
-    z-index: -1;
-}
-
-.logout-anim {
-    transform: translateX(0px)!important;
-    transition: all .3s ease !important;
-    z-index: 0 !important;
-}
-
-.profile-anim {
-    transform: translateX(0px) !important;
-    transition: all .3s ease !important;
-    z-index: 0 !important;
 }
 
 .user-button {
@@ -237,11 +226,9 @@ a {
     gap: 10px;
     padding: 10px;
     transition: all .3s ease;
-    cursor: pointer;
-    background-color: rgb(255, 193, 7);
-    border: 1px solid rgb(33 37 41);
+    background-color: rgb(33 37 41);
     border-radius: 5px;
-    color: rgb(33, 37, 41) !important;
+    color: white !important;
     font-weight: 600;
     z-index: 2;
     user-select: none;
@@ -254,6 +241,17 @@ a {
 .user-options {
     display: flex;
     gap: 40px;
+}
+
+.user-options a {
+    color: rgb(255, 255, 255);
+    font-weight: 700;
+    text-shadow: 2px 2px 2px #00000040;
+}
+
+.profile:hover {
+    color: rgb(247, 247, 247) !important;
+    text-shadow: none;
 }
 
 .login:hover {

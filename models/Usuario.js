@@ -21,7 +21,7 @@ const userData = new mongoose.Schema({
         required: true,
         minlength: 8
     },
-    productosFavoritos: {
+    carrito: {
         type: Array, // O puedes definirlo como un arreglo de objetos específicos si tienes más detalles
         default: []
     },
