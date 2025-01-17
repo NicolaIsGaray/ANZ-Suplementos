@@ -29,7 +29,11 @@ const productData = new mongoose.Schema ({
         {
         type: String
         }
-    ]
+    ],
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
 });
 
 module.exports = mongoose.model("Productos", productData);
