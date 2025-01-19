@@ -18,9 +18,43 @@ const productData = new mongoose.Schema ({
         type: Number,
         required: true
     },
+    oferta: {
+        enOferta : {
+            type: Boolean,
+            default: false
+        },
+        descuento: {
+            type: Number,
+            default: 0
+        }
+    },
+    peso: {
+        type: Number,
+        required: false
+    },
+    color: {
+        type: [String],
+        required: false
+    },
+    sabores: {
+        type: [String],
+        required: false
+    },
+    tamaño: {
+        type: [String],
+        required: false
+    },
+    marca: {
+        type: [String],
+        required: false
+    },
     categoria: {
         type: String,
         required: true
+    },
+    subcategoria: {
+        type: String,
+        required: false
     },
     imgPortada: {
         type: String

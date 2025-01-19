@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width" />
     <link rel="shortcut icon" href="../../icon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="../../css-sheets/add-product.css" />
-    <link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.min.css" rel="stylesheet">
     <title>Agregar Producto</title>
   </head>
   <body>
@@ -160,90 +160,296 @@
         </div>
         <div class="info-box">
           <form action="" method="post">
-            <div class="textInputWrapper">
-              <input
-                type="text"
-                class="textInput"
-                name="NombreProducto"
-                id="productName"
-                required
-                autocomplete="off"
-                maxlength="75"
-                placeholder=" "
-              />
-              <label for="productName" class="text-wrap">
-                Nombre del producto ( * )
-              </label>
+            <div class="sect-1">
+              <div class="textInputWrapper">
+                <input
+                  type="text"
+                  class="textInput"
+                  name="NombreProducto"
+                  id="productName"
+                  required
+                  autocomplete="off"
+                  maxlength="75"
+                  placeholder=" "
+                />
+                <label for="productName" class="text-wrap">
+                  Nombre del producto ( * )
+                </label>
+              </div>
+              <div class="textInputWrapper">
+                <div id="editor-container"></div>
+                <textarea
+                  name="DescripcionProducto"
+                  id="editor-textarea"
+                  cols="30"
+                  rows="10"
+                  class="textareaInput"
+                  required
+                  autocomplete="off"
+                  placeholder=" "
+                ></textarea>
+              </div>
+              <div class="textInputWrapper">
+                <input
+                  type="text"
+                  class="textInput"
+                  name="Stock"
+                  id="stock"
+                  required
+                  autocomplete="off"
+                  placeholder=" "
+                />
+                <label for="stock" class="text-wrap">
+                  Unidades del producto ( * )
+                </label>
+              </div>
+              <div class="textInputWrapper">
+                <input
+                  type="text"
+                  class="textInput"
+                  name="precioProducto"
+                  id="price"
+                  required
+                  autocomplete="off"
+                  placeholder=" "
+                />
+                <label for="price" class="text-wrap">
+                  ¿Que precio tendrá? ( * )
+                </label>
+              </div>
+              <div class="textInputWrapper">
+                <input
+                  type="checkbox"
+                  class="checkInput"
+                  name="enOferta"
+                  id="hot"
+                />
+                <label for="hot" id="offer-input">
+                  ¿Tiene descuento?
+                </label>
+                <div class="numberInputWrapper" id="discounter">
+                  <input
+                    type="number"
+                    class="numberInput"
+                    name="descuento"
+                    id="discount"
+                    autocomplete="off"
+                    maxlength="3"
+                    placeholder=" "
+                  />
+                  <label for="discount" class="number-wrap" id="offer-label">
+                    ¿Cuanto?
+                  </label>
+                </div>
+              </div>
             </div>
-            <div class="textInputWrapper">
-              <div id="editor-container"></div>
-              <textarea
-                name="DescripcionProducto"
-                id="editor-textarea"
-                cols="30"
-                rows="10"
-                class="textareaInput"
-                required
-                autocomplete="off"
-                placeholder=" "
-              ></textarea>
+            <div class="sect-2">
+              <h1 style="margin: 0;">Elige una categoría</h1>
+              <div class="categoryContainer">
+                <span>Selecciona la categoría principal del producto ( * )</span>
+                <select id="category">
+                  <option value="" selected disabled>- Categoría -</option>
+                </select>
+              </div>
+              <div class="suplements-form">
+                <div class="categoryContainer">
+                  <span>Selecciona la subcategoría del producto ( * )</span>
+                  <select class="subcategory">
+                  </select>
+                </div>
+                <div class="numberInputWrapper">
+                  <input
+                    type="number"
+                    class="numberInput"
+                    name="peso"
+                    id="weights"
+                    autocomplete="off"
+                    placeholder=" "
+                  />
+                  <label for="weights" class="number-wrap">
+                    Peso [Gramos] (Opcional)
+                  </label>
+                </div>
+                <div class="detailsContainer" style="align-items: center;">
+                  <div class="span-options" style="width: 100%;">
+                    <span>Color (Opcional)</span>
+                    <div class="isnew">
+                      <label for="new-color-check">¿Nuevo Color?</label>
+                      <input type="checkbox" name="newColr" id="new-color-check">
+                    </div>
+                  </div>
+                  <div class="color-list">
+                  </div>
+                  <div class="textInputWrapper hiddenAdding addForColor" style="width: 100%;">
+                    <input
+                      type="text"
+                      class="textInput addingInput"
+                      name="NuevoColor"
+                      id="new-color"
+                      autocomplete="off"
+                      placeholder=" "
+                    />
+                    <label for="new-color" class="text-wrap" id="color-label">
+                      Ingrese el nuevo color
+                    </label>
+                  </div>
+                </div>
+                <div class="detailsContainer" style="align-items: center;">
+                  <div class="span-options" style="width: 100%;">
+                    <span>Sabor (Opcional)</span>
+                    <div class="isnew">
+                      <label for="new-flavour-check">¿Nuevo Sabor?</label>
+                      <input type="checkbox" name="newFvlr" id="new-flavour-check">
+                    </div>
+                  </div>
+                  <div class="flavour-list">
+                  </div>
+                  <div class="textInputWrapper hiddenAdding addForFlavour" style="width: 100%;">
+                    <input
+                      type="text"
+                      class="textInput addingInput"
+                      name="NuevoSabor"
+                      id="new-flavour"
+                      autocomplete="off"
+                      placeholder=" "
+                    />
+                    <label for="new-flavour" class="text-wrap" id="flavour-label">
+                      Ingrese el nuevo sabor
+                    </label>
+                  </div>
+                </div>
+                <div class="detailsContainer" style="align-items: center;">
+                  <div class="span-options" style="width: 100%;">
+                    <span>Tamaño (Opcional)</span>
+                    <div class="isnew">
+                      <label for="new-size-check">¿Nuevo Tamaño?</label>
+                      <input type="checkbox" name="newBrand" id="new-size-check">
+                    </div>
+                  </div>
+                  <div class="size-list">
+                  </div>
+                  <div class="textInputWrapper hiddenAdding addForSize" style="width: 100%;">
+                    <input
+                      type="text"
+                      class="textInput addingInput"
+                      name="NuevoTamaño"
+                      id="new-size"
+                      autocomplete="off"
+                      placeholder=" "
+                    />
+                    <label for="new-size" class="text-wrap" id="size-label">
+                      Ingrese el nuevo tamaño
+                    </label>
+                  </div>
+                </div>
+                <div class="detailsContainer" style="align-items: center;">
+                  <div class="span-options" style="width: 100%;">
+                    <span>Marca (Opcional)</span>
+                    <div class="isnew">
+                      <label for="new-brand-check">¿Marca Nueva?</label>
+                      <input type="checkbox" name="newBrand" id="new-brand-check">
+                    </div>
+                  </div>
+                  <div class="brand-list">
+                  </div>
+                  <div class="textInputWrapper hiddenAdding addForBrand" style="width: 100%;">
+                    <input
+                      type="text"
+                      class="textInput addingInput"
+                      name="NuevaMarca"
+                      id="new-brand"
+                      autocomplete="off"
+                      placeholder=" "
+                    />
+                    <label for="new-brand" class="text-wrap" id="brand-label">
+                      Ingrese el nombre de la marca
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="shakers-form">
+                <div class="categoryContainer">
+                  <span>Selecciona la subcategoría del producto ( * )</span>
+                  <select class="subcategory">
+                  </select>
+                </div>
+                <div class="detailsContainer" style="align-items: center;">
+                  <div class="span-options" style="width: 100%;">
+                    <span>Color (Opcional)</span>
+                    <div class="isnew">
+                      <label for="new-color-check">¿Nuevo Color?</label>
+                      <input type="checkbox" name="newColr" id="new-color-check">
+                    </div>
+                  </div>
+                  <div class="color-list">
+                  </div>
+                  <div class="textInputWrapper hiddenAdding addForColor" style="width: 100%;">
+                    <input
+                      type="text"
+                      class="textInput addingInput"
+                      name="NuevoColor"
+                      id="new-color"
+                      autocomplete="off"
+                      placeholder=" "
+                    />
+                    <label for="new-color" class="text-wrap" id="color-label">
+                      Ingrese el nuevo color
+                    </label>
+                  </div>
+                </div>
+                <div class="detailsContainer" style="align-items: center;">
+                  <div class="span-options" style="width: 100%;">
+                    <span>Marca (Opcional)</span>
+                    <div class="isnew">
+                      <label for="new-brand-check">¿Marca Nueva?</label>
+                      <input type="checkbox" name="newBrand" id="new-brand-check">
+                    </div>
+                  </div>
+                  <div class="brand-list">
+                  </div>
+                  <div class="textInputWrapper hiddenAdding addForBrand" style="width: 100%;">
+                    <input
+                      type="text"
+                      class="textInput addingInput"
+                      name="NuevaMarca"
+                      id="new-brand"
+                      autocomplete="off"
+                      placeholder=" "
+                    />
+                    <label for="new-brand" class="text-wrap" id="brand-label">
+                      Ingrese el nombre de la marca
+                    </label>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="textInputWrapper">
-              <input
-                type="text"
-                class="textInput"
-                name="Stock"
-                id="stock"
-                required
-                autocomplete="off"
-                placeholder=" "
-              />
-              <label for="stock" class="text-wrap">
-                Unidades del producto ( * )
-              </label>
-            </div>
-            <div class="textInputWrapper">
-              <input
-                type="text"
-                class="textInput"
-                name="precioProducto"
-                id="price"
-                required
-                autocomplete="off"
-                placeholder=" "
-              />
-              <label for="price" class="text-wrap">
-                ¿Que precio tendrá? ( * )
-              </label>
-            </div>
-            <div class="textInputWrapper">
-              <input
-                type="text"
-                class="textInput"
-                name="ImagenPortada"
-                id="image"
-                required
-                autocomplete="off"
-                placeholder=" "
-              />
-              <label for="image" class="text-wrap">
-                Imagen de Portada [URL]
-              </label>
-            </div>
-            <div class="categoryContainer">
-              <span>Selecciona la categoría del producto ( * )</span>
-              <select id="category">
-                <option value="" selected disabled>- Categoría -</option>
-              </select>
-            </div>
-            <div class="addProductContainer">
-              <input type="submit" value="Añadir Producto" id="addProduct" />
+            <div class="sect-3">
+              <div class="img-displayer">
+                <img id="image-preview" src="../../media/default.png" alt="">
+              </div>
+              <div class="imgInputWrapper">
+                <input
+                  type="text"
+                  class="textInput"
+                  name="ImagenPortada"
+                  id="image"
+                  required
+                  autocomplete="off"
+                  placeholder=" "
+                />
+                <label for="image" class="text-wrap">
+                  Imagen de Portada [URL]
+                </label>
+              </div>
             </div>
           </form>
+          <div class="addProductContainer">
+            <input type="submit" value="Añadir Producto" id="addProduct" />
+          </div>
         </div>
       </div>
       <div class="back-container">
-        <button type="button" id="backButton">Regresar</button>
+        <button type="button" id="backButton"><i class="fa-solid fa-arrow-left"></i></button>
       </div>
     </div>
   </body>
@@ -251,7 +457,7 @@
     src="https://kit.fontawesome.com/21f1cfa061.js"
     crossorigin="anonymous"
   ></script>
-  <script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.min.js"></script>
   <script>
     var quill = new Quill("#editor-container", {
       theme: "snow", // Tema prediseñado.
@@ -272,6 +478,7 @@
       textarea.value = quill.root.innerHTML; // Copia el contenido del editor al <textarea>
     });
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="../../js-scripts/add-product.js"></script>
 </html>

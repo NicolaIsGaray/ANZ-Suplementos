@@ -43,8 +43,6 @@ async function obtenerRolUsuario() {
             }
         });
 
-        console.log('Respuesta del servidor:', response.data); // Imprimir toda la respuesta para depuración
-
         const isAdmin = response.data.isAdmin; // Suponiendo que el backend te está enviando isAdmin como true/false
 
         window.onload = () => {
@@ -119,7 +117,6 @@ async function verificarAccesoAdmin() {
             headers: { Authorization: `Bearer ${token}` }
         });
 
-        console.log(response.data.message); // Mensaje de éxito
     } catch (error) {
         console.error("Acceso denegado:", error.response?.data?.message || error.message);
         window.location.href = "/"; // Redirigir a otra página
@@ -141,14 +138,16 @@ filterButton.addEventListener("click", (e) => {
 });
 
 // FILTRAR PRODUCTOS CON CHECKBOXES
-
 const cargarFiltradoCategorias = async () => {
     try {
-        const respuesta = await axios.get('/producto/categorias'); // Ruta para obtener categorías
-        const categorias = respuesta.data;
+        const respuestaCat = await axios.get('/producto/categorias'); // Ruta para obtener categorías
+        const categorias = respuestaCat.data;
 
-        const contenedorCategorias = document.querySelector('.filter-container');
-        contenedorCategorias.innerHTML = ''; // Limpiar contenido previo
+        const respuestaSub = await axios.get('/producto/subcategorias'); // Ruta para obtener subcategorías
+        const subcategorias = respuestaSub.data;
+
+        const contenedorSubCategorias = document.querySelector('.filter-container');
+        contenedorSubCategorias.innerHTML = ''; // Limpiar contenido previo
 
         categorias.forEach(categoria => {
             const label = document.createElement('label');
@@ -160,7 +159,22 @@ const cargarFiltradoCategorias = async () => {
             label.textContent = categoria.nombreCategoria;
             label.prepend(checkbox);
 
-            contenedorCategorias.appendChild(label);
+            contenedorSubCategorias.appendChild(label);
+        });
+
+        subcategorias.forEach(subcategoria => {
+            subcategoria.nombreSubCategoria.forEach(parte => {
+                const label = document.createElement('label');
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.value = parte.trim();
+                checkbox.classList.add('categoria-checkbox');
+    
+                label.textContent = parte.trim();
+                label.prepend(checkbox);
+    
+                contenedorSubCategorias.appendChild(label);
+            });
         });
 
         // Escuchar cambios en los checkboxes
@@ -175,31 +189,51 @@ const cargarFiltradoCategorias = async () => {
 
 const filtrarProductos = async () => {
     try {
-        // Obtener checkboxes de categorías seleccionadas
+        // Obtener checkboxes de categorías y subcategorías seleccionadas
         const checkboxes = document.querySelectorAll('.categoria-checkbox');
         const categoriasSeleccionadas = Array.from(checkboxes)
             .filter(checkbox => checkbox.checked) // Filtrar solo los marcados
             .map(checkbox => checkbox.value);
 
-        // Construir la URL dependiendo de si hay categorías seleccionadas
-        const url = categoriasSeleccionadas.length > 0
+        // Si las categorías seleccionadas están vacías, se pueden obtener todos los productos
+        const urlC = categoriasSeleccionadas.length > 0
             ? `/producto/selectedCat?categorias=${categoriasSeleccionadas.join(',')}`
-            : '/producto/productos'; // Si no hay categorías seleccionadas, traer todos los productos
+            : '/producto/productos';
 
-        // Hacer la solicitud al backend
-        const respuesta = await axios.get(url);
-        const productos = respuesta.data;
+        const urlS = categoriasSeleccionadas.length > 0
+            ? `/producto/selectedSubCat?subcategorias=${categoriasSeleccionadas.join(',')}`
+            : '/producto/productos';
+
+        // Hacer las solicitudes al backend en paralelo para obtener productos por categorías y subcategorías
+        const [respuestaCat, respuestaSub] = await Promise.all([
+            axios.get(urlC),
+            axios.get(urlS)
+        ]);
+
+        const productosCat = respuestaCat.data;
+        const productosSub = respuestaSub.data;
+
+        // Combinar productos de categorías y subcategorías
+        const productosCombinados = [...productosCat, ...productosSub];
+
+        // Eliminar productos duplicados usando el ID del producto
+        const productosUnicos = productosCombinados.filter((producto, index, self) =>
+            index === self.findIndex((p) => (
+                p.id === producto.id // Suponiendo que cada producto tiene un campo 'id' único
+            ))
+        );
 
         // Limpiar contenedor y renderizar productos
         const divProducts = document.querySelector(".products-subcontainer");
         divProducts.innerHTML = ''; // Limpiar productos previos
-        productos.forEach(producto => {
+        productosUnicos.forEach(producto => {
             renderProduct(producto);
         });
     } catch (error) {
         console.error('Error al filtrar productos:', error);
     }
 };
+
 
 // Función para cargar todos los productos al inicio
 const cargarProductosIniciales = async () => {
@@ -421,27 +455,27 @@ function getCategoryInput() {
     }
 
     return {
-        nombreCategoria: addValue
+        nombreSubCategoria: addValue
     }
 }
 
 const categoryRegister = async (e) => {
     e.preventDefault();
-    const {nombreCategoria} = getCategoryInput();
+    const {nombreSubCategoria} = getCategoryInput();
 
-    if (!nombreCategoria) {
+    if (!nombreSubCategoria) {
         Swal.fire({
             icon: "error",
             title: "¡Hey!",
             text: "El nombre no puede estar vacio."
           });
     } else {
-        const CategoryToSend = {
-            nombreCategoria
+        const SubCategoryToSend = {
+            nombreSubCategoria
         };
     
         try {
-            await axios.post("/producto/categoria", CategoryToSend)
+            await axios.post("/producto/subcategoria", SubCategoryToSend)
         } catch (error) {
             console.log(error.response.data);
         }
@@ -457,31 +491,27 @@ categoryAdd.addEventListener("click", (e) => {
 //ELIMINAR CATEGORÍA
 async function obtenerCategorias() {
     try {
-        const response = await axios.get('/producto/categorias'); // URL de la API que devuelve las categorías
-        const categorias = response.data; // Almacena las categorías obtenidas
-        return categorias; // Devuelve las categorías obtenidas
+        const response = await axios.get('/producto/subcategorias'); // URL de la API que devuelve las categorías
+        const subcategorias = response.data; // Almacena las categorías obtenidas
+        return subcategorias; // Devuelve las categorías obtenidas
     } catch (error) {
-        console.error('Error al obtener categorías:', error);
+        console.error('Error al obtener subcategorías:', error);
     }
 }
 
 async function cargarCategorias() {
-    const categorias = await obtenerCategorias();
+    const subcategorias = await obtenerCategorias();
     
     const selectContainer = document.getElementById("delCtgr");
-    const excludeCategory = ["Suplementos", "Vasos", "Ofertas"]
 
-    categorias.forEach(categoria => {
-        // Verifica si la categoría es la que quieres evitar renderizar
-        if (excludeCategory.includes(categoria.nombreCategoria)) {
-            return; // Salta esta categoría
-        }
-    
-        // Renderiza la categoría normalmente
-        const catOption = document.createElement("option");
-        catOption.value = categoria.nombreCategoria;
-        catOption.text = categoria.nombreCategoria;
-        selectContainer.appendChild(catOption);
+    subcategorias.forEach(subcategoria => {
+        subcategoria.nombreSubCategoria.forEach(parte => {
+            const catOption = document.createElement("option");
+            catOption.value = parte.trim();
+            catOption.text = parte.trim();
+
+            selectContainer.appendChild(catOption);
+        });
     });
     
     
@@ -490,14 +520,14 @@ async function cargarCategorias() {
 cargarCategorias();
 
 async function eliminarCategoria() {
-    const selectedCategory = document.getElementById("delCtgr").value;
+    const selectedSubCategory = document.getElementById("delCtgr").value;
 
     try {
-        await axios.delete(`/producto/eliminar-categoria/${selectedCategory}`);
-        alert("Categoría eliminada con éxito.");
+        await axios.delete(`/producto/eliminar-subcategoria/${selectedSubCategory}`);
+        alert("SubCategoría eliminada con éxito.");
         location.reload();
     } catch (error) {
-        console.error("Error al eliminar la categoría:", error.response.data);
+        console.error("Error al eliminar la subcategoría:", error.response.data);
     }
 
 }

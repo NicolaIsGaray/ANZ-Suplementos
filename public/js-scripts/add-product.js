@@ -44,8 +44,6 @@ async function obtenerRolUsuario() {
             }
         });
 
-        console.log('Respuesta del servidor:', response.data); // Imprimir toda la respuesta para depuración
-
         const isAdmin = response.data.isAdmin; // Suponiendo que el backend te está enviando isAdmin como true/false
 
         window.onload = () => {
@@ -168,12 +166,243 @@ inputFieldStock.addEventListener('input', (event) => {
     event.target.value = value;
 });
 
+//Obtener Colores
+async function obtenerColores() {
+    try {
+        const response = await axios.get('/producto/component/color');
+        const colores = response.data;
+        return colores;
+    } catch (error) {
+        console.error('Error al obtener colores:', error);
+    }
+}
+
+async function cargarColores() {
+    const colores = await obtenerColores();
+    
+    const selectContainer = document.querySelectorAll(".color-list");
+
+    selectContainer.forEach(container => {
+        colores.forEach(color => {
+            if (color.color) {        
+                color.color.forEach(parte => {
+                    const colorDiv = document.createElement("div");
+                    const colorInput = document.createElement("input");
+                    const colorLabel = document.createElement("label");
+    
+                    colorDiv.classList.add("color");
+                    colorInput.setAttribute("type", "checkbox");
+                    colorInput.setAttribute("id", parte.trim());
+                    colorInput.setAttribute("value", parte.trim());
+                    colorLabel.setAttribute("for", parte.trim());
+                    colorLabel.textContent = parte.trim();
+    
+                    colorDiv.appendChild(colorInput);
+                    colorDiv.appendChild(colorLabel);
+                    container.appendChild(colorDiv);
+                });
+            } else {
+                return;
+            }
+        });
+    });
+}
+
+cargarColores();
+
+//Obtener Sabores
+async function obtenerSabores() {
+    try {
+        const response = await axios.get('/producto/component/sabores');
+        const sabores = response.data;
+        return sabores;
+    } catch (error) {
+        console.error('Error al obtener sabores:', error);
+    }
+}
+
+async function cargarSabores() {
+    const sabores = await obtenerSabores();
+    
+    const selectContainer = document.querySelectorAll(".flavour-list");
+
+    selectContainer.forEach(container => {
+        sabores.forEach(sabor => {
+            if (sabor.sabores) {            
+                sabor.sabores.forEach(parte => {
+                    const saborDiv = document.createElement("div");
+                    const saborInput = document.createElement("input");
+                    const saborLabel = document.createElement("label");
+                
+                    saborDiv.classList.add("flavour");
+                    saborInput.setAttribute("type", "checkbox");
+                    saborInput.setAttribute("id", parte.trim());
+                    saborLabel.setAttribute("for", parte.trim());
+                    saborLabel.textContent = parte.trim();
+        
+                    saborDiv.appendChild(saborInput);
+                    saborDiv.appendChild(saborLabel);
+                    container.appendChild(saborDiv);
+                });
+            } else {
+                return;
+            }
+        });
+    });
+}
+
+cargarSabores();
+
+//Obtener Tamaños
+async function obtenerTamaños() {
+    try {
+        const response = await axios.get('/producto/component/sizes');
+        const tamaños = response.data;
+        return tamaños;
+    } catch (error) {
+        console.error('Error al obtener los tamaños:', error);
+    }
+}
+
+async function cargarTamaños() {
+    const tamaños = await obtenerTamaños();
+    
+    const selectContainer = document.querySelectorAll(".size-list");
+
+    selectContainer.forEach(container => {
+        tamaños.forEach(tamaño => {
+            if (tamaño.tamaño) {            
+                tamaño.tamaño.forEach(parte => {
+                    const tamañoDiv = document.createElement("div");
+                    const tamañoInput = document.createElement("input");
+                    const tamañoLabel = document.createElement("label");
+                    
+                    tamañoDiv.classList.add("size");
+                    tamañoInput.setAttribute("type", "checkbox");
+                    tamañoInput.setAttribute("id", parte.trim());
+                    tamañoLabel.setAttribute("for", parte.trim());
+                    tamañoLabel.textContent = parte.trim();
+            
+                    tamañoDiv.appendChild(tamañoInput);
+                    tamañoDiv.appendChild(tamañoLabel);
+                    container.appendChild(tamañoDiv);
+                });
+            } else {
+                return;
+            }
+        });
+    });
+}
+
+cargarTamaños();
+
+//Obtener Marcas
+async function obtenerMarcas() {
+    try {
+        const response = await axios.get('/producto/component/marcas');
+        const marcas = response.data;
+        return marcas;
+    } catch (error) {
+        console.error('Error al obtener las marcas:', error);
+    }
+}
+
+async function cargarMarcas() {
+    const marcas = await obtenerMarcas();
+    
+    const selectContainer = document.querySelectorAll(".brand-list");
+
+    selectContainer.forEach(container => {
+        marcas.forEach(marca => {
+            if (marca.marca) {            
+                marca.marca.forEach(parte => {
+                    const marcaDiv = document.createElement("div");
+                    const marcaInput = document.createElement("input");
+                    const marcaLabel = document.createElement("label");
+                    
+                    marcaDiv.classList.add("brand");
+                    marcaInput.setAttribute("type", "checkbox");
+                    marcaInput.setAttribute("id", parte.trim());
+                    marcaLabel.setAttribute("for", parte.trim());
+                    marcaLabel.textContent = parte.trim();
+            
+                    marcaDiv.appendChild(marcaInput);
+                    marcaDiv.appendChild(marcaLabel);
+                    container.appendChild(marcaDiv);
+                })
+            } else {
+                return;
+            }
+        });
+    });
+}
+
+cargarMarcas();
+
+//<|OFERTA CHECK|>
+const checkboxOffer = document.getElementById("hot");
+const showDiscountInput = document.getElementById("discounter");
+const labelOffer = document.getElementById("offer-input");
+checkboxOffer.addEventListener("change", () => {
+    if (checkboxOffer.checked) {
+        showDiscountInput.style.display = "flex";
+        labelOffer.textContent = "Descuento (%)";
+    } else {
+        showDiscountInput.style.display = "none";
+        labelOffer.textContent = "¿Tiene descuento?";
+    }
+});
+
+//<|COLOR CHECK|>
+const checkboxColor = document.getElementById("new-color-check");
+const showColorInput = document.querySelector(".addForColor");
+checkboxColor.addEventListener("change", () => {
+    if (checkboxColor.checked) {
+        showColorInput.style.display = "flex";
+    } else {
+        showColorInput.style.display = "none";
+    }
+});
+
+//<|SABORES CHECK|>
+const checkboxFlavour = document.getElementById("new-flavour-check");
+const showFlavourInput = document.querySelector(".addForFlavour");
+checkboxFlavour.addEventListener("change", () => {
+    if (checkboxFlavour.checked) {
+        showFlavourInput.style.display = "flex";
+    } else {
+        showFlavourInput.style.display = "none";
+    }
+});
+
+//<|TAMAÑO CHECK|>
+const checkboxSize = document.getElementById("new-size-check");
+const showSizeInput = document.querySelector(".addForSize");
+checkboxSize.addEventListener("change", () => {
+    if (checkboxSize.checked) {
+        showSizeInput.style.display = "flex";
+    } else {
+        showSizeInput.style.display = "none";
+    }
+});
+
+//<|MARCA CHECK|>
+const checkboxBrand = document.getElementById("new-brand-check");
+const showBrandInput = document.querySelector(".addForBrand");
+checkboxBrand.addEventListener("change", () => {
+    if (checkboxBrand.checked) {
+        showBrandInput.style.display = "flex";
+    } else {
+        showBrandInput.style.display = "none";
+    }
+});
+
 //Obtener Categorias
 async function obtenerCategorias() {
     try {
-        const response = await axios.get('/producto/categorias'); // URL de la API que devuelve las categorías
-        const categorias = response.data; // Almacena las categorías obtenidas
-        return categorias; // Devuelve las categorías obtenidas
+        const response = await axios.get('/producto/categorias');
+        const categorias = response.data;
+        return categorias;
     } catch (error) {
         console.error('Error al obtener categorías:', error);
     }
@@ -181,8 +410,6 @@ async function obtenerCategorias() {
 
 async function cargarCategorias() {
     const categorias = await obtenerCategorias();
-
-    console.log(categorias);
     
     const selectContainer = document.querySelector("#category");
 
@@ -198,43 +425,144 @@ async function cargarCategorias() {
 
 cargarCategorias();
 
-function getInputValues() {
-    const productNameInput = document.querySelector("#productName");
-    const productDescInput = document.querySelector("#productDesc");
-    const productStockInput = document.querySelector("#stock");
-    const productPriceInput = document.querySelector("#price");
-    const productImgInput = document.querySelector("#image");
-    const productMultiImgInput = document.querySelector("#productImages");
-    const productCategoryInput = document.querySelector("#category");
-
-    const productNameValue = productNameInput.value;
-    const productDescValue = quill.root.innerHTML;
-    const productStockValue = productStockInput.value.replace(/\./g, '');
-    const productPriceValue = productPriceInput.value.replace(/\./g, '');
-    const productImgValue = productImgInput.value;
-    const productCategoryValue = productCategoryInput.value;
-
-    return {
-        nombre : productNameValue,
-        descripcion: productDescValue,
-        stock: parseInt(productStockValue, 10),
-        precio: parseFloat(productPriceValue),
-        categoria: productCategoryValue,
-        imgPortada: productImgValue
+//Obtener SubCategorias
+async function obtenerSubCategorias() {
+    try {
+        const response = await axios.get('/producto/subcategorias');
+        const subcategorias = response.data;
+        return subcategorias;
+    } catch (error) {
+        console.error('Error al obtener subcategorías:', error);
     }
 }
 
+async function cargarSubCategorias() {
+    const subcategorias = await obtenerSubCategorias();
+    
+    const selectContainer = document.querySelectorAll(".subcategory");
+    selectContainer.forEach(container => {
+        subcategorias.forEach(subcategoria => {
+            subcategoria.nombreSubCategoria.forEach(parte => {
+                const catOption = document.createElement("option");
+                catOption.value = parte.trim();
+                catOption.text = parte.trim();
+        
+                container.appendChild(catOption);
+            });
+        });
+    });
+}
+
+cargarSubCategorias();
+  
+//<|PREVISUALIZACION DE IMAGEN|>
+const imageInput = document.getElementById("image");
+const imagePreview = document.getElementById("image-preview");
+
+imageInput.addEventListener("input", () => {
+    const imageUrl = imageInput.value;
+
+    if (imageUrl.trim() !== "") {
+        imagePreview.src = imageUrl;
+    } else {
+        imagePreview.src = "";
+    }
+})
+
+function getInputValues() {
+    const productNameValue = document.querySelector("#productName").value;
+    const productDescValue = quill.root.innerHTML;
+    const productStockValue = document.querySelector("#stock").value.replace(/\./g, '');
+    const productPriceValue = parseFloat(document.querySelector("#price").value.replace(/\./g, ''));
+    const productDiscountValue = parseFloat(document.querySelector("#discount").value) || 0;
+    const productWeightValue = parseFloat(document.querySelector("#weights").value) || 0;
+
+    const productColorValue = [...document.querySelectorAll(".color input:checked")].map(input => input.id);
+    const productFlavourValue = [...document.querySelectorAll(".flavour input:checked")].map(input => input.id);
+    const productSizeValue = [...document.querySelectorAll(".size input:checked")].map(input => input.id);
+    const productBrandValue = [...document.querySelectorAll(".brand input:checked")].map(input => input.id);
+
+    const productImgValue = document.querySelector("#image").value;
+    const productCategoryValue = document.querySelector("#category").value;
+    const productSubCategorySelector = document.querySelectorAll(".subcategory");
+    
+    const productSubCategoryValue = Array.from(productSubCategorySelector)
+    .map(subCategory => subCategory.value)
+    .filter(value => value !== "")[0]; // Filtrar valores vacíos
+
+    const newColorValue = document.getElementById("new-color").value;
+    const newFlavourValue = document.getElementById("new-flavour").value;
+    const newSizeValue = document.getElementById("new-size").value;
+    const newBrandValue = document.getElementById("new-brand").value;
+
+    const offerChecked = document.getElementById("hot").checked;
+
+    // Calcular precio final
+    let precioFinal = productPriceValue;
+    if (offerChecked && productDiscountValue) {
+        const descuento = productPriceValue * (productDiscountValue / 100);
+        precioFinal = productPriceValue - descuento;
+    }
+
+    // Combinar valores existentes y nuevos en un array
+    const combinedColors = [...productColorValue, ...(newColorValue ? [newColorValue] : [])];
+    const combinedFlavours = [...productFlavourValue, ...(newFlavourValue ? [newFlavourValue] : [])];
+    const combinedSizes = [...productSizeValue, ...(newSizeValue ? [newSizeValue] : [])];
+    const combinedBrands = [...productBrandValue, ...(newBrandValue ? [newBrandValue] : [])];
+
+    return {
+        nombre: productNameValue,
+        descripcion: productDescValue,
+        stock: parseInt(productStockValue, 10),
+        precio: parseFloat(precioFinal), // Enviar el precio final calculado
+        oferta: {
+            enOferta: offerChecked,
+            descuento: offerChecked ? productDiscountValue : 0
+        },
+        peso: productWeightValue,
+        color: combinedColors,
+        sabores: combinedFlavours,
+        marca: combinedBrands,
+        tamaño: combinedSizes,
+        categoria: productCategoryValue,
+        subcategoria: productSubCategoryValue,
+        imgPortada: productImgValue
+    };
+}
+
+const componentRegister = async (e) => {
+    e.preventDefault();
+    const { color, sabores, marca, tamaño} = getInputValues();
+
+    const ComponentToSend = {
+        color,
+        sabores,
+        marca,
+        tamaño
+    }
+
+    try {
+        await axios.post("/producto/componente/agregar-componente", ComponentToSend)
+    } catch (error) {
+        console.log(error.response.data);
+    }
+}
+
+
 const productRegister = async (e) => {
     e.preventDefault();
-    const {nombre, descripcion, stock, precio, imgPortada, categoria} = getInputValues();
+    const {nombre, descripcion, stock, precio, imgPortada, categoria, subcategoria, oferta, peso, color, sabores, marca, tamaño} = getInputValues();
     const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
 
-    if (!nombre || !descripcion || !stock || !precio || !categoria) {
+    if (!nombre || !descripcion || !stock || !precio || !categoria || !subcategoria) {
         Swal.fire({
             icon: "error",
-            title: "¡Epa!",
+            title: "¡Alto!",
             text: "Porfavor, completa los campos necesarios."
           });
+
+          console.log(subcategoria);
+          
         return;
     }
 
@@ -248,19 +576,24 @@ const productRegister = async (e) => {
         }
     } 
 
-    const ObjectsToSend = {
+    const producto = {
         nombre,
         descripcion,
         stock,
         precio,
+        oferta,
+        peso,
+        color,
+        sabores,
+        tamaño,
+        marca,
         categoria,
+        subcategoria,
         imgPortada
     };
 
-    console.log(ObjectsToSend)
-
     try {
-        await axios.post("/producto/agregarProducto", ObjectsToSend)
+        await axios.post("/producto/agregar/producto", producto)
         location.reload();
     } catch (error) {
         console.log(error.response.data);
@@ -268,9 +601,25 @@ const productRegister = async (e) => {
     }
 }
 
+const detectSuplementos = document.getElementById('category');
+const suplementosSection = document.querySelector('.suplements-form');
+const shakersSection = document.querySelector('.shakers-form');
+
+detectSuplementos.addEventListener('change', (event) => {
+    const selectedValue = event.target.value;
+    if (selectedValue === "Suplementos") {
+        suplementosSection.style.display = "flex";
+        shakersSection.style.display = "none";
+    } else if (selectedValue === "Vasos") {
+        shakersSection.style.display = "flex";
+        suplementosSection.style.display = "none";
+    }
+});
+
 const productAdd = document.querySelector("#addProduct");
 productAdd.addEventListener("click", (e) => {
     productRegister(e);
+    componentRegister(e);
 })
 
 const goBack = async (e) => {
