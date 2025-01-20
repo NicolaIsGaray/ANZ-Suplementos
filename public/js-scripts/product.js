@@ -144,12 +144,16 @@ function renderProduct(Productos) {
   const productDetails = document.querySelector(".more-details");
   const confirmBuy = document.querySelector(".inBuyButton");
   const productDesc = document.querySelector("#description-p");
-  const productPrice = document.querySelector(".product-price");
   const stockCheck = document.querySelector(".stock-available");
+  const productPriceDiv = document.querySelector(".product-price");
+  const productPrice = document.querySelector("#price");
 
-  const isStock = document.createElement("span");
+  const isStock = document.createElement("div");
+  const productBasePrice = document.createElement("span");
   const productDescName = document.createElement("h2");
   const productImg = document.createElement("img");
+
+  productBasePrice.id = "price";
 
   let nameVerify = Productos.nombre ? Productos.nombre : error;
   titleContent.textContent = nameVerify;
@@ -165,14 +169,57 @@ function renderProduct(Productos) {
   productImg.setAttribute("src", imgVerify);
 
   let priceVerify = Productos.precio ? Productos.precio : error;
-  let precioFormateado = new Intl.NumberFormat("es-ES").format(priceVerify);
-  productPrice.textContent = "$ " + precioFormateado;
+  productBasePrice.textContent = `$${priceVerify}`;
 
-  let stockVerify = Productos.stock ? Productos.stock : error;
-  if (!stockVerify) {
-    isStock.textContent = "N/A";
+  if (Productos.oferta.enOferta) {
+    const comparitionDiv = document.createElement("div");
+    comparitionDiv.classList.add("comparition-div");
+
+    const discountSpan = document.createElement("strong");
+    discountSpan.id = "discount-amount";
+    discountSpan.textContent = `-${Productos.oferta.descuento}% OFF`;
+    productPriceDiv.appendChild(discountSpan);
+
+    const productDiscountPrice = document.createElement("span");
+    priceVerify =
+      Productos.precio - (Productos.precio * Productos.oferta.descuento) / 100;
+    priceVerify = new Intl.NumberFormat("es-ES").format(priceVerify);
+    productDiscountPrice.id = "price-discount";
+    productDiscountPrice.textContent = `$${priceVerify}`;
+
+    productBasePrice.style.textDecoration = "line-through";
+    productBasePrice.style.opacity = "0.4";
+    productBasePrice.style.fontSize = "14px";
+
+    comparitionDiv.appendChild(productDiscountPrice);
+    comparitionDiv.appendChild(productBasePrice);
+    productPriceDiv.appendChild(comparitionDiv);
   } else {
-    isStock.textContent = `(Restante: ${stockVerify})`;
+    productBasePrice.textContent = `$${priceVerify}`;
+    productPriceDiv.appendChild(productBasePrice);
+  }
+
+  let stockVerify = Productos.stock ? Productos.stock : 0;
+  let amountVerify = document.querySelector(".add-amount");
+  if (stockVerify <= 0) {
+    isStock.style.color = "red";
+    isStock.style.margin = "2vh 0"
+    isStock.innerHTML = 
+    `<strong style="color:red">NO HAY STOCK</strong>`;
+
+    amountVerify.style.display = "none";
+
+    confirmBuy.style.backgroundColor = "#2f5245";
+    confirmBuy.id = "out-stock";
+    confirmBuy.disabled = true;
+    confirmBuy.value = "Sin stock"
+  } else {
+    isStock.style.display = "flex";
+    isStock.style.flexDirection = "column";
+    isStock.style.margin = "2vh 0"
+    isStock.innerHTML = 
+    `<strong style="color:green">HAY DISPONIBILIDAD DE STOCK</strong>
+    <span>(Restante: ${stockVerify} unidades)</span>`;
   }
 
   divProductImg.append(productImg);
@@ -196,34 +243,34 @@ function renderProduct(Productos) {
     e.preventDefault();
     let currentQuantity = parseInt(document.getElementById("amount-buy").value);
     if (currentQuantity < Productos.stock) {
-        currentQuantity++;
-        document.getElementById("amount-buy").value = currentQuantity;
-        if (currentQuantity > Productos.stock) {
-            currentQuantity = Productos.stock;
-        }
+      currentQuantity++;
+      document.getElementById("amount-buy").value = currentQuantity;
+      if (currentQuantity > Productos.stock) {
+        currentQuantity = Productos.stock;
+      }
     }
   });
 }
 
 const getProduct = async () => {
-    try {
-      const response = await axios.get(`/producto/selected/${idProduct}`);
-      console.log(response);
-      // Envolver el objeto en un array si no es un array
-      const products = Array.isArray(response.data)
-        ? response.data
-        : [response.data];
-  
-      // Ahora puedo usar map
-      products.map((Productos) => {
-        renderProduct(Productos);
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  
-  getProduct();
+  try {
+    const response = await axios.get(`/producto/selected/${idProduct}`);
+    console.log(response);
+    // Envolver el objeto en un array si no es un array
+    const products = Array.isArray(response.data)
+      ? response.data
+      : [response.data];
+
+    // Ahora puedo usar map
+    products.map((Productos) => {
+      renderProduct(Productos);
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+getProduct();
 
 //<|CONTACTO|>
 const getSociales = async () => {
