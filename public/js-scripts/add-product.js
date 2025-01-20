@@ -354,47 +354,59 @@ checkboxOffer.addEventListener("change", () => {
 });
 
 //<|COLOR CHECK|>
-const checkboxColor = document.getElementById("new-color-check");
-const showColorInput = document.querySelector(".addForColor");
-checkboxColor.addEventListener("change", () => {
-    if (checkboxColor.checked) {
-        showColorInput.style.display = "flex";
-    } else {
-        showColorInput.style.display = "none";
-    }
+const checkboxColors = document.querySelectorAll("#new-color-check"); // Cambiado a clase
+const showColorInputs = document.querySelectorAll(".addForColor");
+
+checkboxColors.forEach((checkbox, index) => {
+    checkbox.addEventListener("change", () => {
+        if (checkbox.checked) {
+            showColorInputs[index].style.display = "flex"; // Muestra el correspondiente
+        } else {
+            showColorInputs[index].style.display = "none"; // Oculta el correspondiente
+        }
+    });
 });
 
 //<|SABORES CHECK|>
-const checkboxFlavour = document.getElementById("new-flavour-check");
-const showFlavourInput = document.querySelector(".addForFlavour");
-checkboxFlavour.addEventListener("change", () => {
-    if (checkboxFlavour.checked) {
-        showFlavourInput.style.display = "flex";
-    } else {
-        showFlavourInput.style.display = "none";
-    }
+const checkboxFlavours = document.querySelectorAll("#new-flavour-check");
+const showFlavourInputs = document.querySelectorAll(".addForFlavour");
+
+checkboxFlavours.forEach((checkbox, index) => {
+    checkbox.addEventListener("change", () => {
+        if (checkbox.checked) {
+            showFlavourInputs[index].style.display = "flex"; // Muestra el correspondiente
+        } else {
+            showFlavourInputs[index].style.display = "none"; // Oculta el correspondiente
+        }
+    });
 });
 
 //<|TAMAÑO CHECK|>
-const checkboxSize = document.getElementById("new-size-check");
-const showSizeInput = document.querySelector(".addForSize");
-checkboxSize.addEventListener("change", () => {
-    if (checkboxSize.checked) {
-        showSizeInput.style.display = "flex";
-    } else {
-        showSizeInput.style.display = "none";
-    }
+const checkboxSizes = document.querySelectorAll("#new-size-check");
+const showSizeInputs = document.querySelectorAll(".addForSize");
+
+checkboxSizes.forEach((checkbox, index) => {
+    checkbox.addEventListener("change", () => {
+        if (checkbox.checked) {
+            showSizeInputs[index].style.display = "flex"; // Muestra el correspondiente
+        } else {
+            showSizeInputs[index].style.display = "none"; // Oculta el correspondiente
+        }
+    });
 });
 
 //<|MARCA CHECK|>
-const checkboxBrand = document.getElementById("new-brand-check");
-const showBrandInput = document.querySelector(".addForBrand");
-checkboxBrand.addEventListener("change", () => {
-    if (checkboxBrand.checked) {
-        showBrandInput.style.display = "flex";
-    } else {
-        showBrandInput.style.display = "none";
-    }
+const checkboxBrands = document.querySelectorAll("#new-brand-check");
+const showBrandInputs = document.querySelectorAll(".addForBrand");
+
+checkboxBrands.forEach((checkbox, index) => {
+    checkbox.addEventListener("change", () => {
+        if (checkbox.checked) {
+            showBrandInputs[index].style.display = "flex"; // Muestra el correspondiente
+        } else {
+            showBrandInputs[index].style.display = "none"; // Oculta el correspondiente
+        }
+    });
 });
 
 //Obtener Categorias
@@ -601,6 +613,7 @@ const productRegister = async (e) => {
     }
 }
 
+//<|DETECTAR TIPO DE PRODUCTO|>
 const detectSuplementos = document.getElementById('category');
 const suplementosSection = document.querySelector('.suplements-form');
 const shakersSection = document.querySelector('.shakers-form');

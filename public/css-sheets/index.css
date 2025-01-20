@@ -545,19 +545,39 @@ swiper-slide {
     width: 176px;
 }
 
+.comparition-div {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.product-price {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
 #price {
-    font-size: 16px;
+    font-size: 18px;
+}
+
+#price-discount {
+    font-size: 18px;
+}
+
+#discount-amount {
+    color: #917110;
 }
 
 .buy-button {
-    height: 42px;
+    height: 32px;
     color: rgb(255 255 255);
     font-family: "Montserrat", serif;
     font-optical-sizing: auto;
     font-weight: 900;
     font-style: normal;
     font-size: xx-small;
-    width: 100px;
+    width: 90px;
     background-color: rgb(33 37 41);
     border: none;
     border-radius: 10px;

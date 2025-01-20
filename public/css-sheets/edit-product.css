@@ -13,11 +13,6 @@ a {
     text-decoration: none;
 }
 
-section {
-    width: 1280px;
-    overflow: hidden;
-}
-
 /* <=======ADM=======> */
 .adm {
     position: fixed;
@@ -439,10 +434,9 @@ section {
 /* <=======MAIN CONTENT=======> */
 .container-product {
     display: flex;
-    margin-top: 22vh;
+    margin-top: 24vh;
     flex-direction: column;
     align-items: center;
-    width: 100%;
 }
 
 .content-product {
@@ -450,13 +444,21 @@ section {
     align-items: center;
     flex-direction: column;
     box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.7);
-    width: 800px;
-    margin: 10px;
+    width: 80%;
+}
+
+.add-title {
+    position: relative;
+    bottom: 40px;
+    background-color: white;
+    padding: 0px 16px 0px 16px;
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.7);
+    border-radius: 6px;
 }
 
 .info-box {
-    width: 50%;
-    height: auto;
+    width: 95%;
+    height: 100%;
 }
 
 .ql-container.ql-snow {
@@ -485,6 +487,44 @@ section {
     background-color: transparent;
 }
 
+.numberInputWrapper {
+    width: 100%;
+}
+
+.number-wrap {
+    position: absolute;
+    transform: translateY(-27px) translateX(10px);
+    color: #757575;
+    pointer-events: none;
+    transition: all .3s ease-in-out;
+    background-color: transparent;
+}
+
+#offer-label {
+    transform: translateY(10px) translateX(10px);
+}
+
+#color-label {
+    transform: translateY(20px) translateX(10px);
+}
+
+#flavour-label {
+    transform: translateY(20px) translateX(10px);
+}
+
+#size-label {
+    transform: translateY(20px) translateX(10px);
+}
+
+#brand-label {
+    transform: translateY(20px) translateX(10px);
+}
+
+.addingInput {
+    margin-top: 10px;
+    width: 94% !important;
+}
+
 .textInput:focus + .text-wrap,
  .textInput:not(:placeholder-shown) + .text-wrap {
     font-size: 12px;
@@ -496,46 +536,48 @@ section {
     padding-right: 4px;
 }
 
-textarea {
-    resize: none;
-    width: 100%;
-    border-radius: 6px;
-    border: 1px solid rgb(33, 37, 41);
-    transition: all .3s ease-in-out;
-    padding: 10px;
+.sect-1 {
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
+    width: 25%;
 }
 
-#text-wrap-desc {
-    position: absolute;
-    transform: translateY(-160px) translateX(10px);
-    color: #757575;
-    pointer-events: none;
-    transition: all .3s ease-in-out;
-    background-color: transparent;
+.sect-2 {
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
+    align-items: center;
+    width: 25%;
 }
 
-textarea:focus + #text-wrap-desc,
-textarea:not(:placeholder-shown) + #text-wrap-desc {
-    font-size: 12px;
-    color: rgb(255, 193, 7);
-    transform: translateY(-180px) translateX(10px);
-    transition: all .3s ease-in-out;
-    background-color: #fff;
-    padding-left: 4px;
-    padding-right: 4px;
+.sect-3 {
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
+    align-items: center;
+    width: 25%;
 }
 
-textarea:focus,
-textarea:not(:placeholder-shown) {
-    outline: none;
-    border: 1px solid rgb(255, 193, 7);
+.suplements-form {
+    display: none;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.shakers-form {
+    display: none;
+    flex-direction: column;
+    gap: 16px;
 }
 
 form {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
     width: 100%;
-    gap: 16px;
+    margin-bottom: 4vh;
 }
 
 form input[type="text"] {
@@ -552,13 +594,229 @@ form input[type="text"]:not(:placeholder-shown) {
     border: 1px solid rgb(255, 193, 7);
 }
 
-form select {
+#offer-input {
+    display: flex;
+    justify-content: center;
+    background-color: #000;
+    padding: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #fff;
+    border: 1px solid #000;
+    margin-bottom: 1vh;
+    user-select: none;
+    transition: all .3s ease-in-out;
+}
+
+#hot {
+    position: absolute;
+    width: 0;
+    height: 0;
+    top: 0;
+}
+
+#offer-input:hover {
+    background-color: rgb(255, 193, 7);
+    color: rgb(33, 37, 41);
+    border: 1px solid rgb(33, 37, 41);
+}
+
+#hot:checked + #offer-input {
+    background-color: rgb(255, 193, 7);
+    color: rgb(33, 37, 41);
+    border: 1px solid rgb(33, 37, 41);
+}
+
+#discounter {
+    display: none;
+}
+
+form input[type="number"] {
     width: 95%;
     padding: 10px;
     border-radius: 6px;
     border: 1px solid rgb(33, 37, 41);
     transition: all .3s ease-in-out;
+}
+
+.numberInput:focus + .number-wrap,
+ .numberInput:not(:placeholder-shown) + .number-wrap {
+    font-size: 12px;
+    color: rgb(255, 193, 7);
+    transform: translateY(-44px) translateX(10px);
+    transition: all .3s ease-in-out;
+    background-color: #fff;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+
+.isnew input[type="checkbox"] {
+    cursor: pointer;
+}
+
+.numberInput:focus + #offer-label,
+ .numberInput:not(:placeholder-shown) + #offer-label {
+    transform: translateY(-6px) translateX(10px);
+}
+
+.textInput:focus + #color-label,
+ .textInput:not(:placeholder-shown) + #color-label {
+    transform: translateY(4px) translateX(10px);
+}
+
+.textInput:focus + #flavour-label,
+ .textInput:not(:placeholder-shown) + #flavour-label {
+    transform: translateY(4px) translateX(10px);
+}
+
+.textInput:focus + #size-label,
+ .textInput:not(:placeholder-shown) + #size-label {
+    transform: translateY(4px) translateX(10px);
+}
+
+.textInput:focus + #brand-label,
+ .textInput:not(:placeholder-shown) + #brand-label {
+    transform: translateY(4px) translateX(10px);
+}
+
+form input[type="number"]:focus,
+form input[type="number"]:not(:placeholder-shown) {
+    outline: none;
+    border: 1px solid rgb(255, 193, 7);
+}
+
+form input::-webkit-outer-spin-button,
+form input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.span-options {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+}
+
+.span-options span {
+    color: #757575;
+}
+
+.detailsContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.hiddenAdding {
+    display: none;
+}
+
+.color-list {
+    display: flex;
+    max-width: 14vw;
+    max-height: 7vh;
+    border: 1px solid rgb(33 37 41);
+    border-radius: 6px;
+    padding: 1vw 3vw;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+}
+
+.color-list::-webkit-scrollbar {
+    width: 0px;
+}
+
+.color {
+    width: 120px;
+}
+
+.flavour-list {
+    display: flex;
+    max-width: 14vw;
+    max-height: 7vh;
+    border: 1px solid rgb(33 37 41);
+    border-radius: 6px;
+    padding: 1vw 3vw;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+}
+
+.flavour-list::-webkit-scrollbar {
+    width: 0px;
+}
+
+.flavour {
+    width: 120px;
+}
+
+.size-list {
+    display: flex;
+    max-width: 14vw;
+    max-height: 7vh;
+    border: 1px solid rgb(33 37 41);
+    border-radius: 6px;
+    padding: 1vw 3vw;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+}
+
+.size-list::-webkit-scrollbar {
+    width: 0px;
+}
+
+.size {
+    width: 120px;
+}
+
+.brand-list {
+    display: flex;
+    max-width: 14vw;
+    max-height: 7vh;
+    border: 1px solid rgb(33 37 41);
+    border-radius: 6px;
+    padding: 1vw 3vw;
+    flex-wrap: wrap;
+    overflow-y: scroll;
+}
+
+.brand-list::-webkit-scrollbar {
+    width: 0px;
+}
+
+.brand {
+    width: 120px;
+}
+
+.imgInputWrapper {
+    width: 100%;
+}
+
+.img-displayer {
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    width: 200px;
+    height: 200px;
+}
+
+.image-preview {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+form select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid rgb(33, 37, 41);
+    transition: all .3s ease-in-out;
     text-align: center;
+    cursor: pointer;
+}
+
+form select:hover {
+    border: 1px solid rgb(255, 193, 7);
 }
 
 form select:focus {
@@ -566,15 +824,10 @@ form select:focus {
     border: 1px solid rgb(255, 193, 7);
 }
 
-#current-img {
-    width: 80px;
-    height: auto;
-}
-
 .categoryContainer {
     display: flex;
     flex-direction: column;
-    width: 106%;
+    width: 100%;
 }
 
 .categoryContainer span {
@@ -608,10 +861,9 @@ form select:focus {
 }
 
 .back-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 32px;
+    position: absolute;
+    left: 12vw;
+    top: 28vh;
 }
 
 #backButton {
@@ -623,7 +875,6 @@ form select:focus {
     transition: all .3s ease-in-out;
     cursor: pointer;
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.7);
-    margin-bottom: 2vh;
 }
 
 #backButton:hover {

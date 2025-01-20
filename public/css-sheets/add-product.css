@@ -13,11 +13,6 @@ a {
     text-decoration: none;
 }
 
-section {
-    width: 1280px;
-    overflow: hidden;
-}
-
 /* <=======ADM=======> */
 .adm {
     position: fixed;

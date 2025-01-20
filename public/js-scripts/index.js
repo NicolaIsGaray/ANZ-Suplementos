@@ -169,7 +169,8 @@ const renderProduct = (Productos) => {
     const liItem = document.createElement("li");
     const swiperSlider = document.createElement("swiper-slide");
     const productName = document.createElement("span");
-    const productPrice = document.createElement("span");
+    const productPriceDiv = document.createElement("div");
+    const productBasePrice = document.createElement("span");
     const productImg = document.createElement("img");
     const buyButton = document.createElement("button");
 
@@ -181,14 +182,46 @@ const renderProduct = (Productos) => {
     productImg.classList.add("item-img");
     buyButton.classList.add("buy-button");
     liItem.classList.add("item-main");
+    productPriceDiv.classList.add("product-price");
 
     productName.id = "name-product";
-    productPrice.id = "price";
+    productBasePrice.id = "price";
 
     buyButton.innerHTML = `COMPRAR <i class="fa-solid fa-basket-shopping" style="color: #FFD43B;"></i>`;
 
     let priceVerify = Productos.precio ? Productos.precio : "Null"
-    productPrice.textContent = `$${priceVerify}`;
+
+    priceVerify = new Intl.NumberFormat('es-ES').format(priceVerify);
+
+    productBasePrice.textContent = `$${priceVerify}`;
+
+    if (Productos.oferta.enOferta) {
+        const comparitionDiv = document.createElement("div");
+        comparitionDiv.classList.add("comparition-div");
+
+        const discountSpan = document.createElement("strong");
+        discountSpan.id = "discount-amount";
+        discountSpan.textContent = `-${Productos.oferta.descuento}% OFF`;
+        productPriceDiv.appendChild(discountSpan);
+
+        const productDiscountPrice = document.createElement("span");
+        priceVerify = Productos.precio - (Productos.precio * Productos.oferta.descuento) / 100;
+        priceVerify = new Intl.NumberFormat('es-ES').format(priceVerify);
+        productDiscountPrice.id = "price-discount"
+        productDiscountPrice.textContent = `$${priceVerify}`;
+
+        productBasePrice.style.textDecoration = "line-through";
+        productBasePrice.style.opacity = "0.4";
+        productBasePrice.style.fontSize = "14px";
+        
+
+        comparitionDiv.appendChild(productDiscountPrice);
+        comparitionDiv.appendChild(productBasePrice);
+        productPriceDiv.appendChild(comparitionDiv);
+    } else {
+        productBasePrice.textContent = `$${priceVerify}`;
+        productPriceDiv.appendChild(productBasePrice);
+    }
 
     let nameVerify = Productos.nombre ? Productos.nombre : "Null"
     productName.textContent = nameVerify;
@@ -212,7 +245,7 @@ const renderProduct = (Productos) => {
     swiperSlider.appendChild(liItem);
     liItem.appendChild(divImg);
     divItemContent.appendChild(productName);
-    divItemContent.appendChild(productPrice);
+    divItemContent.appendChild(productPriceDiv);
     divItemContent.appendChild(buyButton);
     liItem.appendChild(divItemContent);
 
