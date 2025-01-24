@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width">
     <link rel="shortcut icon" href="../../icon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="../../css-sheets/product-general.css" />
-    <title>Productos - ANZ SUPLEMENTOS</title>
+    <title class="section-name">Productos - ANZ SUPLEMENTOS</title>
   </head>
   <body>
     <header>
@@ -121,42 +121,75 @@
     <section class="products">
       <div class="top-section">
         <div class="section-name-div">
-          <h3 id="section-name"></h3>
+          <h3 class="section-name"></h3>
         </div>
         <div class="sorter">
-          <a id="sorter"><i class="fa-solid fa-sort-amount-down-alt"></i> Ordenar</a>
+          <a id="sorter"><i class="fa-solid fa-sort-amount-down-alt"></i><p>Ordenar</p></a>
         </div>
       </div>
       <div class="product-container">
+
         <div class="product-selection-container">
           <div class="product-selection-box">
-            <!-- Dinamico -->
-            <div id="category" class="selection">
-              <p>CATEGORÍAS</p>
-              <i class="fa-solid fa-greater-than"></i>
+            <div class="selection" id="category">
+              <div class="selection-name" id="category-name">
+                <p>CATEGORÍA</p>
+                <i class="category-arrow fa-solid fa-angle-right"></i>
+              </div>
+              <div class="filter-list">
+              </div>
            </div>
-             <div id="flavour" class="selection">
+             <div class="selection" id="flavour">
+              <div class="selection-name" id="flavour-name">
                 <p>SABOR</p>
-                <i class="fa-solid fa-greater-than"></i>
+                <i class="category-arrow fa-solid fa-angle-right"></i>
+              </div>
+              <div class="filter-list">
+              </div>
              </div>
-             <div id="weight" class="selection">
+             <div class="selection" id="weight">
+              <div class="selection-name" id="weight-name">
                 <p>PESO</p>
-                <i class="fa-solid fa-greater-than"></i>
+                <i class="category-arrow fa-solid fa-angle-right"></i>
+              </div>
+              <div class="filter-list">
+              </div>
              </div>
-             <div id="colour" class="selection">
+             <div class="selection" id="size">
+              <div class="selection-name" id="size-name">
+                <p>TAMAÑO</p>
+                <i class="category-arrow fa-solid fa-angle-right"></i>
+              </div>
+              <div class="filter-list">
+              </div>
+           </div>
+             <div class="selection" id="color">
+              <div class="selection-name" id="color-name">
                 <p>COLOR</p>
-                <i class="fa-solid fa-greater-than"></i>
+                <i class="category-arrow fa-solid fa-angle-right"></i>
+              </div>
+              <div class="filter-list">
+              </div>
              </div>
-             <div id="brand" class="selection">
+             <div class="selection" id="brand">
+              <div class="selection-name" id="brand-name">
                 <p>MARCA</p>
-                <i class="fa-solid fa-greater-than"></i>
+                <i class="category-arrow fa-solid fa-angle-right"></i>
+              </div>
+              <div class="filter-list">
+              </div>
              </div>
-             <div id="price" class="selection">
+             <div class="selection" id="price">
+              <div class="selection-name" id="price-name">
                 <p>PRECIO</p>
-                <i class="fa-solid fa-greater-than"></i>
+                
+              </div>
+              <div class="filter-list">
+              </div>
              </div>
           </div>
         </div>
+
         <div class="products-card"></div>
       </div>
     </section>

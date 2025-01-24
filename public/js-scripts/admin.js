@@ -195,6 +195,9 @@ const filtrarProductos = async () => {
             .filter(checkbox => checkbox.checked) // Filtrar solo los marcados
             .map(checkbox => checkbox.value);
 
+            console.log(categoriasSeleccionadas);
+            
+
         // Si las categorías seleccionadas están vacías, se pueden obtener todos los productos
         const urlC = categoriasSeleccionadas.length > 0
             ? `/producto/selectedCat?categorias=${categoriasSeleccionadas.join(',')}`
@@ -213,13 +216,16 @@ const filtrarProductos = async () => {
         const productosCat = respuestaCat.data;
         const productosSub = respuestaSub.data;
 
+        console.log(productosCat);
+        
+
         // Combinar productos de categorías y subcategorías
         const productosCombinados = [...productosCat, ...productosSub];
 
         // Eliminar productos duplicados usando el ID del producto
         const productosUnicos = productosCombinados.filter((producto, index, self) =>
             index === self.findIndex((p) => (
-                p.id === producto.id // Suponiendo que cada producto tiene un campo 'id' único
+                p.id === producto.id && p.nombre === producto.nombre // Suponiendo que cada producto tiene un campo 'id' único
             ))
         );
 

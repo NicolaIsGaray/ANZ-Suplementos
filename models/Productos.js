@@ -29,7 +29,7 @@ const productData = new mongoose.Schema ({
         }
     },
     peso: {
-        type: Number,
+        type: String,
         required: false
     },
     color: {

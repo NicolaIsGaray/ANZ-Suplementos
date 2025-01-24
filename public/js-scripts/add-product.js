@@ -487,7 +487,7 @@ function getInputValues() {
     const productStockValue = document.querySelector("#stock").value.replace(/\./g, '');
     const productPriceValue = parseFloat(document.querySelector("#price").value.replace(/\./g, ''));
     const productDiscountValue = parseFloat(document.querySelector("#discount").value) || 0;
-    const productWeightValue = parseFloat(document.querySelector("#weights").value) || 0;
+    const productWeightValue = document.querySelector("#weights").value || 0;
 
     const productColorValue = [...document.querySelectorAll(".color input:checked")].map(input => input.id);
     const productFlavourValue = [...document.querySelectorAll(".flavour input:checked")].map(input => input.id);
@@ -531,7 +531,7 @@ function getInputValues() {
             enOferta: offerChecked,
             descuento: offerChecked ? productDiscountValue : 0
         },
-        peso: productWeightValue,
+        peso: `${productWeightValue}gr`,
         color: combinedColors,
         sabores: combinedFlavours,
         marca: combinedBrands,

@@ -571,7 +571,7 @@ swiper-slide {
 
 .buy-button {
     height: 32px;
-    color: rgb(255 255 255);
+    color: white;
     font-family: "Montserrat", serif;
     font-optical-sizing: auto;
     font-weight: 900;
@@ -582,6 +582,12 @@ swiper-slide {
     border: none;
     border-radius: 10px;
     cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+
+.buy-button:hover {
+    background-color: rgb(87, 88, 90);
+    color: white;
 }
 
 .item-content {

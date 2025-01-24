@@ -55,7 +55,6 @@ productRoute.get('/productos', async (req, res) => {
     }
 });
 
-
 productRoute.get('/selected/:idProductSel', async (req, res) => {
     try {
         const producto = await Producto.findById(req.params.idProductSel);
@@ -76,6 +75,37 @@ productRoute.delete('/eliminar-producto/:idProducto', async (req, res) => {
         res.status(500).send("Error")
     }
 });
+
+productRoute.get("/filtrado", async (req, res) => {
+    try {
+        const { section } = req.query;
+
+        // Define los campos que no quieres enviar para cada categoría
+        const excludeFields = {
+            Vasos: ["peso", "sabores"], // Campos a excluir para 'Vasos'
+            Suplementos: [] // Por ahora, no excluye nada en 'Suplementos'
+        };
+
+        // Obtén los campos a excluir según la categoría
+        const fieldsToExclude = excludeFields[section] || [];
+
+        // Genera la proyección para Mongoose
+        const projection = fieldsToExclude.reduce((acc, field) => {
+            acc[field] = 0; // 0 significa excluir el campo
+            return acc;
+        }, {});
+
+        // Filtra por categoría y aplica la proyección
+        const query = section ? { categoria: section } : {};
+        const productos = await Producto.find(query).select(projection);
+
+        res.status(200).json(productos);
+    } catch (error) {
+        console.error("Error al obtener productos:", error);
+        res.status(500).json({ error: "Error al obtener productos" });
+    }
+});
+
 
 //>> AGREGAR CATEGORÍAS
 productRoute.post('/categoria', async (req, res) => {
@@ -287,6 +317,91 @@ productRoute.get('/component/marcas', async (req, res) => {
     } catch (error) {
         console.error('Error al obtener las marcas:', error);
         res.status(500).json({ error: 'Error en el servidor' });
+    }
+});
+
+productRoute.get('/filter/color', async (req, res) => {
+    const colores = req.query.colores?.split(',').map(c => c.trim()) || []; // Obtener colores seleccionados
+    try {
+        let productos;
+        if (colores.length > 0) {
+            // Filtrar por colores
+            productos = await Producto.find({ color: { $in: colores } });
+        } else {
+            // Traer todos los productos si no hay colores seleccionados
+            productos = await Producto.find();
+        }
+        res.status(200).json(productos);
+    } catch (error) {
+        res.status(500).json({ message: 'Error al filtrar productos', error });
+    }
+});
+
+productRoute.get('/filter/sabor', async (req, res) => {
+    const sabor = req.query.sabores?.split(',').map(c => c.trim()) || []; // Obtener colores seleccionados
+    try {
+        let productos;
+        if (sabor.length > 0) {
+            // Filtrar por colores
+            productos = await Producto.find({ sabores: { $in: sabor } });
+        } else {
+            // Traer todos los productos si no hay colores seleccionados
+            productos = await Producto.find();
+        }
+        res.status(200).json(productos);
+    } catch (error) {
+        res.status(500).json({ message: 'Error al filtrar productos', error });
+    }
+});
+
+productRoute.get('/filter/peso', async (req, res) => {
+    const pesos = req.query.pesos?.split(',').map(c => c.trim()) || []; // Obtener colores seleccionados
+    try {
+        let productos;
+        if (pesos.length > 0) {
+            // Filtrar por colores
+            productos = await Producto.find({ peso: { $in: pesos } });
+        } else {
+            // Traer todos los productos si no hay colores seleccionados
+            productos = await Producto.find();
+        }
+        res.status(200).json(productos);
+    } catch (error) {
+        res.status(500).json({ message: 'Error al filtrar productos', error });
+    }
+});
+
+productRoute.get('/filter/tam', async (req, res) => {
+    const size = req.query.size?.split(',').map(c => c.trim()) || []; // Obtener colores seleccionados
+    try {
+        let productos;
+        if (size.length > 0) {
+            // Filtrar por colores
+            productos = await Producto.find({ tamaño: { $in: size } });
+        } else {
+            // Traer todos los productos si no hay colores seleccionados
+            productos = await Producto.find();
+        }
+        res.status(200).json(productos);
+    } catch (error) {
+        res.status(500).json({ message: 'Error al filtrar productos', error });
+    }
+});
+
+productRoute.get('/filter/marca', async (req, res) => {
+    const marcas = req.query.marcas?.split(',').map(c => c.trim()) || []; // Obtener colores seleccionados
+    try {
+        let productos;
+        if (marcas.length > 0) {
+            // Filtrar por colores
+            productos = await Producto.find({ marca: { $in: marcas } });
+        } else {
+            // Traer todos los productos si no hay colores seleccionados
+            productos = await Producto.find();
+        }
+        res.status(200).json(productos);
+    } catch (error) {
+        res.status(500).json({ message: 'Error al filtrar productos', error });
     }
 });
 

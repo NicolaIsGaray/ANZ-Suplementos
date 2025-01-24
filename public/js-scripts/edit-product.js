@@ -502,7 +502,7 @@ function getInputValues() {
     const productStockValue = document.querySelector("#stock").value.replace(/\./g, '');
     const productPriceValue = parseFloat(document.querySelector("#price").value.replace(/\./g, ''));
     const productDiscountValue = parseFloat(document.querySelector("#discount").value) || 0;
-    const productWeightValue = parseFloat(document.querySelector("#weights").value) || 0;
+    const productWeightValue = document.querySelector("#weights").value || 0;
 
     const productColorValue = [...document.querySelectorAll(".color input:checked")].map(input => input.id);
     const productFlavourValue = [...document.querySelectorAll(".flavour input:checked")].map(input => input.id);
@@ -550,7 +550,7 @@ function getInputValues() {
         descuento: offerChecked ? productDiscountValue : 0 // Si no está en oferta, el descuento es 0
     };
 
-    if (productWeightValue) dataToUpdate.peso = productWeightValue;
+    if (productWeightValue) dataToUpdate.peso = `${productWeightValue}gr`;
     if (combinedColors.length > 0) dataToUpdate.color = combinedColors;
     if (combinedFlavours.length > 0) dataToUpdate.sabores = combinedFlavours;
     if (combinedBrands.length > 0) dataToUpdate.marca = combinedBrands;
@@ -562,6 +562,23 @@ function getInputValues() {
     return dataToUpdate;
 }
 
+const componentRegister = async (e) => {
+    e.preventDefault();
+    const { color, sabores, marca, tamaño} = getInputValues();
+
+    const ComponentToSend = {
+        color,
+        sabores,
+        marca,
+        tamaño
+    }
+
+    try {
+        await axios.post("/producto/componente/agregar-componente", ComponentToSend)
+    } catch (error) {
+        console.log(error.response.data);
+    }
+}
 
 const productModify = async (e) => {
     e.preventDefault();
@@ -615,6 +632,7 @@ const productModify = async (e) => {
 const productEdit = document.querySelector("#editProduct");
 productEdit.addEventListener("click", (e) => {
     productModify(e);
+    componentRegister(e);
     goBack(e);
 });
 
