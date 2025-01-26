@@ -111,6 +111,27 @@ openBtn.addEventListener("click", (e) => {
 });
 // </|Toggle Sidebar|>
 
+// <|Toggle Filters|>
+const getFiltersButton = document.getElementById("mb-filter");
+const getFiltersCloser = document.getElementById("close-filter-mb");
+const getFiltersMobile = document.querySelector(".product-selection-container");
+const admDiv = document.querySelector(".adm");
+
+getFiltersButton.addEventListener("click", (e) => {
+  e.preventDefault();
+  getFiltersMobile.classList.toggle("product-selection-container-open");
+  admDiv.style.position = "fixed";
+  admDiv.style.zIndex = "0";
+});
+
+getFiltersCloser.addEventListener("click", (e) => {
+  e.preventDefault();
+  getFiltersMobile.classList.remove("product-selection-container-open");
+  admDiv.style.position = "fixed";
+  admDiv.style.zIndex = "1";
+});
+// </|Toggle Filters|>
+
 //SEPARAR Y MOSTRAR ID EN BARRA DE NAVEGACIÓN
 const query = window.location.search.split("=");
 const idProducto = query[1];
@@ -259,6 +280,33 @@ const renderProduct = (producto) => {
 };
 
 getProductosPorCategoria();
+
+function applyStylesBasedOnResolution() {
+  const mediaQuery = window.matchMedia("(max-width: 470px)");
+  const objectToRender = document.querySelector(".products-card");
+  const items = document.querySelectorAll(".item-main");
+
+  if (mediaQuery.matches) {
+    // Resolución menor a 768px
+    objectToRender.style.gridTemplateColumns = "repeat(1, 1fr)";
+    items.forEach((item) => {
+      item.style.width = "55%"
+    });
+  } else {
+    // Resolución mayor o igual a 768px
+    objectToRender.style.gridTemplateColumns = "repeat(2, 1fr)";
+    items.forEach((item) => {
+      item.style.width = "100%"
+    });
+  }
+}
+
+// Detectar cambios en tiempo real
+window.addEventListener("resize", applyStylesBasedOnResolution);
+
+// Aplicar los estilos al cargar la página
+applyStylesBasedOnResolution();
+
 
 //<-FUNCIÓN DE FILTRADO->
 const filter = async () => {
@@ -463,8 +511,6 @@ const filtrarProductos = async () => {
       .filter((checkbox) => checkbox.checked)
       .map((checkbox) => checkbox.value);
 
-    console.log(categoriasSeleccionadas);
-
     // Si las categorías seleccionadas están vacías, se pueden obtener todos los productos
     const urlCategoria =
       categoriasSeleccionadas.length > 0
@@ -512,8 +558,6 @@ const filtrarProductos = async () => {
     const productosPeso = respuestaPeso.data;
     const productosTam = respuestaTam.data;
     const productosMarca = respuestaMarca.data;
-
-    console.log(productosCat);
 
     // Combinar productos de categorías y subcategorías
     const productosCombinados = [

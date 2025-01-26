@@ -13,6 +13,10 @@ a {
     text-decoration: none;
 }
 
+div {
+    -webkit-tap-highlight-color: transparent;
+}
+
 /* <=======ADM=======> */
 .adm {
     position: fixed;
@@ -519,6 +523,10 @@ a {
     font-size: 12px;
 }
 
+#close-filter-mb {
+    display: none;
+}
+
 .filter-list {
     width: 100%;
     max-height: 0;
@@ -865,14 +873,45 @@ a {
 
     .organization {
         display: flex;
+        width: 100%;
+        justify-content: space-around;
+    }
+
+    .organization div {
+        padding: 16px;
+        box-shadow: 0px 0px 2px;
+        width: 35%;
+    }
+
+    .section-name-div {
+        margin: 2vh 0;
+        position: relative;
+        right: 10vw;
+        font-family: 'Montserrat', serif;
     }
 
     #sorter {
         margin: 0;
+        justify-content: center;
+    }
+
+    #sorter p {
+        font-family: 'Montserrat', serif;
+        font-style: normal;
+        font-weight: 500;
+        text-decoration: none !important;
     }
 
     #mb-filter {
         margin: 0;
+        justify-content: center;
+    }
+
+    #mb-filter p {
+        font-family: 'Montserrat', serif;
+        font-style: normal;
+        font-weight: 500;
+        text-decoration: none !important;
     }
 
     .mb-filter-container {
@@ -884,7 +923,45 @@ a {
     }
 
     .product-selection-container {
-        display: none;
+        width: 100%;
+        position: fixed;
+        z-index: 1;
+        background: white;
+        justify-content: normal;
+        padding: 0;
+        top: 22vh;
+        height: 78%;
+        flex-direction: column;
+        align-items: center;
+        overflow-y: scroll;
+        transform: translateX(999px);
+        transition: transform .3s ease-in-out;
+    }
+
+    .product-selection-container-open {
+        transform: translateX(0);
+    }
+
+    #close-filter-mb {
+        display: block;
+        width: 60px;
+        height: 36px;
+        padding: 0;
+        position: relative;
+        left: 85%;
+        background: transparent;
+        border: 1px solid rgba(0, 0, 0, 0.5);
+        border-radius: 10px;
+    }
+
+    .product-selection-box {
+        width: 99%;
+        margin-top: 4vh;
+    }
+
+    .selection {
+        width: 92%;
+        border-radius: 0;
     }
 
     .products-card {
@@ -893,6 +970,7 @@ a {
     }
 
     .item-main {
+        padding: 12px;
         width: 100%; /* Ajusta el ancho para pantallas más pequeñas */
         font-size: calc(9px + 0.4vw); /* Reduce ligeramente el tamaño de la fuente */
     }
