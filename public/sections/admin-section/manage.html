@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width" />
     <link rel="shortcut icon" href="../../icon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="../../css-sheets/manage.css" />
     <title>Administración</title>
@@ -10,91 +10,125 @@
   <body>
     <header>
       <div class="head-container">
-          <div class="navs">
-              <div class="topnavs">
-                  <div>
-                      <div class="mb-sidebars">
-                          <a class="open-sidebar"><i class="fa-solid fa-bars"></i></a>
-                      </div>
-                      <div class="logo">
-                          <a href="../../index.html">
-                          <img src="../../media/logo-tibushop.png" alt="ANZ Logo">
-                          </a>
-                      </div>
-                      <div class="user-navs-logged">
-                          <a class="userBtn"><i class="fa-solid fa-user"></i></a>
-                      </div>
-                      
-                      <div class="search-container">
-                          <input type="text" placeholder="¿Qué necesitás?" id="searcher">
-                          <button type="submit" id="searcher-submiter"><i class="fa-solid fa-magnifying-glass"></i></button>
-                      </div>
-                  </div>
-                  <div class="mb-search">
-                      <input type="text" placeholder="¿Qué necesitás?" id="mb-searcher">
-                      <button type="submit" id="mb-searcher-submiter"><i class="fa-solid fa-magnifying-glass"></i></button>
-                  </div>
-                  <div class="user-navs">
-                      <div class="guess-log">
-                          <a href="../user-section/login.html" class="login">Iniciar Sesión</a>
-                          <a href="../user-section/register.html" class="register">Registrarse</a>
-                      </div>
-                      <div class="user-options">
-                          <a class="user-button"></a>
-                          <a class="profile">Mi perfil</a>
-                          <a class="logout" onclick="logOutEvent()">Cerrar Sesión</a>
-                      </div>
-                  </div>
+        <div class="navs">
+          <div class="topnavs">
+            <div class="general-top-container">
+              <div class="mb-sidebars">
+                <a class="open-sidebar">
+                  <img
+                    src="../../media/icons/bars-solid.svg"
+                    alt=""
+                    style="width: 24px; height: 24px"
+                  />
+                </a>
               </div>
-              <div class="bottomnavs">
-                  <div class="navs-container">
-                      <nav>
-                          <ul>
-                              <li>
-                                  <a href="../../index.html">INICIO</a>
-                              </li>
-                              <li>
-                                  <a href="../product-section/product-general.html?section=Suplementos">SUPLEMENTOS</a>
-                              </li>
-                              <li>
-                                  <a href="../product-section/product-general.html?section=Ofertas">OFERTAS</a>
-                              </li>
-                              <li>
-                                  <a href="../product-section/product-general.html?section=Vasos">VASOS Y SHAKERS</a>
-                              </li>
-                              <li>
-                                  <a href="../about.html">QUIENES SOMOS</a>
-                              </li>
-                              <li>
-                                  <a href="../contact.html">CONTACTO</a>
-                              </li>
-                          </ul>
-                      </nav>
-                  </div>
+              <div class="logo">
+                <a href="../../index.html">
+                  <img src="../../media/logo-tibushop.png" alt="ANZ Logo" />
+                </a>
               </div>
-          </div>
-      </div>
-  </header>
+              <div class="user-navs-logged">
+                <a href="../user-section/profile.html">
+                  <img
+                    src="../../media/icons/user-solid.svg"
+                    alt=""
+                    style="width: 24px; height: 24px"
+                  />
+                </a>
+                <a href="../user-section/buy-confirm.html">
+                  <img
+                    src="../../media/icons/cart-shopping-solid.svg"
+                    alt=""
+                    style="width: 24px; height: 24px"
+                  />
+                </a>
+              </div>
 
-    <div class="mb-user-sidebar">
-      <div class="guess-content">
-        <ul>
-          <li>
-            <a href="../user-section/login.html">Iniciar Sesión</a>
-          </li>
-          <li>
-            <a href="../user-section/register.html">Registrarse</a>
-          </li>
-        </ul>
+              <div class="search-container">
+                <input
+                  type="text"
+                  placeholder="¿Qué necesitás?"
+                  id="searcher"
+                />
+                <button type="submit" id="searcher-submiter">
+                  <img
+                    src="../../media/icons/magnifying-glass-solid.svg"
+                    alt=""
+                    style="width: 24px; height: 24px"
+                  />
+                </button>
+              </div>
+              <div class="user-navs">
+                <div class="guess-log">
+                  <a href="../user-section/login.html" class="login"
+                    >Iniciar Sesión</a
+                  >
+                  <a href="../user-section/register.html" class="register"
+                    >Registrarse</a
+                  >
+                </div>
+                <div class="user-options">
+                  <div class="user-interact">
+                    <span class="user-button"></span>
+                    <a class="logout"
+                      ><img
+                        src="../../media/icons/right-from-bracket-solid.svg"
+                        alt=""
+                        style="width: 24px; height: 24px"
+                      />
+                    </a>
+                    <a
+                      class="shopping-cart"
+                      href="../user-section/buy-confirm.html"
+                      ><img
+                        src="../../media/icons/cart-shopping-solid.svg"
+                        alt=""
+                        style="width: 24px; height: 24px"
+                    /></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bottomnavs">
+            <div class="navs-container">
+              <nav>
+                <ul>
+                  <li>
+                    <a href="../../index.html">INICIO</a>
+                  </li>
+                  <li>
+                    <a
+                      href="../product-section/product-general.html?section=Suplementos"
+                      >SUPLEMENTOS</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="../product-section/product-general.html?section=Ofertas"
+                      >OFERTAS</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="../product-section/product-general.html?section=Vasos"
+                      >VASOS Y SHAKERS</a
+                    >
+                  </li>
+                  <li>
+                    <a href="../about.html">QUIENES SOMOS</a>
+                  </li>
+                  <li>
+                    <a href="../contact.html">CONTACTO</a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="user-logged-content">
-        <ul>
-          <li><a class="profile">Mi perfil</a></li>
-          <li><a class="logout" onclick="logOutEvent()">Cerrar Sesión</a></li>
-        </ul>
-      </div>
-      <h4 id="mb-username">Cuenta</h4>
-    </div>
+    </header>
+
     <div class="mb-sidebar">
       <div class="side-content">
         <ul>
@@ -106,14 +140,12 @@
             >
           </li>
           <li>
-            <a
-              href="../product-section/product-general.html?section=Ofertas"
+            <a href="../product-section/product-general.html?section=Ofertas"
               >Ofertas</a
             >
           </li>
           <li>
-            <a
-              href="../product-section/product-general.html?section=Vasos"
+            <a href="../product-section/product-general.html?section=Vasos"
               >Vasos y Shakers</a
             >
           </li>
@@ -125,7 +157,11 @@
 
     <div class="go-start">
       <a href="#up-start" class="go-start-btn">
-        <i class="fa-solid fa-arrow-up"></i>
+        <img
+          src="../../media/icons/arrow-up-solid.svg"
+          alt=""
+          style="width: 24px; height: 24px"
+        />
       </a>
     </div>
 
@@ -144,7 +180,7 @@
               <a href="#contact-manage">Gestión de Contacto</a>
             </li>
           </ul>
-  
+        </div>
       </div>
     </section>
 
@@ -161,10 +197,8 @@
             </button>
           </div>
         </div>
-        <div class="filter-container">
-        </div>
-        <div class="products-subcontainer">
-        </div>
+        <div class="filter-container"></div>
+        <div class="products-subcontainer"></div>
       </div>
     </section>
 
@@ -176,17 +210,29 @@
             <div class="add-category">
               <h3>Añadir Categoría</h3>
               <form action="" method="post">
-                <input type="text" name="newCategoria" id="newCtgr" placeholder="Nombre" autocomplete="off"/>
-                <input type="submit" value="Crear" id="addCategoryBtn"/>
+                <input
+                  type="text"
+                  name="newCategoria"
+                  id="newCtgr"
+                  placeholder="Nombre"
+                  autocomplete="off"
+                />
+                <input type="submit" value="Crear" id="addCategoryBtn" />
               </form>
             </div>
             <div class="delete-category">
               <h3>Eliminar Categoría</h3>
               <form action="" method="post">
                 <select name="delCategoria" id="delCtgr">
-                  <option value="" selected disabled>- Elegir Categoría -</option>
+                  <option value="" selected disabled>
+                    - Elegir Categoría -
+                  </option>
                 </select>
-                <input type="submit" value="Eliminar Categoría" id="delCategoryBtn" />
+                <input
+                  type="submit"
+                  value="Eliminar Categoría"
+                  id="delCategoryBtn"
+                />
               </form>
             </div>
           </div>
@@ -201,43 +247,35 @@
           <form action="" method="post" id="contact-form">
             <div class="one">
               <label for="number-contact">
-              Ingresa tu nuevo número de Contacto (Celular o Telefóno).
-            </label>
-            <input
-              type="tel"
-              id="number-contact"
-              name="number-contact"
-              placeholder="+54 015 999 9999"
-            />
-            <input
-              type="button"
-              value="Editar"
-              onclick="editarTelefono()"
-            />
-            <label for="ig-contact">
-              Ingresa tu nueva página de Instagram.
-            </label>
-            <input
-              type="text"
-              id="ig-contact"
-              name="ig-contact"
-              placeholder="URL de la Página de Instagram"
-            />
-            <input
-              type="button"
-              value="Editar"
-              onclick="editarInstagram()"
-            />
-            <label for="x-contact">
-              Ingresa tu nueva página de Twitter/X.
-            </label>
-            <input
-              type="text"
-              id="x-contact"
-              name="x-contact"
-              placeholder="URL de la Página de Twitter/X"
-            />
-            <input type="button" value="Editar" onclick="editarTwitter()" />
+                Ingresa tu nuevo número de Contacto (Celular o Telefóno).
+              </label>
+              <input
+                type="tel"
+                id="number-contact"
+                name="number-contact"
+                placeholder="+54 015 999 9999"
+              />
+              <input type="button" value="Editar" onclick="editarTelefono()" />
+              <label for="ig-contact">
+                Ingresa tu nueva página de Instagram.
+              </label>
+              <input
+                type="text"
+                id="ig-contact"
+                name="ig-contact"
+                placeholder="URL de la Página de Instagram"
+              />
+              <input type="button" value="Editar" onclick="editarInstagram()" />
+              <label for="x-contact">
+                Ingresa tu nueva página de Twitter/X.
+              </label>
+              <input
+                type="text"
+                id="x-contact"
+                name="x-contact"
+                placeholder="URL de la Página de Twitter/X"
+              />
+              <input type="button" value="Editar" onclick="editarTwitter()" />
             </div>
 
             <div class="two">
@@ -250,12 +288,8 @@
                 name="fb-contact"
                 placeholder="URL de la Página de Facebook"
               />
-  
-              <input
-                type="button"
-                value="Editar"
-                onclick="editarFacebook()"
-              />
+
+              <input type="button" value="Editar" onclick="editarFacebook()" />
               <label for="yt-contact">
                 Ingresa tu nuevo canal de Youtube.
               </label>
@@ -265,7 +299,7 @@
                 name="yt-contact"
                 placeholder="URL del Canal"
               />
-  
+
               <input type="button" value="Editar" onclick="editarYoutube()" />
             </div>
           </form>

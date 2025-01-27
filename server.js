@@ -17,6 +17,24 @@ const url = `mongodb+srv://${MONGO_U}:${MONGO_P}@generaldata.5ebr4.mongodb.net/?
 const cookieParser = require("cookie-parser");
 app.use(cookieParser());
 
+// Crear una cookie
+app.get('/set-cookie', (req, res) => {
+  res.cookie('nombre', 'valor', { maxAge: 3600000, httpOnly: true }); // 1 hora
+  res.send('Cookie creada');
+});
+
+// Leer cookies
+app.get('/get-cookie', (req, res) => {
+  const cookie = req.cookies['nombre'];
+  res.send(`Tu cookie es: ${cookie}`);
+});
+
+// Eliminar una cookie
+app.get('/clear-cookie', (req, res) => {
+  res.clearCookie('nombre');
+  res.send('Cookie eliminada');
+});
+
 const routes = require("./routes/index");
 app.use("/", routes);
 

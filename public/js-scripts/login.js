@@ -1,3 +1,26 @@
+// <|COOKIES|>
+document.addEventListener('DOMContentLoaded', () => {
+    const banner = document.getElementById('cookie-banner');
+    const acceptButton = document.getElementById('accept-cookies');
+
+    // Mostrar el banner si el usuario no aceptó cookies
+    if (!localStorage.getItem('cookies-accepted')) {
+        setTimeout(() => {
+            banner.style.bottom = '0'; // Mueve el banner hacia arriba con la animación
+        }, 100); // Retardo para que la transición sea visible
+    }
+
+    // Ocultar el banner y guardar el consentimiento
+    acceptButton.addEventListener('click', () => {
+        localStorage.setItem('cookies-accepted', 'true');
+        banner.style.bottom = '-100px';
+        setTimeout(() => {
+            banner.remove();
+        }, 300);
+    });
+});
+// </|COOKIES|>
+
 function getInputValues() {
     const emailInput = document.querySelector("#email");
     const passInput = document.querySelector("#password");

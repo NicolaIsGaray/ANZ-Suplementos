@@ -12,9 +12,15 @@
       <div class="head-container">
         <div class="navs">
           <div class="topnavs">
-            <div>
+            <div class="general-top-container">
               <div class="mb-sidebars">
-                <a class="open-sidebar"><i class="fa-solid fa-bars"></i></a>
+                <a class="open-sidebar">
+                  <img
+                    src="../../media/icons/bars-solid.svg"
+                    alt=""
+                    style="width: 24px; height: 24px"
+                  />
+                </a>
               </div>
               <div class="logo">
                 <a href="../../index.html">
@@ -22,7 +28,20 @@
                 </a>
               </div>
               <div class="user-navs-logged">
-                <a class="userBtn"><i class="fa-solid fa-user"></i></a>
+                <a href="../user-section/profile.html">
+                  <img
+                    src="../../media/icons/user-solid.svg"
+                    alt=""
+                    style="width: 24px; height: 24px"
+                  />
+                </a>
+                <a href="../user-section/buy-confirm.html">
+                  <img
+                    src="../../media/icons/cart-shopping-solid.svg"
+                    alt=""
+                    style="width: 24px; height: 24px"
+                  />
+                </a>
               </div>
 
               <div class="search-container">
@@ -32,33 +51,42 @@
                   id="searcher"
                 />
                 <button type="submit" id="searcher-submiter">
-                  <i class="fa-solid fa-magnifying-glass"></i>
+                  <img
+                    src="../../media/icons/magnifying-glass-solid.svg"
+                    alt=""
+                    style="width: 24px; height: 24px"
+                  />
                 </button>
               </div>
-            </div>
-            <div class="mb-search">
-              <input
-                type="text"
-                placeholder="¿Qué necesitás?"
-                id="mb-searcher"
-              />
-              <button type="submit" id="mb-searcher-submiter">
-                <i class="fa-solid fa-magnifying-glass"></i>
-              </button>
-            </div>
-            <div class="user-navs">
-              <div class="guess-log">
-                <a href="../user-section/login.html" class="login"
-                  >Iniciar Sesión</a
-                >
-                <a href="../user-section/register.html" class="register"
-                  >Registrarse</a
-                >
-              </div>
-              <div class="user-options">
-                <a class="user-button"></a>
-                <a class="profile">Mi perfil</a>
-                <a class="logout" onclick="logOutEvent()">Cerrar Sesión</a>
+              <div class="user-navs">
+                <div class="guess-log">
+                  <a href="../user-section/login.html" class="login"
+                    >Iniciar Sesión</a
+                  >
+                  <a href="../user-section/register.html" class="register"
+                    >Registrarse</a
+                  >
+                </div>
+                <div class="user-options">
+                  <div class="user-interact">
+                    <span class="user-button"></span>
+                    <a class="logout"
+                      ><img
+                        src="../../media/icons/right-from-bracket-solid.svg"
+                        alt=""
+                        style="width: 24px; height: 24px"
+                      />
+                    </a>
+                    <a
+                      class="shopping-cart"
+                      href="../user-section/buy-confirm.html"
+                      ><img
+                        src="../../media/icons/cart-shopping-solid.svg"
+                        alt=""
+                        style="width: 24px; height: 24px"
+                    /></a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -96,21 +124,6 @@
       </div>
     </header>
 
-    <div class="mb-user-sidebar">
-      <div class="guess-content">
-        <ul>
-          <li><a href="../user-section/login.html">Iniciar Sesión</a></li>
-          <li><a href="../user-section/register.html">Registrarse</a></li>
-        </ul>
-      </div>
-      <div class="user-logged-content">
-        <ul>
-          <li><a class="profile">Mi perfil</a></li>
-          <li><a class="logout" onclick="logOutEvent()">Cerrar Sesión</a></li>
-        </ul>
-      </div>
-      <h4 id="mb-username">Cuenta</h4>
-    </div>
     <div class="mb-sidebar">
       <div class="side-content">
         <ul>
@@ -130,14 +143,12 @@
 
     <div class="adm">
       <button type="button" id="mg-sect">
-        <i class="fa-solid fa-crown"></i>
+        <img
+          src="../../media/icons/crown-solid.svg"
+          alt=""
+          style="width: 16px; height: 16px"
+        />
       </button>
-    </div>
-
-    <div class="wa">
-      <a type="button" id="wa-cont" target="_blank"
-        ><i class="fa-brands fa-whatsapp"></i
-      ></a>
     </div>
 
     <section class="product">
@@ -151,12 +162,25 @@
             <div class="stock-available"></div>
             <form action="" method="post" class="stock-buy">
               <div class="add-amount">
-                <button id="decrease"><i class="fa-solid fa-less-than"></i></button>
-                <input type="number" name="amount-buy" id="amount-buy" value="1">
-                <button id="increase"><i class="fa-solid fa-greater-than"></i></button>
+                <button id="decrease">
+                  <i class="fa-solid fa-less-than"></i>
+                </button>
+                <input
+                  type="number"
+                  name="amount-buy"
+                  id="amount-buy"
+                  value="1"
+                />
+                <button id="increase">
+                  <i class="fa-solid fa-greater-than"></i>
+                </button>
               </div>
               <div class="purchase">
-                <input type="submit" value="AGREGAR AL CARRITO" class="inBuyButton">
+                <input
+                  type="submit"
+                  value="AGREGAR AL CARRITO"
+                  class="inBuyButton"
+                />
               </div>
             </form>
           </div>
@@ -170,6 +194,15 @@
         </div>
       </div>
     </section>
+
+    <div id="cookie-banner">
+      <span
+        >Al navegar en este sitio
+        <strong>aceptás el uso de cookies</strong> para mejorar y brindarte una
+        mejor experiencia de compra.</span
+      >
+      <button id="accept-cookies">ENTENDIDO</button>
+    </div>
 
     <footer>
       <div class="end-container">

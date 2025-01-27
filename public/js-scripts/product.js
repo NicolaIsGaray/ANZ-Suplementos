@@ -1,16 +1,36 @@
+// <|COOKIES|>
+document.addEventListener('DOMContentLoaded', () => {
+  const banner = document.getElementById('cookie-banner');
+  const acceptButton = document.getElementById('accept-cookies');
+
+  // Mostrar el banner si el usuario no aceptó cookies
+  if (!localStorage.getItem('cookies-accepted')) {
+      setTimeout(() => {
+          banner.style.bottom = '0'; // Mueve el banner hacia arriba con la animación
+      }, 100); // Retardo para que la transición sea visible
+  }
+
+  // Ocultar el banner y guardar el consentimiento
+  acceptButton.addEventListener('click', () => {
+      localStorage.setItem('cookies-accepted', 'true');
+      banner.style.bottom = '-200px';
+      setTimeout(() => {
+          banner.remove();
+      }, 900);
+  });
+});
+// </|COOKIES|>
+
 //<|ROLES|>
 //Verificacion de Rol
 const getAdm = document.querySelector(".adm");
 const getUserOpt = document.querySelector(".guess-log");
-const getGuessOpt = document.querySelector(".guess-content");
 
 const userOptions = document.querySelector(".user-options");
-const mbUserLogged = document.querySelector(".user-logged-content");
 
 window.onload = () => {
   getAdm.style.display = "none";
   userOptions.style.display = "none";
-  mbUserLogged.style.display = "none";
 };
 
 async function obtenerRolUsuario() {
@@ -35,15 +55,11 @@ async function obtenerRolUsuario() {
     if (isAdmin) {
       getAdm.style.display = "flex";
       getUserOpt.style.display = "none";
-      getGuessOpt.style.display = "none";
       userOptions.style.display = "flex";
-      mbUserLogged.style.display = "flex";
     } else {
-      getAdm.innerHTML = " ";
+      getAdm.remove();
       getUserOpt.style.display = "none";
-      getGuessOpt.style.display = "none";
       userOptions.style.display = "flex";
-      mbUserLogged.style.display = "flex";
     }
 
     async function userResponse() {
@@ -57,17 +73,25 @@ async function obtenerRolUsuario() {
 
     const usuarioDisplay = await userResponse();
     const usernameDisplay = document.querySelector(".user-button");
-    const mbUserName = document.getElementById("mb-username");
 
-    usernameDisplay.innerHTML = `${usuarioDisplay.username} <i class="fa-solid fa-circle-user"></i>`;
-
-    mbUserName.innerHTML = `${usuarioDisplay.username}`;
+    usernameDisplay.innerHTML = `Hola, ${usuarioDisplay.username} <img
+                    src="../../media/icons/circle-user-solid.svg"
+                    alt=""
+                    style="width: 24px; height: 24px"
+                />`;
   } catch (error) {
     console.log(error);
   }
 }
 
 //LogOut
+const getLogOut = document.querySelector(".logout");
+
+getLogOut.addEventListener("click", (e) => {
+  e.preventDefault();
+  logOutEvent();
+});
+
 const logOut = async () => {
   try {
     const response = await axios.post("/usuario/logOut");
@@ -79,7 +103,7 @@ const logOut = async () => {
 function logOutEvent() {
   logOut();
   localStorage.removeItem("token");
-  window.location.href = "./index.html";
+  window.location.href = "../../index.html";
 }
 
 //Botón de Admin
@@ -92,16 +116,6 @@ admBtn.addEventListener("click", (e) => {
 // Llamada para verificar el rol y ejecutar la acción
 obtenerRolUsuario();
 //</|ROLES|>
-
-// <|Toggle User Sidebar|>
-const userSidebar = document.querySelector(".mb-user-sidebar");
-const toggleUserSidebarBtn = document.querySelector(".userBtn");
-
-toggleUserSidebarBtn.addEventListener("click", (e) => {
-  e.preventDefault();
-  userSidebar.classList.toggle("mb-user-sidebar-open");
-});
-// </|Toggle User Sidebar|>
 
 // <|Toggle Sidebar|>
 const sidebar = document.querySelector(".mb-sidebar");
@@ -279,14 +293,11 @@ const getSociales = async () => {
     const contacto = response.data; // Almacena la URL de Instagram obtenida
 
     contacto.forEach((contactos) => {
-      const whatsapp = document.getElementById("wa-cont");
 
       const facebookIcon = document.getElementById("facebook");
       const instagramIcon = document.getElementById("instagram");
       const twitterIcon = document.getElementById("twitter");
       const youtubeIcon = document.getElementById("youtube");
-
-      whatsapp.href = `https://wa.me/${contactos.telefono}`;
 
       facebookIcon.href = contactos.facebook;
       instagramIcon.href = contactos.instagram;
