@@ -254,6 +254,11 @@ const renderProduct = (Productos) => {
     category3.append(swiperSlider);
   }
 
+  // Agregar un pequeño retraso para cada producto
+  setTimeout(() => {
+    liItem.classList.add("fade-in");
+  }, 100); // Aumentar el retraso en 100ms para cada producto
+
   divImg.appendChild(productImg);
   swiperSlider.appendChild(liItem);
   liItem.appendChild(divImg);

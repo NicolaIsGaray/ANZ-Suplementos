@@ -425,7 +425,14 @@ swiper-slide {
     align-items: center;
     position: relative;
     z-index: 2;
-    transition: all .3s ease-in-out;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.item-main.fade-in {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .item-img-div {

@@ -1,22 +1,22 @@
 // <|COOKIES|>
-document.addEventListener('DOMContentLoaded', () => {
-  const banner = document.getElementById('cookie-banner');
-  const acceptButton = document.getElementById('accept-cookies');
+document.addEventListener("DOMContentLoaded", () => {
+  const banner = document.getElementById("cookie-banner");
+  const acceptButton = document.getElementById("accept-cookies");
 
   // Mostrar el banner si el usuario no aceptó cookies
-  if (!localStorage.getItem('cookies-accepted')) {
-      setTimeout(() => {
-          banner.style.bottom = '0'; // Mueve el banner hacia arriba con la animación
-      }, 100); // Retardo para que la transición sea visible
+  if (!localStorage.getItem("cookies-accepted")) {
+    setTimeout(() => {
+      banner.style.bottom = "0"; // Mueve el banner hacia arriba con la animación
+    }, 100); // Retardo para que la transición sea visible
   }
 
   // Ocultar el banner y guardar el consentimiento
-  acceptButton.addEventListener('click', () => {
-      localStorage.setItem('cookies-accepted', 'true');
-      banner.style.bottom = '-200px';
-      setTimeout(() => {
-          banner.remove();
-      }, 900);
+  acceptButton.addEventListener("click", () => {
+    localStorage.setItem("cookies-accepted", "true");
+    banner.style.bottom = "-200px";
+    setTimeout(() => {
+      banner.remove();
+    }, 900);
   });
 });
 // </|COOKIES|>
@@ -208,7 +208,7 @@ const renderProduct = (producto) => {
 
   // Crear elementos del producto
   const divItem = document.createElement("div");
-  divItem.classList.add("item-main", "seccion");
+  divItem.classList.add("item-main");
 
   const divItemContent = document.createElement("div");
   divItemContent.classList.add("item-content");
@@ -283,6 +283,12 @@ const renderProduct = (producto) => {
       } else {
         section.textContent = `${producto.categoria}`;
       }
+
+      // Agregar un pequeño retraso para cada producto
+      setTimeout(() => {
+        divItem.classList.add("fade-in");
+      }, 100); // Aumentar el retraso en 100ms para cada producto
+
       // Agregar elementos al contenedor principal del producto
       divItem.appendChild(divImg);
       divItemContent.appendChild(productName);
