@@ -279,9 +279,9 @@ const renderProduct = (producto) => {
   sectionName.forEach((section) => {
     if (categoriaCheck === producto.categoria) {
       if (producto.categoria === "Vasos") {
-        section.textContent = `Vasos y Shakers - ANZ SUPLEMENTOS`;
+        section.textContent = `Vasos y Shakers`;
       } else {
-        section.textContent = `${producto.categoria} - ANZ SUPLEMENTOS`;
+        section.textContent = `${producto.categoria}`;
       }
       // Agregar elementos al contenedor principal del producto
       divItem.appendChild(divImg);
@@ -296,39 +296,6 @@ const renderProduct = (producto) => {
 };
 
 getProductosPorCategoria();
-
-function applyStylesBasedOnResolution() {
-  const mediaQuery = window.matchMedia("(max-width: 470px)");
-  const mediaQuery2 = window.matchMedia("(max-width: 480px)");
-  const objectToRender = document.querySelector(".products-card");
-  const items = document.querySelectorAll(".item-main");
-
-  if (mediaQuery.matches) {
-    // Resolución menor a 768px
-    objectToRender.style.gridTemplateColumns = "repeat(1, 1fr)";
-    items.forEach((item) => {
-      item.style.width = "55%";
-    });
-  } else {
-    if (mediaQuery2.matches) {
-      objectToRender.style.gridTemplateColumns = "repeat(2, 1fr)";
-      items.forEach((item) => {
-        item.style.width = "100%";
-      });
-    } else {
-      objectToRender.style.gridTemplateColumns = "repeat(5, 1fr)";
-      items.forEach((item) => {
-        item.style.width = "100%";
-      });
-    }
-  }
-}
-
-// Detectar cambios en tiempo real
-window.addEventListener("resize", applyStylesBasedOnResolution);
-
-// Aplicar los estilos al cargar la página
-applyStylesBasedOnResolution();
 
 //<-FUNCIÓN DE FILTRADO->
 const filter = async () => {
