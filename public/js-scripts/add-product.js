@@ -10,15 +10,8 @@ openBtn.addEventListener("click", (e) => {
 
 //<|ROLES|>
 //Verificacion de Rol
-const getAdm = document.querySelector(".adm");
 const getUserOpt = document.querySelector(".guess-log");
-
 const userOptions = document.querySelector(".user-options");
-
-window.onload = () => {
-  getAdm.style.display = "none";
-  userOptions.style.display = "none";
-};
 
 async function obtenerRolUsuario() {
   const token = localStorage.getItem("token"); // Obtener el token almacenado en localStorage
@@ -518,7 +511,7 @@ function getInputValues() {
         sabores: combinedFlavours,
         marca: combinedBrands,
         tamaño: combinedSizes,
-        categoria: productCategoryValue,
+        categoria: offerChecked ? [productCategoryValue, "Ofertas"] : productCategoryValue,
         subcategoria: productSubCategoryValue,
         imgPortada: productImgValue
     };

@@ -233,18 +233,24 @@ productRoute.delete('/eliminar-subcategoria/:nombreSubCategoria', async (req, re
     try {
         const { nombreSubCategoria } = req.params; // Obtén el nombre de la subcategoría desde los parámetros de la URL
 
-        const subCategoriaEliminada = await SubCategorias.findOneAndDelete({ nombreSubCategoria }); // Busca y elimina la subcategoría por su nombre
+        // Usa $pull para eliminar el valor específico del arreglo
+        const resultado = await SubCategorias.updateOne(
+            {}, // Aquí puedes agregar un filtro para encontrar el documento que contiene el arreglo (si es necesario).
+            { $pull: { nombreSubCategoria: nombreSubCategoria } } // $pull elimina el valor específico del arreglo
+        );
 
-        if (!subCategoriaEliminada) {
-            return res.status(404).json({ error: 'SubCategoría no encontrada.' });
+        // Verifica si se realizó alguna modificación
+        if (resultado.modifiedCount === 0) {
+            return res.status(404).json({ error: 'SubCategoría no encontrada o ya eliminada.' });
         }
 
-        res.status(200).json({ message: 'SubCategoría eliminada con éxito.', nombreSubCategoria: subCategoriaEliminada });
+        res.status(200).json({ message: 'SubCategoría eliminada con éxito.', nombreSubCategoria });
     } catch (error) {
         console.error('Error al eliminar la subcategoría:', error);
         res.status(500).json({ error: 'Error al eliminar la subcategoría.' });
     }
 });
+
 
 productRoute.post('/componente/agregar-componente', async (req, res) => {
     const { color, sabores, tamaño, marca } = req.body;

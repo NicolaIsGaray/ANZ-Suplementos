@@ -49,11 +49,11 @@ const productData = new mongoose.Schema ({
         required: false
     },
     categoria: {
-        type: String,
+        type: [String],
         required: true
     },
     subcategoria: {
-        type: String,
+        type: [String],
         required: false
     },
     imgPortada: {

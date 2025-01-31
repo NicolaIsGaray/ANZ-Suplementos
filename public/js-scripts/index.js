@@ -242,16 +242,18 @@ const renderProduct = (Productos) => {
     : "./media/default.png";
   productImg.setAttribute("src", imgVerify);
 
-  if (Productos.categoria === "Ofertas") {
-    category1.append(swiperSlider);
-  }
-
-  if (Productos.categoria === "Vasos") {
+  if (Productos.categoria.includes("Vasos")) {
     category2.append(swiperSlider);
+    if (Productos.categoria.includes("Ofertas")) {
+      category1.appendChild(swiperSlider);
+    }
   }
 
-  if (Productos.categoria === "Suplementos") {
+  if (Productos.categoria.includes("Suplementos")) {
     category3.append(swiperSlider);
+    if (Productos.categoria.includes("Ofertas")) {
+      category1.append(swiperSlider);
+    }
   }
 
   // Agregar un pequeño retraso para cada producto

@@ -179,7 +179,7 @@ function renderProduct(Productos) {
 
   let imgVerify = Productos.imgPortada
     ? Productos.imgPortada
-    : "../media/icons/default.png";
+    : "../../media/default.png";
   productImg.setAttribute("src", imgVerify);
 
   let priceVerify = Productos.precio ? Productos.precio : error;

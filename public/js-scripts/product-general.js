@@ -44,8 +44,6 @@ async function obtenerRolUsuario() {
       },
     });
 
-    console.log("Respuesta del servidor:", response.data); // Imprimir toda la respuesta para depuración
-
     const isAdmin = response.data.isAdmin; // Suponiendo que el backend te está enviando isAdmin como true/false
 
     window.onload = () => {
@@ -277,17 +275,43 @@ const renderProduct = (producto) => {
   const sectionName = document.querySelectorAll(".section-name");
 
   sectionName.forEach((section) => {
-    if (categoriaCheck === producto.categoria) {
-      if (producto.categoria === "Vasos") {
-        section.textContent = `Vasos y Shakers`;
-      } else {
-        section.textContent = `${producto.categoria}`;
+    // Si estamos en la categoría de Ofertas
+    if (categoriaCheck === "Ofertas") {
+      // Filtrar productos que no están en oferta
+      if (!producto.oferta.enOferta) {
+        return; // Saltar productos que no estén en oferta
       }
 
-      // Agregar un pequeño retraso para cada producto
+      // Cambiar el texto de la sección para Ofertas
+      section.textContent = `Ofertas Especiales`;
+
+      // Renderizar productos en oferta con efecto fade-in
       setTimeout(() => {
         divItem.classList.add("fade-in");
-      }, 100); // Aumentar el retraso en 100ms para cada producto
+      }, 100);
+
+      // Agregar elementos al contenedor principal del producto
+      divItem.appendChild(divImg);
+      divItemContent.appendChild(productName);
+      divItemContent.appendChild(productPriceDiv);
+      divItemContent.appendChild(buyButton);
+      divItem.appendChild(divItemContent);
+
+      divProducts.appendChild(divItem);
+    }
+    // Si estamos en otra categoría registrada
+    else if (producto.categoria.includes(categoriaCheck)) {
+      // Cambiar el texto de la sección según la categoría
+      if (producto.categoria.includes("Vasos")) {
+        section.textContent = `Vasos y Shakers`;
+      } else if (producto.categoria.includes("Suplementos")) {
+        section.textContent = `Suplementos Deportivos`;
+      }
+
+      // Renderizar productos con efecto fade-in
+      setTimeout(() => {
+        divItem.classList.add("fade-in");
+      }, 100);
 
       // Agregar elementos al contenedor principal del producto
       divItem.appendChild(divImg);
@@ -316,125 +340,112 @@ const filter = async () => {
   const pesoCount = {}; // Contenedor de pesos y sus cantidades
 
   productos.forEach((producto) => {
-    // Filtros para la categoría Suplementos
-    if (categoriaCheck === "Suplementos") {
-      const filtroSuplementos = {
-        subcategoria: producto.subcategoria && producto.subcategoria.length > 0,
-        color: Array.isArray(producto.color) && producto.color.length > 0,
-        sabores: Array.isArray(producto.sabores) && producto.sabores.length > 0,
-        peso: producto.peso && producto.peso.length > 0,
-        tamaño: Array.isArray(producto.tamaño) && producto.tamaño.length > 0,
-        marca: Array.isArray(producto.marca) && producto.marca.length > 0,
-      };
+    let filtros = {};
 
-      // Muestra u oculta cada filtro según corresponda
-      document.getElementById("category").style.display =
-        filtroSuplementos.subcategoria ? "flex" : "none";
-      document.getElementById("color").style.display = filtroSuplementos.color
-        ? "flex"
-        : "none";
-      document.getElementById("flavour").style.display =
-        filtroSuplementos.sabores ? "flex" : "none";
-      document.getElementById("weight").style.display = filtroSuplementos.peso
-        ? "flex"
-        : "none";
-      document.getElementById("size").style.display = filtroSuplementos.tamaño
-        ? "flex"
-        : "none";
-      document.getElementById("brand").style.display = filtroSuplementos.marca
-        ? "flex"
-        : "none";
+    // if (
+    //   categoriaCheck === "Suplementos" &&
+    //   producto.categoria.includes("Suplementos")
+    // ) {
+    //   filtros = {
+    //     subcategoria: producto.subcategoria && producto.subcategoria.length > 0,
+    //     color: Array.isArray(producto.color) && producto.color.length > 0,
+    //     sabores: Array.isArray(producto.sabores) && producto.sabores.length > 0,
+    //     peso: producto.peso && producto.peso.length > 0,
+    //     tamaño: Array.isArray(producto.tamaño) && producto.tamaño.length > 0,
+    //     marca: Array.isArray(producto.marca) && producto.marca.length > 0,
+    //   };
+    // } else if (categoriaCheck === "Vasos") {
+    //   filtros = {
+    //     subcategoria: producto.subcategoria && producto.subcategoria.length > 0,
+    //     color: Array.isArray(producto.color) && producto.color.length > 0,
+    //     tamaño: Array.isArray(producto.tamaño) && producto.tamaño.length > 0,
+    //     marca: Array.isArray(producto.marca) && producto.marca.length > 0,
+    //   };
+    // } else if (categoriaCheck === "Ofertas") {
+    //   console.log("HOLA");
+    // }
 
-      // Contabilizar los colores
-      if (producto.color && Array.isArray(producto.color)) {
-        producto.color.forEach((color) => {
-          colorCount[color] = (colorCount[color] || 0) + 1;
-        });
-      }
-
-      // Contabilizar los sabores
-      if (producto.sabores && Array.isArray(producto.sabores)) {
-        producto.sabores.forEach((sabor) => {
-          saborCount[sabor] = (saborCount[sabor] || 0) + 1;
-        });
-      }
-
-      // Contabilizar los tamaños
-      if (producto.tamaño && Array.isArray(producto.tamaño)) {
-        producto.tamaño.forEach((tamano) => {
-          tamañoCount[tamano] = (tamañoCount[tamano] || 0) + 1;
-        });
-      }
-
-      // Contabilizar las marcas
-      if (producto.marca && Array.isArray(producto.marca)) {
-        producto.marca.forEach((marca) => {
-          marcaCount[marca] = (marcaCount[marca] || 0) + 1;
-        });
-      }
-
-      // Contabilizar las subcategorías
-      if (producto.subcategoria) {
-        subcategoriaCount[producto.subcategoria] =
-          (subcategoriaCount[producto.subcategoria] || 0) + 1;
-      }
-
-      // Contabilizar los pesos
-      if (producto.peso) {
-        pesoCount[producto.peso] = (pesoCount[producto.peso] || 0) + 1;
+    if (producto.categoria.includes(categoriaCheck)) {
+      if (producto.categoria.includes("Suplementos")) {
+        filtros = {
+          subcategoria:
+            producto.subcategoria && producto.subcategoria.length > 0,
+          color: Array.isArray(producto.color) && producto.color.length > 0,
+          sabores:
+            Array.isArray(producto.sabores) && producto.sabores.length > 0,
+          peso: producto.peso && producto.peso.length > 0,
+          tamaño: Array.isArray(producto.tamaño) && producto.tamaño.length > 0,
+          marca: Array.isArray(producto.marca) && producto.marca.length > 0,
+        };
+      } else if (producto.categoria.includes("Vasos")) {
+        filtros = {
+          subcategoria:
+            producto.subcategoria && producto.subcategoria.length > 0,
+          color: Array.isArray(producto.color) && producto.color.length > 0,
+          tamaño: Array.isArray(producto.tamaño) && producto.tamaño.length > 0,
+          marca: Array.isArray(producto.marca) && producto.marca.length > 0,
+        };
+      } else if (producto.categoria.includes("Ofertas")) {
+        filtros = {
+          subcategoria:
+            producto.subcategoria && producto.subcategoria.length > 0,
+          color: Array.isArray(producto.color) && producto.color.length > 0,
+          sabores:
+            Array.isArray(producto.sabores) && producto.sabores.length > 0,
+          peso: producto.peso && producto.peso.length > 0,
+          tamaño: Array.isArray(producto.tamaño) && producto.tamaño.length > 0,
+          marca: Array.isArray(producto.marca) && producto.marca.length > 0,
+        };
       }
     }
 
-    // Filtros para la categoría Vasos
-    if (categoriaCheck === "Vasos") {
-      const filtroSuplementos = {
-        subcategoria: producto.subcategoria && producto.subcategoria.length > 0,
-        color: Array.isArray(producto.color) && producto.color.length > 0,
-        tamaño: Array.isArray(producto.tamaño) && producto.tamaño.length > 0,
-        marca: Array.isArray(producto.marca) && producto.marca.length > 0,
-      };
+    // Mostrar u ocultar los filtros dinámicamente según los datos
+    document.getElementById("category").style.display = filtros.subcategoria
+      ? "flex"
+      : "none";
+    document.getElementById("color").style.display = filtros.color
+      ? "flex"
+      : "none";
+    document.getElementById("flavour").style.display = filtros.sabores
+      ? "flex"
+      : "none";
+    document.getElementById("weight").style.display = filtros.peso
+      ? "flex"
+      : "none";
+    document.getElementById("size").style.display = filtros.tamaño
+      ? "flex"
+      : "none";
+    document.getElementById("brand").style.display = filtros.marca
+      ? "flex"
+      : "none";
 
-      // Muestra u oculta cada filtro según corresponda
-      document.getElementById("category").style.display =
-        filtroSuplementos.subcategoria ? "flex" : "none";
-      document.getElementById("color").style.display = filtroSuplementos.color
-        ? "flex"
-        : "none";
-      document.getElementById("flavour").style.display = "none";
-      document.getElementById("weight").style.display = "none";
-      document.getElementById("size").style.display = filtroSuplementos.tamaño
-        ? "flex"
-        : "none";
-      document.getElementById("brand").style.display = filtroSuplementos.marca
-        ? "flex"
-        : "none";
-
-      // Contabilizar los colores
-      if (producto.color && Array.isArray(producto.color)) {
-        producto.color.forEach((color) => {
-          colorCount[color] = (colorCount[color] || 0) + 1;
-        });
-      }
-
-      // Contabilizar los tamaños
-      if (producto.tamaño && Array.isArray(producto.tamaño)) {
-        producto.tamaño.forEach((tamano) => {
-          tamañoCount[tamano] = (tamañoCount[tamano] || 0) + 1;
-        });
-      }
-
-      // Contabilizar las marcas
-      if (producto.marca && Array.isArray(producto.marca)) {
-        producto.marca.forEach((marca) => {
-          marcaCount[marca] = (marcaCount[marca] || 0) + 1;
-        });
-      }
-
-      // Contabilizar las subcategorías
-      if (producto.subcategoria) {
-        subcategoriaCount[producto.subcategoria] =
-          (subcategoriaCount[producto.subcategoria] || 0) + 1;
-      }
+    // Contabilizar cada filtro según corresponda
+    if (filtros.color) {
+      producto.color.forEach((color) => {
+        colorCount[color] = (colorCount[color] || 0) + 1;
+      });
+    }
+    if (filtros.sabores) {
+      producto.sabores.forEach((sabor) => {
+        saborCount[sabor] = (saborCount[sabor] || 0) + 1;
+      });
+    }
+    if (filtros.tamaño) {
+      producto.tamaño.forEach((tamano) => {
+        tamañoCount[tamano] = (tamañoCount[tamano] || 0) + 1;
+      });
+    }
+    if (filtros.marca) {
+      producto.marca.forEach((marca) => {
+        marcaCount[marca] = (marcaCount[marca] || 0) + 1;
+      });
+    }
+    if (filtros.subcategoria) {
+      subcategoriaCount[producto.subcategoria] =
+        (subcategoriaCount[producto.subcategoria] || 0) + 1;
+    }
+    if (filtros.peso) {
+      pesoCount[producto.peso] = (pesoCount[producto.peso] || 0) + 1;
     }
   });
 

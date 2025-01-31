@@ -477,12 +477,10 @@ a {
     margin-left: 16vw;
 }
 
-#section-name {
-    font-size: 32px;
-    font-family: "Montserrat", serif;
-    font-optical-sizing: auto;
-    font-weight: 700;
-    font-style: normal;
+.section-name-div h3 {
+    font-family: 'Montserrat', serif;
+    font-weight: 800;
+    font-size: 2em;
 }
 
 #sorter {
@@ -825,6 +823,11 @@ a {
         padding-left: 7vw;
         padding-bottom: 2vh;
         font-family: 'Montserrat', serif;
+    }
+
+    .section-name-div h3 {
+        font-size: 24px;;
+        font-weight: 700;
     }
 
     #sorter {

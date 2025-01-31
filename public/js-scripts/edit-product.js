@@ -539,7 +539,7 @@ function getInputValues() {
     if (combinedBrands.length > 0) dataToUpdate.marca = combinedBrands;
     if (combinedSizes.length > 0) dataToUpdate.tamaño = combinedSizes;
     if (productImgValue) dataToUpdate.imgPortada = productImgValue;
-    if (productCategoryValue) dataToUpdate.categoria = productCategoryValue;
+    if (productCategoryValue) dataToUpdate.categoria = offerChecked ? [productCategoryValue, "Ofertas"] : productCategoryValue;
     if (productSubCategoryValue) dataToUpdate.subcategoria = productSubCategoryValue;
 
     return dataToUpdate;
