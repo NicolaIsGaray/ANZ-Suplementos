@@ -181,20 +181,67 @@
       /></a>
     </div>
 
-    <div class="slideshow-container">
-      <div class="slidesDiv fade">
-        <img src="./media/slide1.jpeg" style="height: 100%; width: 100%" />
-      </div>
+    <section class="swipers-presentation">
+      <swiper-container
+        class="mySwiper swiper-desktop"
+        pagination="true"
+        navigation="true"
+        space-between="0"
+        pagination-clickable="true"
+        centered-slides="false"
+        autoplay-delay="3000"
+        autoplay-disable-on-interaction="false"
+        slides-per-view="1"
+        loop="true"
+      >
+        <swiper-slide class="slideshow-container">
+          <img src="./media/slides/slide1.png" alt="Slide 1" />
+        </swiper-slide>
+        <swiper-slide class="slideshow-container">
+          <img src="./media/slides/slide2.png" alt="Slide 2" />
+        </swiper-slide>
+      </swiper-container>
+      <swiper-container
+        class="mySwiper swiper-mobile"
+        pagination="true"
+        navigation="true"
+        space-between="0"
+        pagination-clickable="true"
+        centered-slides="false"
+        autoplay-delay="3000"
+        autoplay-disable-on-interaction="false"
+        slides-per-view="1"
+        loop="true"
+      >
+        <swiper-slide class="slideshow-container">
+          <img src="./media/slides/slide-mb1.png" alt="Slide 1" />
+        </swiper-slide>
+        <swiper-slide class="slideshow-container">
+          <img src="./media/slides/slide-mb2.png" alt="Slide 2" />
+        </swiper-slide>
+      </swiper-container>
+    </section>
 
-      <div class="slidesDiv fade">
-        <img src="./media/slide2.jpg" style="height: 100%; width: 100%" />
+    <section class="category-image-decoration">
+      <div class="image-deco">
+        <a
+          href="./sections/product-section/product-general.html?section=Suplementos"
+        >
+          <img
+            src="./media/deco-images/suplementos-deco.png"
+            alt="suplementos-deco"
+          />
+        </a>
       </div>
-
-      <div class="slidesDiv fade">
-        <img src="./media/slide3.png" style="height: 100%; width: 100%" />
+      <div class="image-deco">
+        <a href="./sections/product-section/product-general.html?section=Vasos">
+          <img
+            src="./media/deco-images/vasos-deco.png"
+            alt="vasos-shakers-deco"
+          />
+        </a>
       </div>
-    </div>
-    <br />
+    </section>
 
     <div class="main-container">
       <section>

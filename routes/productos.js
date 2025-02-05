@@ -4,6 +4,130 @@ const Producto = require("../models/Productos");
 const Categorias = require("../models/Categorias");
 const SubCategorias = require("../models/SubCategorias");
 const Componentes = require("../models/Componentes");
+const Usuarios = require("../models/Usuario");
+
+//>> Agregar producto al carrito <<
+productRoute.post("/carrito/:userId/agregar", async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const { productoId, cantidad } = req.body;
+
+        const usuario = await Usuarios.findById(userId);
+        if (!usuario) return res.status(404).json({ error: "Usuario no encontrado" });
+
+        const producto = await Producto.findById(productoId);
+        if (!producto) return res.status(404).json({ error: "Producto no encontrado" });
+
+        // Verificar si el producto ya está en el carrito
+        const itemExistente = usuario.carrito.find(item => item.producto.equals(productoId));
+        if (itemExistente) {
+            itemExistente.cantidad += cantidad;
+        } else {
+            usuario.carrito.push({ producto: productoId, cantidad });
+        }
+
+        await usuario.save();
+        res.json({ mensaje: "Producto agregado al carrito", carrito: usuario.carrito });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+productRoute.get("/carrito/:userId", async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const usuario = await Usuarios.findById(userId).populate("carrito.producto");
+
+        if (!usuario) return res.status(404).json({ error: "Usuario no encontrado" });
+
+        res.json({ carrito: usuario.carrito });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+productRoute.put("/carrito/:userId/actualizar", async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const { productoId, cantidad } = req.body;
+
+        const usuario = await Usuarios.findById(userId);
+        if (!usuario) return res.status(404).json({ error: "Usuario no encontrado" });
+
+        const item = usuario.carrito.find(item => item.producto.equals(productoId));
+        if (!item) return res.status(404).json({ error: "Producto no encontrado en el carrito" });
+
+        item.cantidad = cantidad;
+        await usuario.save();
+
+        res.json({ mensaje: "Cantidad actualizada", carrito: usuario.carrito });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+productRoute.delete("/carrito/:userId/eliminar/:productoId", async (req, res) => {
+    try {
+        const { userId, productoId } = req.params;
+
+        const usuario = await Usuarios.findById(userId);
+        if (!usuario) return res.status(404).json({ error: "Usuario no encontrado" });
+
+        usuario.carrito = usuario.carrito.filter(item => !item.producto.equals(productoId));
+        await usuario.save();
+
+        res.json({ mensaje: "Producto eliminado del carrito", carrito: usuario.carrito });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+productRoute.delete("/carrito/:userId/vaciar", async (req, res) => {
+    try {
+        const { userId } = req.params;
+
+        const usuario = await Usuarios.findById(userId);
+        if (!usuario) return res.status(404).json({ error: "Usuario no encontrado" });
+
+        usuario.carrito = [];
+        await usuario.save();
+
+        res.json({ mensaje: "Carrito vaciado" });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+productRoute.post("/carrito/:userId/comprar", async (req, res) => {
+    try {
+        const { userId } = req.params;
+
+        const usuario = await Usuarios.findById(userId).populate("carrito.producto");
+        if (!usuario) {
+            return res.status(404).json({ error: "Usuario no encontrado" });
+        }
+
+        if (usuario.carrito.length === 0) {
+            return res.status(400).json({ error: "El carrito está vacío" });
+        }
+
+        const nuevaOrden = new Orden({
+            usuario: userId,
+            productos: usuario.carrito,
+            total: usuario.carrito.reduce((sum, item) => sum + item.producto.precio * item.cantidad, 0)
+        });
+
+        await nuevaOrden.save();
+        usuario.carrito = []; // Vaciar carrito después de la compra
+        await usuario.save();
+
+        res.json({ mensaje: "Compra realizada con éxito", orden: nuevaOrden });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+//>>/ Agregar producto al carrito /<<
 
 productRoute.post('/agregar/producto', async (req, res) => {
     const { nombre, descripcion, stock, imgPortada, precio, categoria, subcategoria, peso, color, sabores, tamaño, marca, oferta } = req.body;

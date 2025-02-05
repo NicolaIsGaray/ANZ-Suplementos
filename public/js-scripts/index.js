@@ -194,6 +194,7 @@ const renderProduct = (Productos) => {
   buyButton.classList.add("buy-button");
   liItem.classList.add("item-main");
   productPriceDiv.classList.add("product-price");
+  swiperSlider.classList.add("product-sliders");
 
   productName.id = "name-product";
   productBasePrice.id = "price";

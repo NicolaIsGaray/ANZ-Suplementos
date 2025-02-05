@@ -1,10 +1,7 @@
 const express = require("express");
 const pageRouter = express.Router();
 
-const Pagina = require("../models/Página");
 const Sociales = require("../models/Sociales");
-
-const verifyRole = require ("../middlewares/verifyRole");
 
 //>> EDITAR ENLACES SOCIALES
 pageRouter.post('/contacto-telefono', async (req, res) => {

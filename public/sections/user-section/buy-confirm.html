@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="shortcut icon" href="../../icon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../../css-sheets/buy-confirm.css" />
+    <title>Carrito de Productos</title>
+  </head>
+  <body>
+    <header>
+      <div class="head-container">
+        <div class="navs">
+          <div class="topnavs">
+            <div class="general-top-container">
+              <div class="mb-sidebars">
+                <a class="open-sidebar">
+                  <img
+                    src="../../media/icons/bars-solid.svg"
+                    alt=""
+                    style="width: 24px; height: 24px"
+                  />
+                </a>
+              </div>
+              <div class="logo">
+                <a href="../../index.html">
+                  <img src="../../media/logo-tibushop.png" alt="ANZ Logo" />
+                </a>
+              </div>
+              <div class="user-navs-logged">
+                <a href="./profile.html">
+                  <img
+                    src="../../media/icons/user-solid.svg"
+                    alt=""
+                    style="width: 24px; height: 24px"
+                  />
+                </a>
+                <a href="./buy-confirm.html">
+                  <img
+                    src="../../media/icons/cart-shopping-solid.svg"
+                    alt=""
+                    style="width: 24px; height: 24px"
+                  />
+                </a>
+              </div>
+
+              <div class="search-container">
+                <input
+                  type="text"
+                  placeholder="¿Qué necesitás?"
+                  id="searcher"
+                />
+                <button type="submit" id="searcher-submiter">
+                  <img
+                    src="../../media/icons/magnifying-glass-solid.svg"
+                    alt=""
+                    style="width: 24px; height: 24px"
+                  />
+                </button>
+              </div>
+              <div class="user-navs">
+                <div class="guess-log">
+                  <a href="./login.html" class="login"
+                    >Iniciar Sesión</a
+                  >
+                  <a href="./register.html" class="register"
+                    >Registrarse</a
+                  >
+                </div>
+                <div class="user-options">
+                  <div class="user-interact">
+                    <span class="user-button"></span>
+                    <a class="logout"
+                      ><img
+                        src="../../media/icons/right-from-bracket-solid.svg"
+                        alt=""
+                        style="width: 24px; height: 24px"
+                      />
+                    </a>
+                    <a
+                      class="shopping-cart"
+                      href="./buy-confirm.html"
+                      ><img
+                        src="../../media/icons/cart-shopping-solid.svg"
+                        alt=""
+                        style="width: 24px; height: 24px"
+                    /></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bottomnavs">
+            <div class="navs-container">
+              <nav>
+                <ul>
+                  <li>
+                    <a href="../../index.html">INICIO</a>
+                  </li>
+                  <li>
+                    <a
+                      href="../product-section/product-general.html?section=Suplementos"
+                      >SUPLEMENTOS</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="../product-section/product-general.html?section=Ofertas"
+                      >OFERTAS</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="../product-section/product-general.html?section=Vasos"
+                      >VASOS Y SHAKERS</a
+                    >
+                  </li>
+                  <li>
+                    <a href="../about.html">QUIENES SOMOS</a>
+                  </li>
+                  <li>
+                    <a href="../contact.html">CONTACTO</a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="mb-sidebar">
+      <div class="side-content">
+        <ul>
+          <li><a href="../../index.html">Inicio</a></li>
+          <li>
+            <a href="../product-section/product-general.html?section=Suplementos"
+              >Suplementos</a
+            >
+          </li>
+          <li>
+            <a href="../product-section/product-general.html?section=Ofertas"
+              >Ofertas</a
+            >
+          </li>
+          <li>
+            <a href="../product-section/product-general.html?section=Vasos"
+              >Vasos y Shakers</a
+            >
+          </li>
+          <li><a href="../about.html">Quienes Somos</a></li>
+          <li><a href="../contact.html">Contacto</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="adm">
+      <button type="button" id="mg-sect">
+        <img
+          src="../../media/icons/crown-solid.svg"
+          alt=""
+          style="width: 16px; height: 16px"
+        />
+      </button>
+    </div>
+
+    <div class="wa">
+      <a type="button" id="wa-cont" target="_blank"
+        ><img
+          src="../../media/icons/whatsapp-brands-solid.svg"
+          alt=""
+          style="width: 16px; height: 16px"
+      /></a>
+    </div>
+
+    <section id="cart-section">
+        <div class="cart-container">
+            <div class="cart-title">
+                <h2>Carrito de Compras</h2>
+            </div>
+            <div class="product-list">
+                <div class="product-item">
+                    <div class="product-image">
+                        <img src="../../media/default.png" alt="product-photo">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-info-top">
+                            <div class="product-name">
+                                <span>Producto Test</span> <br>
+                                <span>(Naranja)</span>
+                            </div>
+                            <div class="product-remove">
+                                <a class="remove-product">
+                                    <img src="../../media/icons/trash-can-regular.svg" alt="delete-product">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="product-buy-info">
+                            <div class="product-amount">
+                                <div class="add-amount">
+                                    <button id="decrease">
+                                        <img src="../../media/icons/greater-than-solid.svg" alt="" class="arrow-amount" id="left-arrow">
+                                    </button>
+                                    <input
+                                      type="number"
+                                      name="amount-buy"
+                                      id="amount-buy"
+                                      value="1"
+                                    />
+                                    <button id="increase">
+                                      <img src="../../media/icons/greater-than-solid.svg" alt="" class="arrow-amount" id="right-arrow">
+                                    </button>
+                                  </div>
+                            </div>
+                            <div class="product-price">
+                                <span>$100.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
+    <section id="payment-section">
+        <div class="payment-title">
+            <h2>Pago</h2>
+        </div>
+    </section>
+
+    <div id="cookie-banner">
+      <span
+        >Al navegar en este sitio
+        <strong>aceptás el uso de cookies</strong> para mejorar y brindarte una
+        mejor experiencia de compra.</span
+      >
+      <button id="accept-cookies">ENTENDIDO</button>
+    </div>
+
+    <footer>
+      <div class="end-container">
+        <div class="social-media">
+          <a target="_blank" id="facebook"
+            ><i class="fa-brands fa-facebook"></i
+          ></a>
+          <a target="_blank" id="instagram"
+            ><i class="fa-brands fa-instagram"></i
+          ></a>
+          <a target="_blank" id="twitter"
+            ><i class="fa-brands fa-square-x-twitter"></i
+          ></a>
+          <a target="_blank" id="youtube"
+            ><i class="fa-brands fa-youtube"></i
+          ></a>
+        </div>
+        <p>ANZ SUPLEMENTOS &copy; 2024. Todos los derechos reservados.</p>
+      </div>
+    </footer>
+
+    <script
+      src="https://kit.fontawesome.com/21f1cfa061.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../../js-scripts/buy-confirm.js"></script>
+  </body>
+</html>
